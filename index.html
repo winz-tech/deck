@@ -134,6 +134,97 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
 .pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
 
+/* ---------- 作業中心活介面 ---------- */
+.demo.wide .caps{flex:0 0 430px}
+.hub{flex:1;min-width:0;background:#0a0a0c;border:9px solid #26262c;border-radius:14px;
+  padding:0;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.32);position:relative;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:26px 26px}
+.hub .part{transition:opacity .35s,filter .35s}
+.hub.focusing .part{opacity:.28;filter:saturate(.3)}
+.hub.focusing .part.hit{opacity:1;filter:none}
+.hub .part.hit{position:relative;z-index:2}
+.hub.focusing .part.hit::after{content:'';position:absolute;inset:-7px;border:2px solid #E30613;
+  border-radius:9px;box-shadow:0 0 18px rgba(227,6,19,.6);pointer-events:none}
+
+.hu-top{display:flex;align-items:center;gap:9px;padding:9px 12px;
+  background:linear-gradient(135deg,#1a0000,#2d0000,#1a0000);
+  border-bottom:1px solid rgba(227,6,19,.28)}
+.hu-brand{font-size:13px;font-weight:900;color:#fff;letter-spacing:1px}
+.hu-en{font-family:var(--en);font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.35)}
+.hu-user{margin-left:auto;display:flex;align-items:center;gap:8px}
+.hu-un{font-size:11px;color:#fff;text-align:right;line-height:1.3}
+.hu-un i{display:block;font-style:normal;font-size:9px;color:rgba(255,255,255,.42)}
+.hu-av{width:26px;height:26px;border-radius:50%;background:#E30613;color:#fff;font-size:12px;
+  font-weight:700;display:flex;align-items:center;justify-content:center}
+.hu-out{font-size:10px;color:#ff8a90;border:1px solid rgba(227,6,19,.7);
+  background:rgba(227,6,19,.14);border-radius:6px;padding:4px 8px;font-weight:700}
+
+.hu-body{padding:12px}
+.hu-hi{font-size:16px;color:#fff;font-weight:300;margin-bottom:10px}
+.hu-hi b{font-weight:900}
+.hu-cal{display:flex;align-items:center;gap:12px;padding:9px 12px;margin-bottom:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(227,6,19,.22);border-radius:10px}
+.hu-cal .lab{font-family:var(--en);font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.32)}
+.hu-cal .msg{font-size:11px;color:rgba(255,255,255,.85);margin-top:3px}
+.hu-cal .msg b{color:#ff6168}
+.hu-track{flex:1;height:26px;position:relative;border-bottom:1px solid rgba(255,255,255,.12);min-width:0}
+.hu-ev{position:absolute;bottom:4px;height:13px;border-radius:3px;font-size:8px;line-height:13px;
+  padding:0 5px;color:#fff;white-space:nowrap;overflow:hidden}
+.hu-now{position:absolute;top:0;bottom:0;width:2px;background:#E30613;box-shadow:0 0 7px rgba(227,6,19,.9)}
+.hu-calbtn{font-size:10px;font-weight:700;color:#fff;padding:7px 11px;border-radius:7px;
+  background:linear-gradient(135deg,#E30613,#8f0009);transform:skewX(-18deg);white-space:nowrap}
+.hu-calbtn span{display:block;transform:skewX(18deg)}
+
+.hu-work{display:flex;gap:11px;align-items:flex-start}
+.hu-nav{width:118px;flex:none;display:flex;flex-direction:column;gap:4px}
+.hu-nt{font-family:var(--en);font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);padding:0 6px 3px}
+.hu-z{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:8px;
+  background:rgba(255,255,255,.025);border:1px solid transparent}
+.hu-z i{width:19px;height:19px;border-radius:5px;background:rgba(227,6,19,.14);flex:none;
+  font-style:normal;font-size:10px;display:flex;align-items:center;justify-content:center}
+.hu-z b{font-size:10px;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap}
+.hu-z.on{background:rgba(227,6,19,.16);border-color:rgba(227,6,19,.6)}
+.hu-z.on i{background:#E30613}
+.hu-z.on b{color:#fff}
+
+.hu-cards{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:9px;align-content:start}
+.hu-c{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:10px;
+  padding:11px;position:relative}
+.hu-c .ic{width:27px;height:27px;border-radius:7px;background:#E30613;font-size:14px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.hu-c .nm{font-size:11px;font-weight:700;color:#fff;padding-right:20px}
+.hu-c .ds{font-size:9px;color:rgba(255,255,255,.4);line-height:1.5;margin-top:3px}
+.hu-c .st{position:absolute;top:7px;right:7px;width:18px;height:18px;border-radius:50%;
+  background:rgba(0,0,0,.25);color:rgba(255,255,255,.25);font-size:10px;
+  display:flex;align-items:center;justify-content:center;transition:.3s}
+.hub.pinned .hu-c.pin .st{color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,.8);transform:scale(1.25)}
+
+.hu-fav{width:124px;flex:none;border:1px solid rgba(227,6,19,.22);border-radius:10px;
+  padding:9px;background:rgba(227,6,19,.04)}
+.hu-fh{display:flex;align-items:center;gap:5px;margin-bottom:7px}
+.hu-fh .s{color:#FFD700;font-size:9px}
+.hu-fh .t{font-size:9px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.7)}
+.hu-fe{font-size:9px;color:rgba(255,255,255,.4);line-height:1.6}
+.hu-fi{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px 7px;margin-bottom:5px;
+  opacity:0;transform:translateY(-8px) scale(.9);transition:.4s cubic-bezier(.34,1.56,.64,1)}
+.hub.pinned .hu-fi.p1{opacity:1;transform:none}
+.hu-fi i{width:19px;height:19px;border-radius:5px;background:#E30613;font-style:normal;
+  font-size:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.hu-fi b{font-size:9px;font-weight:600;color:#fff}
+.hu-fa{margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08)}
+.hu-fa .t{color:#ff6168}
+
+.hu-dog{position:absolute;right:12px;bottom:10px;display:flex;flex-direction:column;
+  align-items:center;gap:5px;z-index:3}
+.hu-dog .bg{background:#E30613;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;
+  border-radius:10px;white-space:nowrap;box-shadow:0 0 12px rgba(227,6,19,.55)}
+.hu-dog .bg em{background:rgba(255,255,255,.25);border-radius:6px;padding:0 4px;
+  font-style:normal;margin-left:2px}
+.hu-dog img{width:66px;display:block;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
+
 /* ---------- 總覽 ---------- */
 #grid{position:absolute;inset:0;background:rgba(10,10,14,.97);display:none;
   padding:50px 60px;overflow:auto;z-index:40}
@@ -296,6 +387,61 @@ var FALLBACK = {
         "*"
       ],
       "no": "02",
+      "title": "你的作業中心",
+      "sub": "所有系統的入口，都在同一頁"
+    },
+    {
+      "type": "demo",
+      "comp": "hub",
+      "roles": [
+        "*"
+      ],
+      "title": "登入之後，你會看到這一頁",
+      "lead": "所有系統的入口都在這。看得到的，就是你用得到的。",
+      "steps": [
+        {
+          "h": "左邊是功能區",
+          "p": "生產、品質、採購、人事…點一個，右邊就換一批。手機上是左上角的 ☰。",
+          "focus": "nav"
+        },
+        {
+          "h": "中間每一張卡，就是一個系統",
+          "p": "卡片上寫了它能做什麼，點下去直接進去，不用再登入一次。",
+          "focus": "cards"
+        },
+        {
+          "h": "常用的，點右上角那顆星",
+          "p": "釘起來之後就固定在右邊，不用每次翻功能區找。",
+          "focus": "cards",
+          "pinned": true
+        },
+        {
+          "h": "懶得釘也沒關係",
+          "p": "系統會記住你常點哪幾個，自動排進「最常使用」。",
+          "focus": "fav",
+          "pinned": true
+        },
+        {
+          "h": "右下角的狗狗，頭上是你的待辦",
+          "p": "點牌子看清單。牠可以拖到你喜歡的位置，也可以換成貓咪。",
+          "focus": "dog",
+          "pinned": true
+        },
+        {
+          "h": "上面那一條，是今天的行事曆",
+          "p": "誰在開會、誰出差、你下一場幾點，一眼看完。",
+          "focus": "cal",
+          "pinned": true
+        }
+      ],
+      "notes": "這頁是全場的地基 —— 後面所有功能都是從這裡點進去的。釘選那步按下去右邊會跑出來，可以停一下讓大家看清楚。"
+    },
+    {
+      "type": "section",
+      "roles": [
+        "*"
+      ],
+      "no": "03",
       "title": "上下班打卡",
       "sub": "手機拿出來，兩秒的事"
     },
@@ -337,7 +483,7 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "no": "03",
+      "no": "04",
       "title": "公司在發生什麼事",
       "sub": "佈告欄與行事曆"
     },
@@ -513,6 +659,12 @@ function buildDeck(){
              '<div class="h1">' + esc(s.title) + '</div>' +
              '<div class="lead">' + esc(s.sub) + '</div></div>';
     }
+    else if (s.type === 'demo' && s.comp === 'hub'){
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo wide">' + _hubHtml() +
+             '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
     else if (s.type === 'demo'){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
@@ -527,12 +679,7 @@ function buildDeck(){
                '<button class="pu-btn i"><span class="in2"><span class="zh">上班打卡</span><span class="en2">// CLOCK IN //</span></span></button>' +
                '<button class="pu-btn o"><span class="in2"><span class="zh">下班打卡</span><span class="en2">// CLOCK OUT //</span></span></button>' +
                '<div class="pu-hint"></div>' +
-             '</div><div class="caps">' +
-             (s.steps || []).map(function(c,k){
-               var n = (k+1) < 10 ? '0'+(k+1) : (k+1);
-               return '<div class="cap step"><div class="idx">' + n + '</div><div>' +
-                      '<h3>' + esc(c.h) + '</h3>' + (c.p ? '<p>' + esc(c.p) + '</p>' : '') + '</div></div>';
-             }).join('') + '</div></div>';
+             '</div><div class="caps">' + _capsHtml(s.steps) + '</div></div>';
     }
     else { /* list */
       var its = s.items || [];
@@ -581,9 +728,77 @@ function show(){
 }
 function steps(){ return $('deck').querySelectorAll('.slide.on .step'); }
 
+function _capsHtml(list){
+  return (list || []).map(function(c,k){
+    var n = (k+1) < 10 ? '0'+(k+1) : (k+1);
+    return '<div class="cap step"><div class="idx">' + n + '</div><div>' +
+           '<h3>' + esc(c.h) + '</h3>' + (c.p ? '<p>' + esc(c.p) + '</p>' : '') + '</div></div>';
+  }).join('');
+}
+
+function _hubHtml(){
+  var zones = [['生產管理','⚙'],['品質管理','🛡'],['採購管理','🛒'],['進銷存管理','📦'],['人事管理','👥'],['工具管理','🧰']];
+  var cards = [
+    ['📬','佈告欄','公告、活動、規章都在這裡', 'pin'],
+    ['📇','員工通訊錄','查同事分機、Email、座位',''],
+    ['👤','個人資料維護','維護聯絡方式、緊急聯絡人',''],
+    ['🐛','除蟲許願池','回報問題、許願新功能','']
+  ];
+  return '<div class="hub" id="hub">' +
+    '<div class="hu-top part" data-p="top">' +
+      '<div><div class="hu-brand">作業中心</div><div class="hu-en">WINZ TECHNOLOGY</div></div>' +
+      '<div class="hu-user"><div class="hu-un">王小明<i>生產部 · 作業專員</i></div>' +
+      '<div class="hu-av">王</div><div class="hu-out">🚪 登出</div></div>' +
+    '</div>' +
+    '<div class="hu-body">' +
+      '<div class="hu-hi part" data-p="top">☕ 早安，<b>王小明</b></div>' +
+      '<div class="hu-cal part" data-p="cal"><div style="min-width:118px">' +
+        '<div class="lab">TODAY · 07/28</div><div class="msg">你今天 <b>14:00</b> 品號會議 · 1F</div></div>' +
+        '<div class="hu-track">' +
+          '<div class="hu-ev" style="left:12%;width:16%;background:rgba(255,150,40,.55)">出差</div>' +
+          '<div class="hu-ev" style="left:56%;width:20%;background:rgba(227,6,19,.6)">品號會議</div>' +
+          '<div class="hu-now" style="left:41%"></div></div>' +
+        '<div class="hu-calbtn"><span>⊞ 完整行事曆</span></div></div>' +
+      '<div class="hu-work">' +
+        '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
+          zones.map(function(z,i){ return '<div class="hu-z' + (i===5?' on':'') + '"><i>' + z[1] + '</i><b>' + z[0] + '</b></div>'; }).join('') +
+        '</div>' +
+        '<div class="hu-cards part" data-p="cards">' +
+          cards.map(function(c){ return '<div class="hu-c ' + c[3] + '"><div class="ic">' + c[0] + '</div>' +
+            '<div class="nm">' + c[1] + '</div><div class="ds">' + c[2] + '</div><div class="st">★</div></div>'; }).join('') +
+        '</div>' +
+        '<div class="hu-fav part" data-p="fav">' +
+          '<div class="hu-fh"><span class="s">★</span><span class="t">我的釘選</span></div>' +
+          '<div class="hu-fe" id="hu-fe">點卡片右上角的星號，把常用的釘在這裡。</div>' +
+          '<div class="hu-fi p1"><i>📬</i><b>佈告欄</b></div>' +
+          '<div class="hu-fa"><div class="hu-fh"><span class="t">● 最常使用</span></div>' +
+            '<div class="hu-fi p1"><i>🕐</i><b>打卡系統</b></div></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="hu-dog part" data-p="dog"><div class="bg">📋 待辦 <em>3</em></div>' +
+      '<img src="https://winz-tech.github.io/shimeji/img/dog/01.png" alt=""></div>' +
+  '</div>';
+}
+
+/* 作業中心：依 STEP 聚焦 / 釘選 */
+function setHub(sl){
+  var hb = sl.querySelector('.hub'); if (!hb) return;
+  var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
+  var f = (STEP > 0) ? (cf.focus || '') : '';
+  hb.classList.toggle('focusing', !!f);
+  hb.classList.toggle('pinned', !!cf.pinned);
+  var fe = hb.querySelector('#hu-fe');
+  if (fe) fe.style.display = cf.pinned ? 'none' : 'block';
+  hb.querySelectorAll('.part').forEach(function(p){
+    p.classList.toggle('hit', !!f && p.getAttribute('data-p') === f);
+  });
+}
+
 /* 活介面：依 STEP 推進手機畫面 */
 function setPhone(){
   var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
+  setHub(sl);
   var ph = sl.querySelector('.phone'); if (!ph) return;
   var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
   var st = cf.state || 'idle';
