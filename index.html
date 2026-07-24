@@ -74,20 +74,49 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .foot .pill{background:var(--red);color:#fff;padding:3px 12px;transform:skewX(-18deg)}
 .foot .pill span{display:block;transform:skewX(18deg)}
 
-/* ---------- 路線選單 ---------- */
-#routes{position:absolute;inset:0;background:var(--dark);padding:70px 90px;display:none;flex-direction:column}
+/* ---------- 迎賓頁 ---------- */
+#routes{position:absolute;inset:0;background:var(--dark);display:none;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
 #routes.on{display:flex}
-#routes .h1{color:#fff;font-size:56px}
-.rt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-.rt{background:#191920;border:1px solid rgba(255,255,255,.1);padding:30px 28px;cursor:pointer;
-  text-align:left;color:#fff;font-family:var(--zh);transition:.15s;position:relative}
-.rt:hover{background:#22222c;border-color:var(--red);transform:translateY(-3px)}
-.rt .mk{width:44px;height:7px;background:var(--red);transform:skewX(-18deg);margin-bottom:18px}
-.rt b{display:block;font-size:33px;font-weight:900;letter-spacing:1px}
-.rt small{display:block;font-size:19px;color:#9A9AA6;margin-top:10px;line-height:1.5}
-.rt.hot{border-color:var(--red);background:#241016}
-.rt.dev .mk{background:#4A4A55}
-.rt.dev b{color:#9A9AA6}
+.wl-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 62% at 50% 46%,#000 20%,transparent 80%);
+          mask-image:radial-gradient(ellipse 70% 62% at 50% 46%,#000 20%,transparent 80%)}
+.wl-slash{position:absolute;left:50%;top:46%;width:220vmax;height:2px;
+  transform:translate(-50%,-50%) rotate(-18deg);pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--red),transparent);
+  animation:wlPulse 3s ease-in-out infinite}
+@keyframes wlPulse{0%,100%{opacity:.22}50%{opacity:.7}}
+.wl{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.wl-logo{height:96px;margin-bottom:30px;filter:drop-shadow(0 0 26px rgba(227,6,19,.35))}
+.wl-eb{font-family:var(--en);font-weight:700;font-size:17px;letter-spacing:9px;
+  color:var(--red);text-transform:uppercase;margin-bottom:16px}
+.wl-t{font-size:62px;font-weight:900;color:#fff;letter-spacing:2px;line-height:1.25}
+.wl-s{font-size:24px;color:#8A8A96;margin-top:14px;letter-spacing:1px}
+.wl-start{margin-top:52px;border:none;cursor:pointer;font-family:var(--zh);
+  background:linear-gradient(135deg,var(--red),#8f0009);transform:skewX(-18deg);
+  padding:0;border-radius:8px;box-shadow:0 0 34px rgba(227,6,19,.45);position:relative;
+  animation:wlBreath 2.6s ease-in-out infinite}
+.wl-start::before{content:'';position:absolute;inset:5px;border:1px solid rgba(255,255,255,.32);
+  border-radius:5px;pointer-events:none}
+.wl-start span{display:block;transform:skewX(18deg);padding:22px 76px;color:#fff;
+  font-family:var(--en);font-weight:700;font-size:34px;letter-spacing:12px}
+.wl-start:hover{box-shadow:0 0 48px rgba(227,6,19,.75)}
+.wl-start:active{transform:skewX(-18deg) translateY(3px)}
+@keyframes wlBreath{0%,100%{box-shadow:0 0 26px rgba(227,6,19,.35)}
+  50%{box-shadow:0 0 46px 6px rgba(227,6,19,.55)}}
+.wl-pick{margin-top:46px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  justify-content:center;max-width:1000px}
+.wl-lab{font-family:var(--en);font-size:13px;letter-spacing:4px;color:#5A5A66;margin-right:6px}
+.wl-r{background:transparent;border:1px solid rgba(255,255,255,.16);color:#9A9AA6;
+  border-radius:999px;padding:9px 20px;font-size:17px;cursor:pointer;font-family:var(--zh);
+  transition:.15s}
+.wl-r:hover{border-color:rgba(227,6,19,.6);color:#fff}
+.wl-r.on{background:rgba(227,6,19,.16);border-color:var(--red);color:#fff;font-weight:700}
+.wl-foot{position:absolute;bottom:44px;font-family:var(--en);font-size:14px;
+  letter-spacing:4px;color:#4A4A55;z-index:2}
 
 
 /* ---------- 活介面示範頁 ---------- */
@@ -444,7 +473,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-25 / v1",
+    "ver": "2026-07-25 / v2",
     "updated": "2026-07-25",
     "icons": {
       "生產管理": "img/02_生產管理.png",
@@ -475,7 +504,10 @@ var FALLBACK = {
       "請款單查詢": "",
       "穎利科技 OTP": ""
     },
-    "defaultRoute": "all"
+    "defaultRoute": "all",
+    "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+    "welcome": "內部系統教育訓練",
+    "welcomeSub": "穎利科技　2026 / 07 / 28"
   },
   "routes": [
     {
@@ -1180,27 +1212,39 @@ function setData(j, src){
   DATA = j;
   $('src').textContent = '資料來源：' + src + ' ｜ ' + esc(j.meta && j.meta.ver);
   renderRoutes();
-  // ★ 網址指定 > 預設路線；都沒有才停在選單
+  // ★ 只有網址明寫 ?route=xxx 才跳過迎賓頁；否則停在迎賓頁等按 START
   var q = (location.search.match(/[?&]route=([^&]+)/) || [])[1];
-  var go = q ? decodeURIComponent(q) : ((j.meta && j.meta.defaultRoute) || '');
+  var go = q ? decodeURIComponent(q) : '';
   if (go && (j.routes || []).some(function(r){ return r.id === go; })) pick(go);
 }
 
-/* ---------- 路線選單 ---------- */
+var PICKED = '';
 function renderRoutes(){
   var m = DATA.meta || {}, rs = DATA.routes || [];
-  var h = '<div class="eyebrow">// Select Route</div>' +
-          '<div class="h1">' + esc(m.title) + '</div>' +
-          '<div class="lead">今天要帶誰走？點一個開始。</div><div class="rt-grid">';
-  rs.forEach(function(r, i){
-    h += '<button class="rt' + (r.hot?' hot':'') + (r.dev?' dev':'') + '" onclick="pick(\'' + r.id + '\')">' +
-         '<div class="mk"></div><b>' + esc(r.name) + '</b><small>' + esc(r.desc) + '</small></button>';
-  });
-  h += '</div>';
-  $('routes').innerHTML = h;
+  PICKED = PICKED || m.defaultRoute || (rs[0] && rs[0].id) || '';
+  var hh = '<div class="wl-grid"></div><div class="wl-slash"></div><div class="wl">' +
+    (m.logo ? '<img class="wl-logo" src="' + esc(m.logo) + '" onerror="this.style.display=\'none\'">' : '') +
+    '<div class="wl-eb">// ' + esc(m.org || '') + '</div>' +
+    '<div class="wl-t">' + esc(m.welcome || m.title || '') + '</div>' +
+    '<div class="wl-s">' + esc(m.welcomeSub || '') + '</div>' +
+    '<button class="wl-start" onclick="startDeck()"><span>START</span></button>' +
+    '<div class="wl-pick"><span class="wl-lab">場次</span>' +
+      rs.map(function(r){
+        return '<button class="wl-r' + (r.id === PICKED ? ' on' : '') + '" onclick="setRoute(\'' + r.id + '\')">' +
+               esc(r.name) + '</button>';
+      }).join('') +
+    '</div></div><div class="wl-foot">' + esc(m.ver || '') + '</div>';
+  $('routes').innerHTML = hh;
   $('routes').classList.add('on');
   $('deck').innerHTML = '';
 }
+function setRoute(id){
+  PICKED = id;
+  $('routes').querySelectorAll('.wl-r').forEach(function(b){
+    b.classList.toggle('on', b.textContent === (DATA.routes.filter(function(r){return r.id===id;})[0]||{}).name);
+  });
+}
+function startDeck(){ pick(PICKED); }
 
 function pick(id){
   ROUTE = id;
@@ -1618,7 +1662,7 @@ addEventListener('resize', function(){ fit(); autofit(); });
 addEventListener('keydown', function(e){
   var k = e.key;
   if ($('editor').classList.contains('on')){ if (k === 'Escape') toggleEditor(false); return; }
-  if (!ROUTE){ return; }
+  if (!ROUTE){ if (k === 'Enter' || k === ' ') { e.preventDefault(); startDeck(); } return; }
   if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ e.preventDefault(); next(); }
   else if (k === 'ArrowLeft' || k === 'PageUp'){ e.preventDefault(); prev(); }
   else if (k === 'ArrowDown'){ e.preventDefault(); expandAll(); }
