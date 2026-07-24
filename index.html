@@ -91,12 +91,12 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 
 
 /* ---------- 活介面示範頁 ---------- */
-.demo{display:flex;gap:44px;flex:1;min-height:0;align-items:center;overflow:hidden}
+.demo{display:flex;gap:38px;flex:1;min-height:0;align-items:center;overflow:hidden}
 .demo .caps{flex:1;display:grid;gap:calc(14px*var(--k,1));align-content:center;overflow:hidden;min-height:0}
 .cap{display:flex;gap:16px;align-items:flex-start;border-left:6px solid var(--line);padding:calc(6px*var(--k,1)) 0 calc(6px*var(--k,1)) 18px}
 .cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
-.cap h3{font-size:calc(29px*var(--k,1));font-weight:900;color:var(--ink);line-height:1.3}
-.cap p{font-size:calc(22px*var(--k,1));color:var(--sub);line-height:1.55;margin-top:4px}
+.cap h3{font-size:calc(31px*var(--k,1));font-weight:900;color:var(--ink);line-height:1.3}
+.cap p{font-size:calc(24px*var(--k,1));color:var(--sub);line-height:1.55;margin-top:4px}
 .cap.shown{border-left-color:var(--red)}
 
 .phone{width:352px;flex:none;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
@@ -148,7 +148,7 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   background:#17171c;color:#8a8a92;font-size:19px;text-align:center;padding:30px;line-height:1.7}
 
 /* ---------- 作業中心活介面 ---------- */
-.demo.wide .caps{flex:0 0 430px}
+.demo.wide .caps{flex:0 0 520px}
 .hub{flex:1;min-width:0;background:#0a0a0c;border:9px solid #26262c;border-radius:14px;
   padding:0;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.32);position:relative;
   background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
@@ -325,13 +325,12 @@ var FALLBACK = {
       "品質管理": "img/03_品質管理.png",
       "採購管理": "img/04_採購管理.png",
       "進銷存管理": "img/05_進銷存管理.png",
+      "行銷管理": "img/06_行銷管理.png",
       "申請管理": "img/07_申請管理.png",
-      "工具管理": "img/09_工具管理.png",
-      "佈告欄": "",
-      "員工通訊錄": "",
-      "個人資料維護": "",
-      "除蟲許願池": "img/32_除蟲許願池.png",
-      "打卡系統": ""
+      "請款申請單": "img/33_請款申請單.png",
+      "耗材請購領用單": "img/36_耗材請購領用單.png",
+      "員工商品訂購單": "img/37_員工商品訂購單.png",
+      "除蟲許願池": "img/32_除蟲許願池.png"
     }
   },
   "routes": [
@@ -429,7 +428,7 @@ var FALLBACK = {
       "steps": [
         {
           "h": "左邊是功能區",
-          "p": "生產、品質、採購、人事…點一個，右邊就換一批。手機上是左上角的 ☰。",
+          "p": "生產、品質、採購…點一個，右邊就換一批。手機上是左上角的 ☰。",
           "focus": "nav"
         },
         {
@@ -438,8 +437,67 @@ var FALLBACK = {
           "focus": "cards"
         },
         {
-          "h": "常用的，點右上角那顆星",
-          "p": "釘起來之後就固定在右邊，不用每次翻功能區找。",
+          "h": "看不到的，代表你用不到",
+          "p": "每個人看到的卡不一樣。不是被藏起來，是那個功能跟你的工作無關。",
+          "focus": "cards"
+        }
+      ],
+      "notes": "這頁是全場的地基，後面所有功能都從這裡點進去。第三點要講清楚，不然同事會以為系統壞掉。",
+      "zones": [
+        {
+          "n": "生產管理"
+        },
+        {
+          "n": "品質管理"
+        },
+        {
+          "n": "採購管理"
+        },
+        {
+          "n": "進銷存管理"
+        },
+        {
+          "n": "行銷管理"
+        },
+        {
+          "n": "申請管理",
+          "on": true
+        }
+      ],
+      "cards": [
+        {
+          "n": "請款申請單",
+          "d": "費用申請、核銷、付款記錄查詢",
+          "pin": true
+        },
+        {
+          "n": "耗材請購領用單",
+          "d": "耗材領用登記與記錄管理"
+        },
+        {
+          "n": "員工商品訂購單",
+          "d": "員工訂購成品、簽核、記錄管理"
+        },
+        {
+          "n": "除蟲許願池",
+          "d": "回報系統問題、許願新功能"
+        }
+      ],
+      "favPin": "請款申請單",
+      "favAuto": "除蟲許願池"
+    },
+    {
+      "type": "demo",
+      "comp": "hub",
+      "roles": [
+        "*"
+      ],
+      "title": "常用的，可以固定在手邊",
+      "lead": "不用每次都翻功能區找。",
+      "steps": [
+        {
+          "h": "點卡片右上角那顆星",
+          "p": "釘起來之後就固定在右邊，開頁就看得到。",
           "focus": "cards",
           "pinned": true
         },
@@ -454,15 +512,123 @@ var FALLBACK = {
           "p": "點牌子看清單。牠可以拖到你喜歡的位置，也可以換成貓咪。",
           "focus": "dog",
           "pinned": true
+        }
+      ],
+      "notes": "釘選那步按下去右邊會跑出來，停一下讓大家看清楚。狗狗這段可以輕鬆一點講。",
+      "zones": [
+        {
+          "n": "生產管理"
         },
         {
-          "h": "上面那一條，是今天的行事曆",
-          "p": "誰在開會、誰出差、你下一場幾點，一眼看完。",
+          "n": "品質管理"
+        },
+        {
+          "n": "採購管理"
+        },
+        {
+          "n": "進銷存管理"
+        },
+        {
+          "n": "行銷管理"
+        },
+        {
+          "n": "申請管理",
+          "on": true
+        }
+      ],
+      "cards": [
+        {
+          "n": "請款申請單",
+          "d": "費用申請、核銷、付款記錄查詢",
+          "pin": true
+        },
+        {
+          "n": "耗材請購領用單",
+          "d": "耗材領用登記與記錄管理"
+        },
+        {
+          "n": "員工商品訂購單",
+          "d": "員工訂購成品、簽核、記錄管理"
+        },
+        {
+          "n": "除蟲許願池",
+          "d": "回報系統問題、許願新功能"
+        }
+      ],
+      "favPin": "請款申請單",
+      "favAuto": "除蟲許願池"
+    },
+    {
+      "type": "demo",
+      "comp": "hub",
+      "roles": [
+        "*"
+      ],
+      "title": "上面那一條，是今天的行事曆",
+      "lead": "誰在開會、誰出差、你下一場幾點，一眼看完。",
+      "steps": [
+        {
+          "h": "紅線就是「現在」",
+          "p": "線走到哪，就是現在幾點。左右的色塊是今天的行程。",
+          "focus": "cal",
+          "pinned": true
+        },
+        {
+          "h": "你的下一場會寫在左邊",
+          "p": "幾點、什麼會、在哪間會議室，不用點開就看得到。",
+          "focus": "cal",
+          "pinned": true
+        },
+        {
+          "h": "要看整個月，點「完整行事曆」",
+          "p": "可以訂會議室、看誰有空、建立定期會議。",
           "focus": "cal",
           "pinned": true
         }
       ],
-      "notes": "這頁是全場的地基 —— 後面所有功能都是從這裡點進去的。釘選那步按下去右邊會跑出來，可以停一下讓大家看清楚。"
+      "notes": "這頁接下一段行事曆隱私，先鋪陳「大家看得到彼此的時間」，下一頁再講「但看不到假別」。",
+      "zones": [
+        {
+          "n": "生產管理"
+        },
+        {
+          "n": "品質管理"
+        },
+        {
+          "n": "採購管理"
+        },
+        {
+          "n": "進銷存管理"
+        },
+        {
+          "n": "行銷管理"
+        },
+        {
+          "n": "申請管理",
+          "on": true
+        }
+      ],
+      "cards": [
+        {
+          "n": "請款申請單",
+          "d": "費用申請、核銷、付款記錄查詢",
+          "pin": true
+        },
+        {
+          "n": "耗材請購領用單",
+          "d": "耗材領用登記與記錄管理"
+        },
+        {
+          "n": "員工商品訂購單",
+          "d": "員工訂購成品、簽核、記錄管理"
+        },
+        {
+          "n": "除蟲許願池",
+          "d": "回報系統問題、許願新功能"
+        }
+      ],
+      "favPin": "請款申請單",
+      "favAuto": "除蟲許願池"
     },
     {
       "type": "section",
@@ -704,7 +870,7 @@ function buildDeck(){
     else if (s.type === 'demo' && s.comp === 'hub'){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
-             '<div class="rule"></div><div class="demo wide">' + _hubHtml() +
+             '<div class="rule"></div><div class="demo wide">' + _hubHtml(s) +
              '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
     }
     else if (s.type === 'demo'){
@@ -751,13 +917,24 @@ function routeName(){
 }
 
 /* ---------- 顯示 / 逐步展開 ---------- */
+var MIN_K = 0.85;   // ★ 投影可讀下限：字最多只縮到 85%
 function autofit(){
   var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
+  // 先把圖還原
+  var vis = sl.querySelector('.phone, .hub, .shot');
+  if (vis) vis.style.maxWidth = '';
   sl.querySelectorAll('.items, .caps').forEach(function(box){
     var k = 1; box.style.setProperty('--k', 1);
-    while (box.scrollHeight > box.clientHeight + 2 && k > 0.6){
-      k = Math.round((k - 0.04) * 100) / 100;
+    while (box.scrollHeight > box.clientHeight + 2 && k > MIN_K){
+      k = Math.round((k - 0.03) * 100) / 100;
       box.style.setProperty('--k', k);
+    }
+    // 字已到下限還是放不下 → 改縮圖，把空間讓給字
+    if (vis && box.scrollHeight > box.clientHeight + 2){
+      var w = vis.getBoundingClientRect().width, min = w * 0.6, cur = w;
+      while (box.scrollHeight > box.clientHeight + 2 && cur > min){
+        cur -= 26; vis.style.maxWidth = cur + 'px';
+      }
     }
   });
 }
@@ -779,20 +956,18 @@ function _capsHtml(list){
   }).join('');
 }
 
-function _hubHtml(){
+function _hubHtml(s){
+  s = s || {};
   var ICO = (DATA.meta && DATA.meta.icons) || {};
   function _ic(key, emoji, cls){
     var u = ICO[key];
     return u ? '<' + cls + ' class="hasimg"><img src="' + esc(u) + '" onerror="var p=this.parentNode;p.classList.remove(\'hasimg\');p.textContent=\'' + emoji + '\'"></' + cls + '>'
              : '<' + cls + '>' + emoji + '</' + cls + '>';
   }
-  var zones = [['生產管理','⚙'],['品質管理','🛡'],['採購管理','🛒'],['進銷存管理','📦'],['申請管理','📄'],['工具管理','🧰']];
-  var cards = [
-    ['佈告欄','公告、活動、規章都在這裡','📬','pin'],
-    ['員工通訊錄','查同事分機、Email、座位','📇',''],
-    ['個人資料維護','維護聯絡方式、緊急聯絡人','👤',''],
-    ['除蟲許願池','回報問題、許願新功能','🐛','']
-  ];
+  var zones = s.zones || [];
+  var cards = s.cards || [];
+  var favP  = s.favPin || '';
+  var favA  = s.favAuto || '';
   return '<div class="hub" id="hub">' +
     '<div class="hu-top part" data-p="top">' +
       '<div><div class="hu-brand">作業中心</div><div class="hu-en">WINZ TECHNOLOGY</div></div>' +
@@ -810,16 +985,16 @@ function _hubHtml(){
         '<div class="hu-calbtn"><span>⊞ 完整行事曆</span></div></div>' +
       '<div class="hu-work">' +
         '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
-          zones.map(function(z,i){ return '<div class="hu-z' + (i===5?' on':'') + '">' + _ic(z[0], z[1], 'i') + '<b>' + z[0] + '</b></div>'; }).join('') +
+          zones.map(function(z){ return '<div class="hu-z' + (z.on ? ' on' : '') + '">' + _ic(z.n, z.e || '▪', 'i') + '<b>' + esc(z.n) + '</b></div>'; }).join('') +
         '</div>' +
         '<div class="hu-cards part" data-p="cards">' +
-          cards.map(function(c){ return '<div class="hu-c ' + c[3] + '">' + _ic(c[0], c[2], 'div').replace('class="hasimg"','class="ic hasimg"').replace('<div>','<div class="ic">') +
-            '<div class="nm">' + c[0] + '</div><div class="ds">' + c[1] + '</div><div class="st">★</div></div>'; }).join('') +
+          cards.map(function(c){ return '<div class="hu-c ' + (c.pin ? 'pin' : '') + '">' + _ic(c.n, c.e || '▪', 'div').replace('class="hasimg"','class="ic hasimg"').replace('<div>','<div class="ic">') +
+            '<div class="nm">' + esc(c.n) + '</div><div class="ds">' + esc(c.d) + '</div><div class="st">★</div></div>'; }).join('') +
         '</div>' +
         '<div class="hu-fav part" data-p="fav">' +
           '<div class="hu-fh"><span class="s">★</span><span class="t">我的釘選</span></div>' +
           '<div class="hu-fe" id="hu-fe">點卡片右上角的星號，把常用的釘在這裡。</div>' +
-          '<div class="hu-fi p1">' + _ic('佈告欄','📬','i') + '<b>佈告欄</b></div>' +
+          '<div class="hu-fi p1">' + _ic(favP,'▪','i') + '<b>' + esc(favP) + '</b></div>' +
           '<div class="hu-fa"><div class="hu-fh"><span class="t">● 最常使用</span></div>' +
             '<div class="hu-fi p1"><i>🕐</i><b>打卡系統</b></div></div>' +
         '</div>' +
