@@ -3,7 +3,7 @@
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v3",
+    "ver": "2026-07-28 / v4",
     "updated": "2026-07-28",
     "icons": {
       "生產管理": "img/02_生產管理.png",
@@ -34,43 +34,59 @@
       "請款單查詢": "img/47_請款單查詢.png",
       "穎利科技 OTP": "img/43_OTP程式.png"
     },
-    "defaultRoute": "all",
+    "defaultRoute": "hub",
     "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
     "welcome": "內部系統教育訓練",
     "welcomeSub": "穎利科技　2026 / 07 / 28"
   },
   "routes": [
     {
-      "id": "all",
-      "name": "全公司場",
-      "desc": "7/28 全員場・只講共用功能",
-      "hot": true
+      "id": "punch",
+      "main": true,
+      "no": "01",
+      "name": "打卡系統",
+      "en": "TIME ATTENDANCE",
+      "speaker": "姬姐",
+      "speakerEn": "PAGGIE",
+      "photo": "paggie.png",
+      "desc": "上下班打卡，手機拿出來就好"
+    },
+    {
+      "id": "hub",
+      "main": true,
+      "no": "02",
+      "name": "作業中心",
+      "en": "OPERATIONS HUB",
+      "speaker": "咪姐",
+      "speakerEn": "MIMI TSAI",
+      "photo": "mimi.png",
+      "desc": "每天都會用到的那些功能"
     },
     {
       "id": "foreman",
       "name": "廠務",
-      "desc": "共用功能 ＋ 廠務專屬"
+      "desc": "作業中心 ＋ 廠務專屬"
     },
     {
       "id": "r_and_d",
       "name": "研發襄理",
-      "desc": "共用功能 ＋ 研發專屬"
+      "desc": "作業中心 ＋ 研發專屬"
     },
     {
       "id": "qc",
       "name": "品管組長",
-      "desc": "共用功能 ＋ 進貨檢驗"
+      "desc": "作業中心 ＋ 進貨檢驗"
     },
     {
       "id": "operator",
       "name": "作業專員",
-      "desc": "共用功能 ＋ 現場單據"
+      "desc": "作業中心 ＋ 現場單據"
     },
     {
       "id": "_dev",
+      "dev": true,
       "name": "備課模式",
-      "desc": "全部頁面一次展開（自己看）",
-      "dev": true
+      "desc": "全部頁面一次展開（自己看）"
     }
   ],
   "slides": [
@@ -78,7 +94,27 @@
       "type": "cover",
       "light": true,
       "roles": [
-        "*"
+        "punch"
+      ],
+      "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+      "org": "WINZ TECHNOLOGY",
+      "title": "上下班打卡，<br>手機拿出來就好",
+      "sub": "走到公司就能打，不用排隊、不用刷卡",
+      "speaker": "姬姐",
+      "speakerEn": "PAGGIE",
+      "when": "2026 / 07 / 28",
+      "where": "內部系統教育訓練",
+      "photo": "paggie.png"
+    },
+    {
+      "type": "cover",
+      "light": true,
+      "roles": [
+        "hub",
+        "foreman",
+        "r_and_d",
+        "qc",
+        "operator"
       ],
       "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
       "org": "WINZ TECHNOLOGY",
@@ -88,8 +124,7 @@
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "Imagery.png",
-      "always": true
+      "photo": "mimi.png"
     },
     {
       "type": "section",
@@ -576,16 +611,16 @@
     {
       "type": "section",
       "roles": [
-        "*"
+        "punch"
       ],
-      "no": "03",
+      "no": "01",
       "title": "上下班打卡",
       "sub": "手機拿出來，兩秒的事"
     },
     {
       "type": "demo",
       "roles": [
-        "*"
+        "punch"
       ],
       "title": "上班：按紅色那顆",
       "lead": "手機拿出來，兩秒就好。",
@@ -607,7 +642,7 @@
     {
       "type": "demo",
       "roles": [
-        "*"
+        "punch"
       ],
       "title": "下班：按藍色那顆",
       "lead": "兩顆都變灰，今天就結束了。",
@@ -632,7 +667,7 @@
       "roles": [
         "*"
       ],
-      "no": "04",
+      "no": "03",
       "title": "公司在發生什麼事",
       "sub": "佈告欄與行事曆"
     },
@@ -750,7 +785,7 @@
       "roles": [
         "*"
       ],
-      "no": "05",
+      "no": "04",
       "title": "要東西、要錢的時候",
       "sub": "請購、請款、領用，都有自己的單子"
     },
@@ -1203,7 +1238,7 @@
       "roles": [
         "*"
       ],
-      "no": "06",
+      "no": "05",
       "title": "還有這些，也是你的",
       "sub": "隨時看的、屬於你自己的"
     },
