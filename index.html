@@ -115,6 +115,12 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   transition:.15s}
 .wl-r:hover{border-color:rgba(227,6,19,.6);color:#fff}
 .wl-r.on{background:rgba(227,6,19,.16);border-color:var(--red);color:#fff;font-weight:700}
+.wl-r .tag{font-family:var(--en);font-size:11px;letter-spacing:1px;color:#C8811A;
+  border:1px solid rgba(200,129,26,.5);border-radius:5px;padding:1px 6px;margin-left:9px}
+.wl-r .tag.ok{color:#3ecf6a;border-color:rgba(62,207,106,.5)}
+.wl-r.empty{color:#5A5A66;border-color:rgba(255,255,255,.09)}
+.wl-r.empty.on{color:#cfcfcf}
+.wl-note{margin-top:18px;font-size:16px;color:#5A5A66;letter-spacing:1px}
 .wl-foot{position:absolute;bottom:44px;font-family:var(--en);font-size:14px;
   letter-spacing:4px;color:#4A4A55;z-index:2}
 
@@ -1230,10 +1236,19 @@ function renderRoutes(){
     '<button class="wl-start" onclick="startDeck()"><span>START</span></button>' +
     '<div class="wl-pick"><span class="wl-lab">場次</span>' +
       rs.map(function(r){
-        return '<button class="wl-r' + (r.id === PICKED ? ' on' : '') + '" onclick="setRoute(\'' + r.id + '\')">' +
-               esc(r.name) + '</button>';
+        var own = (DATA.slides || []).filter(function(s){
+          return (s.roles || []).indexOf(r.id) > -1;
+        }).length;
+        var soon = (r.id !== 'all' && r.id !== '_dev' && own === 0);
+        var tag = soon ? '<span class="tag">尚未建置</span>'
+                       : (own ? '<span class="tag ok">＋' + own + ' 頁</span>' : '');
+        return '<button class="wl-r' + (r.id === PICKED ? ' on' : '') + (soon ? ' empty' : '') +
+               '" data-id="' + r.id + '" onclick="setRoute(\'' + r.id + '\')">' +
+               esc(r.name) + tag + '</button>';
       }).join('') +
-    '</div></div><div class="wl-foot">' + esc(m.ver || '') + '</div>';
+    '</div>' +
+    '<div class="wl-note">標「尚未建置」的場次，內容目前與全公司場相同</div>' +
+    '</div><div class="wl-foot">' + esc(m.ver || '') + '</div>';
   $('routes').innerHTML = hh;
   $('routes').classList.add('on');
   $('deck').innerHTML = '';
@@ -1241,7 +1256,7 @@ function renderRoutes(){
 function setRoute(id){
   PICKED = id;
   $('routes').querySelectorAll('.wl-r').forEach(function(b){
-    b.classList.toggle('on', b.textContent === (DATA.routes.filter(function(r){return r.id===id;})[0]||{}).name);
+    b.classList.toggle('on', b.getAttribute('data-id') === id);
   });
 }
 function startDeck(){ pick(PICKED); }
