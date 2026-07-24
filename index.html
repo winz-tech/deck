@@ -92,14 +92,14 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 
 /* ---------- 活介面示範頁 ---------- */
 .demo{display:flex;gap:38px;flex:1;min-height:0;align-items:center;overflow:hidden}
-.demo .caps{flex:1;display:grid;gap:calc(14px*var(--k,1));align-content:center;overflow:hidden;min-height:0}
+.demo .caps{flex:1 1 auto;min-width:430px;display:grid;gap:calc(14px*var(--k,1));align-content:center;overflow:hidden;min-height:0}
 .cap{display:flex;gap:16px;align-items:flex-start;border-left:6px solid var(--line);padding:calc(6px*var(--k,1)) 0 calc(6px*var(--k,1)) 18px}
 .cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
 .cap h3{font-size:calc(31px*var(--k,1));font-weight:900;color:var(--ink);line-height:1.3}
 .cap p{font-size:calc(24px*var(--k,1));color:var(--sub);line-height:1.55;margin-top:4px}
 .cap.shown{border-left-color:var(--red)}
 
-.phone{width:352px;flex:none;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
+.phone{width:352px;flex:0 0 auto;min-width:280px;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
   padding:12px 12px 20px;box-shadow:0 22px 50px rgba(0,0,0,.3);position:relative;overflow:hidden}
 .phone::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
   width:96px;height:6px;background:#26262c;border-radius:4px}
@@ -173,7 +173,7 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   background:#17171c;color:#8a8a92;font-size:19px;text-align:center;padding:30px;line-height:1.7}
 
 /* ---------- 作業中心活介面 ---------- */
-.demo.wide .caps{flex:0 0 520px}
+.demo.wide .caps{flex:1 1 auto}
 .hub{flex:1;min-width:0;background:#0a0a0c;border:9px solid #26262c;border-radius:14px;
   padding:0;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.32);position:relative;
   background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
@@ -684,33 +684,45 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "title": "打卡，其實只有兩顆按鈕",
-      "lead": "紅色上班、藍色下班。打完會變灰 —— 代表今天這一趟記好了。",
+      "title": "上班：按紅色那顆",
+      "lead": "手機拿出來，兩秒就好。",
       "who": "王小明",
       "steps": [
         {
           "h": "早上到公司，按紅色那顆",
-          "p": "手機拿出來，兩秒的事。記得開定位權限。",
+          "p": "記得先開定位權限，系統要確認你在公司。",
           "state": "idle"
         },
         {
-          "h": "打完，紅色那顆就先休息了",
-          "p": "時間會直接顯示在上面，不用擔心「到底打了沒」。",
+          "h": "打完，它就先休息了",
+          "p": "時間直接顯示在上面，不用擔心「到底打了沒」。",
           "state": "in"
-        },
+        }
+      ],
+      "notes": "按第二下時按鈕會變成「早安，今天加油」，可以停一下讓大家看到。"
+    },
+    {
+      "type": "demo",
+      "roles": [
+        "*"
+      ],
+      "title": "下班：按藍色那顆",
+      "lead": "兩顆都變灰，今天就結束了。",
+      "who": "王小明",
+      "steps": [
         {
           "h": "下班按藍色那顆",
           "p": "還沒到下班時間，系統會先問你一次，免得手滑。",
           "state": "in",
-          "hint": "🔒 尚未到下班時間，會再確認一次"
+          "hint": "🔒 還沒到下班時間，會再確認一次"
         },
         {
-          "h": "兩顆都變灰，今天就結束了",
-          "p": "打過就不用再按了。真的按錯也不要緊，用「忘打卡」補一張就好。",
+          "h": "打完就收工了",
+          "p": "真的按錯也不要緊，用「忘打卡」補一張就好。",
           "state": "out"
         }
       ],
-      "notes": "這頁投影出來直接指著螢幕講。按一下推進一步，畫面會跟著變 —— 不用切到真系統，也不會有截圖過期的問題。"
+      "notes": "最後一步按鈕會變成「今天辛苦了 · 回家路上請小心」，這句可以帶一下。"
     },
     {
       "type": "section",
@@ -985,9 +997,9 @@ function autofit(){
     }
     // 字已到下限還是放不下 → 才縮圖（最多縮到 75%），把空間讓給字
     if (vis && box.scrollHeight > box.clientHeight + 6){
-      var w = vis.getBoundingClientRect().width, min = w * 0.75, cur = w;
+      var w = vis.getBoundingClientRect().width, min = Math.max(280, w * 0.8), cur = w;
       while (box.scrollHeight > box.clientHeight + 6 && cur > min){
-        cur -= 24; vis.style.maxWidth = cur + 'px';
+        cur -= 16; vis.style.maxWidth = cur + 'px';
       }
     }
   });
