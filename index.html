@@ -134,6 +134,31 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
 .pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
 
+/* ---------- 白底封面 ---------- */
+.slide.light{background:#fff}
+.lc-mark{position:absolute;right:-150px;top:-120px;width:760px;height:760px;
+  background:linear-gradient(135deg,rgba(227,6,19,.09),rgba(227,6,19,0));
+  transform:skewX(-18deg);pointer-events:none}
+.lc-bar{position:absolute;left:0;top:0;bottom:0;width:16px;background:var(--red)}
+.lc-wrap{margin:auto 0;max-width:1150px;position:relative;z-index:2}
+.lc-logo{height:104px;width:auto;display:block;margin-bottom:34px}
+.lc-eyebrow{font-family:var(--en);font-weight:700;font-size:19px;letter-spacing:7px;
+  color:var(--red);text-transform:uppercase;margin-bottom:18px}
+.lc-title{font-size:82px;font-weight:900;color:var(--ink);line-height:1.16;letter-spacing:-2px}
+.lc-rule{width:150px;height:10px;background:var(--red);transform:skewX(-18deg);margin:30px 0 26px}
+.lc-sub{font-size:29px;color:var(--sub);line-height:1.6}
+.lc-foot{position:absolute;left:96px;right:96px;bottom:64px;display:flex;align-items:flex-end;
+  border-top:2px solid var(--line);padding-top:22px;z-index:2}
+.lc-sp{display:flex;align-items:center;gap:18px}
+.lc-sp .tag{font-family:var(--en);font-size:14px;letter-spacing:4px;color:var(--sub);
+  text-transform:uppercase;writing-mode:vertical-rl;text-orientation:upright;
+  border-right:2px solid var(--red);padding-right:10px;line-height:1}
+.lc-sp .who b{display:block;font-size:40px;font-weight:900;color:var(--ink);line-height:1.15}
+.lc-sp .who i{display:block;font-family:var(--en);font-weight:700;font-size:21px;
+  letter-spacing:3px;color:var(--red);font-style:normal;margin-top:4px}
+.lc-meta{margin-left:auto;text-align:right;font-family:var(--en);font-size:16px;
+  letter-spacing:3px;color:var(--sub);line-height:1.9}
+
 /* ---------- 自己的圖（截圖／照片）+ 聚光燈 ---------- */
 .shot{flex:1;min-width:0;position:relative;border-radius:10px;overflow:hidden;
   box-shadow:0 18px 44px rgba(0,0,0,.28);background:#000;max-height:100%}
@@ -378,11 +403,18 @@ var FALLBACK = {
   "slides": [
     {
       "type": "cover",
+      "light": true,
       "roles": [
         "*"
       ],
+      "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+      "org": "WINZ TECHNOLOGY",
       "title": "公司的系統，<br>其實比你想的好用",
-      "sub": "十分鐘，帶你把每天會用到的都走過一遍"
+      "sub": "十分鐘，帶你把每天會用到的都走過一遍",
+      "speaker": "咪姐",
+      "speakerEn": "MIMI TSAI",
+      "when": "2026 / 07 / 28",
+      "where": "內部系統教育訓練"
     },
     {
       "type": "section",
@@ -836,7 +868,20 @@ function buildDeck(){
     var dark = (s.type === 'cover' || s.type === 'section' || s.type === 'end');
     var body = '';
 
-    if (s.type === 'cover'){
+    if (s.type === 'cover' && s.light){
+      body = '<div class="lc-bar"></div><div class="lc-mark"></div>' +
+        '<div class="lc-wrap">' +
+          (s.logo ? '<img class="lc-logo" src="' + esc(s.logo) + '" alt="" onerror="this.style.display=\'none\'">' : '') +
+          '<div class="lc-eyebrow">// ' + esc(s.org || (m.org||'')) + '</div>' +
+          '<div class="lc-title">' + esc(s.title) + '</div>' +
+          '<div class="lc-rule"></div>' +
+          '<div class="lc-sub">' + esc(s.sub) + '</div>' +
+        '</div>' +
+        '<div class="lc-foot"><div class="lc-sp"><div class="tag">Speaker</div>' +
+          '<div class="who"><b>' + esc(s.speaker || '') + '</b><i>' + esc(s.speakerEn || '') + '</i></div></div>' +
+          '<div class="lc-meta">' + esc(s.when || '') + '<br>' + esc(s.where || '') + '</div></div>';
+    }
+    else if (s.type === 'cover'){
       body = '<div class="cover-wrap"><div class="eyebrow">// ' + esc(m.org) + '</div>' +
              '<div class="cover-title">' + esc(s.title) + '</div>' +
              '<div class="rule"></div>' +
@@ -915,7 +960,8 @@ function buildDeck(){
                '<div>' + esc(routeName()) + '</div>' +
                '<div class="pill"><span>' + (i+1) + ' / ' + SLIDES.length + '</span></div></div></div>';
 
-    return '<div class="slide' + (dark?' dark':'') + '" data-i="' + i + '">' + body + foot + '</div>';
+    return '<div class="slide' + (dark?' dark':'') + (light?' light':'') + '" data-i="' + i + '">' +
+           body + (light ? '' : foot) + '</div>';
   }).join('');
   $('deck').innerHTML = html;
 }
