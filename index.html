@@ -170,6 +170,63 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
 .pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
 
+/* ---------- 請款單活介面（淺色，跟真實頁面一致）---------- */
+.pf{width:100%;background:#F4F4F4;border-radius:14px;overflow:hidden;
+  box-shadow:0 18px 44px rgba(0,0,0,.16);position:relative}
+.pf-nav{background:#1A1A1A;color:rgba(255,255,255,.55);font-size:12px;
+  padding:9px 14px;display:flex;align-items:center;gap:8px}
+.pf-nav .num{width:17px;height:17px;border-radius:50%;background:var(--red);color:#fff;
+  font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.pf-nav .ar{color:rgba(255,255,255,.3)}
+.pf-nav .q{margin-left:auto;color:#fff;font-weight:700;background:rgba(227,6,19,.22);
+  border:1px solid rgba(227,6,19,.5);padding:4px 11px;border-radius:20px;font-size:11px}
+.pf-card{background:#fff;margin:14px;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.pf-hd{background:#1A1A1A;color:#fff;padding:10px 15px;font-weight:700;font-size:13px}
+.pf-hd i{color:var(--red);font-style:normal;margin-right:7px}
+.pf-bd{padding:16px}
+.pf-g{margin-bottom:13px}
+.pf-l{font-size:12px;font-weight:700;color:#444;margin-bottom:5px}
+.pf-l em{color:var(--red);font-style:normal}
+.pf-i{border:1.5px solid #e0e0e0;border-radius:7px;padding:9px 12px;font-size:13px;
+  color:#1A1A1A;background:#fff}
+.pf-i.ph{color:#aaa}
+.pf-i.sel::after{content:'▾';float:right;color:#888}
+.pf-i.ro{background:#f7f7f7;font-weight:700}
+.pf-i.ro em{color:var(--red);font-style:normal;margin-right:7px}
+.pf-row{display:flex;gap:11px}.pf-row>*{flex:1}
+.pf-co{display:flex;gap:10px}
+.pf-co div{flex:1;border:2px solid #e0e0e0;border-radius:9px;padding:10px;text-align:center;
+  font-size:12px;color:#888;background:#fff}
+.pf-co div.on{border-color:var(--red);background:#fff5f5;color:#1A1A1A;font-weight:700}
+.pf-dd{border:1.5px solid var(--red);border-top:none;border-radius:0 0 7px 7px;background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.pf-dd div{padding:8px 12px;font-size:13px;color:#333}
+.pf-dd div.add{color:var(--red);font-weight:700;border-top:1px solid #eee}
+.pf-go{background:var(--red);color:#fff;text-align:center;padding:12px;border-radius:8px;
+  font-size:15px;font-weight:700;letter-spacing:2px}
+/* 查詢頁 */
+.pl-chips{display:flex;gap:7px;padding:12px 14px 0}
+.pl-chip{background:#fff;border:1.5px solid #e0e0e0;border-radius:20px;padding:6px 14px;
+  font-size:12px;font-weight:600;color:#666}
+.pl-chip.on{background:var(--red);border-color:var(--red);color:#fff}
+.pl-scope{margin-left:auto;font-size:11px;color:#888;align-self:center}
+.pl-c{background:#fff;border-radius:10px;margin:12px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);
+  border-left:4px solid #e0e0e0;overflow:hidden}
+.pl-c.wait{border-left-color:#e6a700}.pl-c.done{border-left-color:#16a34a}
+.pl-t{padding:12px 14px 8px;display:flex;justify-content:space-between;gap:10px}
+.pl-v{font-size:15px;font-weight:700;color:#1A1A1A}
+.pl-a{font-size:11px;color:#888;margin-top:2px}
+.pl-b{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:12px;margin-top:5px}
+.pl-b.wait{background:#fff3d6;color:#a06800}.pl-b.done{background:#d9f5e3;color:#0d7a3f}
+.pl-m{font-size:16px;font-weight:800;color:#1A1A1A;white-space:nowrap}
+.pl-meta{padding:0 14px 10px;font-size:11.5px;color:#666;display:flex;gap:14px;flex-wrap:wrap}
+.pl-meta b{color:#333}
+.pl-act{display:flex;border-top:1px solid #f0f0f0}
+.pl-act div{flex:1;padding:10px;text-align:center;font-size:12.5px;font-weight:600}
+.pl-act .e{color:#2563eb}.pl-act .c{color:var(--red);border-left:1px solid #f0f0f0}
+.pl-lock{padding:10px;text-align:center;font-size:12px;color:#aaa;border-top:1px solid #f0f0f0}
+
 /* ---------- 功能卡片牆 ---------- */
 .cg{display:grid;gap:22px;flex:1;min-height:0;align-content:center;
   grid-template-columns:repeat(3,1fr)}
@@ -191,6 +248,11 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 /* ---------- 訂會議室活介面 ---------- */
 .bk{width:100%;background:#111116;border:1px solid rgba(227,6,19,.3);border-radius:12px;
   padding:20px;box-shadow:0 18px 44px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.bk .part,.pf .part{transition:opacity .35s,filter .35s}
+.pf.focusing .part{opacity:.24;filter:saturate(.25)}
+.pf.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
+.pf.focusing .part.hit::after{content:'';position:absolute;inset:-7px;border:2px solid var(--red);
+  border-radius:9px;box-shadow:0 0 18px rgba(227,6,19,.5);pointer-events:none}
 .bk .part{transition:opacity .35s,filter .35s}
 .bk.focusing .part{opacity:.26;filter:saturate(.3)}
 .bk.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
@@ -994,12 +1056,63 @@ var FALLBACK = {
       "notes": "這頁講完可以接一句：訂完之後，首頁上面那條行事曆就會看到它。"
     },
     {
-      "type": "todo",
+      "type": "demo",
+      "comp": "payform",
       "roles": [
         "*"
       ],
-      "title": "請款申請單",
-      "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
+      "title": "請款，怎麼送？",
+      "lead": "填一張表就好，送出後 PDF 會自動寄到你信箱。",
+      "steps": [
+        {
+          "h": "先選出款公司",
+          "p": "穎利還是允利，點一下 LOGO 就好。",
+          "focus": "co"
+        },
+        {
+          "h": "申請人不用填，系統認得你",
+          "p": "登入是誰就是誰，不會有人幫別人送單。",
+          "focus": "me"
+        },
+        {
+          "h": "廠商找不到？當場新增",
+          "p": "打關鍵字找不到的話，下拉最後一列可以直接新增，不用等別人建好資料。",
+          "focus": "vd"
+        },
+        {
+          "h": "填金額、送出",
+          "p": "送出後 PDF 自動寄到你的信箱，不用自己存檔。",
+          "focus": "go"
+        }
+      ],
+      "notes": "重點：申請人自動帶、廠商可當場新增、PDF 自動寄。這三件是最常被問的。"
+    },
+    {
+      "type": "demo",
+      "comp": "paylist",
+      "roles": [
+        "*"
+      ],
+      "title": "送出去之後，去哪裡看？",
+      "lead": "作業中心 →「財會管理 → 請款單查詢」，或表單右上角那顆按鈕。",
+      "steps": [
+        {
+          "h": "用上面的標籤篩",
+          "p": "全部 / 待處理 / 已處理 / 已取消。預設只看得到自己的單。",
+          "focus": "filter"
+        },
+        {
+          "h": "還沒處理的，可以改也可以取消",
+          "p": "編輯要寫一句修改原因，取消也要寫原因 —— 這樣後面的人才知道發生什麼事。",
+          "focus": "wait"
+        },
+        {
+          "h": "已經處理的就鎖住了",
+          "p": "錢已經在跑了，這時候就不能再改。真的有問題請直接找會計。",
+          "focus": "done"
+        }
+      ],
+      "notes": "承上頁。這頁講完就把「送單在申請管理、改單在財會管理」再帶一次。"
     },
     {
       "type": "todo",
@@ -1360,6 +1473,13 @@ function buildDeck(){
                  '<div class="cg-d">' + esc(c.d) + '</div></div>';
              }).join('') + '</div>';
     }
+    else if (s.type === 'demo' && (s.comp === 'payform' || s.comp === 'paylist')){
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo wide">' +
+             (s.comp === 'payform' ? _payFormHtml() : _payListHtml()) +
+             '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
     else if (s.type === 'demo' && s.comp === 'book'){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
@@ -1456,6 +1576,52 @@ function _capsHtml(list){
   }).join('');
 }
 
+function _payFormHtml(){
+  return '<div class="pf" id="pf">' +
+    '<div class="pf-nav part" data-p="flow"><span class="num">1</span>填寫請款資料<span class="ar">→</span>' +
+      '<span class="num">2</span>送出申請<span class="ar">→</span><span class="num">3</span>PDF 寄到信箱' +
+      '<span class="q">🔍 請款單查詢</span></div>' +
+    '<div class="pf-card"><div class="pf-hd"><i>▮</i>填寫請款資料</div><div class="pf-bd">' +
+      '<div class="pf-g part" data-p="co"><div class="pf-l">出款公司<em>*</em></div>' +
+        '<div class="pf-co"><div class="on">穎利</div><div>允利</div></div></div>' +
+      '<div class="pf-g part" data-p="me"><div class="pf-l">申請人<em>*</em></div>' +
+        '<div class="pf-i ro"><em>✔</em>王小明（生產部）</div></div>' +
+      '<div class="pf-row part" data-p="kind">' +
+        '<div class="pf-g"><div class="pf-l">請款類別<em>*</em></div><div class="pf-i sel">一般費用</div></div>' +
+        '<div class="pf-g"><div class="pf-l">付款方式<em>*</em></div><div class="pf-i sel">匯款</div></div>' +
+        '<div class="pf-g"><div class="pf-l">最晚匯款日<em>*</em></div><div class="pf-i">2026/08/10</div></div>' +
+      '</div>' +
+      '<div class="pf-g part" data-p="vd"><div class="pf-l">請款對象<em>*</em></div>' +
+        '<div class="pf-i ph">輸入關鍵字搜尋廠商…</div>' +
+        '<div class="pf-dd"><div>全家便利商店</div><div>台灣大哥大</div>' +
+          '<div class="add">＋ 找不到廠商？新增「新光文具」</div></div></div>' +
+      '<div class="pf-row part" data-p="amt">' +
+        '<div class="pf-g"><div class="pf-l">會計科目<em>*</em></div><div class="pf-i sel">文具用品</div></div>' +
+        '<div class="pf-g"><div class="pf-l">金額<em>*</em></div><div class="pf-i">1,280</div></div></div>' +
+      '<div class="pf-go part" data-p="go">✈ 送出申請</div>' +
+    '</div></div></div>';
+}
+
+function _payListHtml(){
+  return '<div class="pf" id="pf">' +
+    '<div class="pl-chips part" data-p="filter"><div class="pl-chip on">全部</div>' +
+      '<div class="pl-chip">待處理</div><div class="pl-chip">已處理</div><div class="pl-chip">已取消</div>' +
+      '<div class="pl-scope">👤 只顯示 王小明 的請款單</div></div>' +
+    '<div class="pl-c wait part" data-p="wait"><div class="pl-t"><div>' +
+      '<div class="pl-v">新光文具</div><div class="pl-a">王小明　·　穎利</div>' +
+      '<span class="pl-b wait">待處理</span></div><div class="pl-m">NT$1,280</div></div>' +
+      '<div class="pl-meta"><span>填表 <b>07/25</b></span><span>最晚匯款 <b>08/10</b></span>' +
+      '<span>科目 <b>文具用品</b></span><span>方式 <b>匯款</b></span></div>' +
+      '<div class="pl-act"><div class="e">✎ 編輯</div><div class="c">⊘ 取消申請</div></div></div>' +
+    '<div class="pl-c done part" data-p="done"><div class="pl-t"><div>' +
+      '<div class="pl-v">台灣大哥大</div><div class="pl-a">王小明　·　穎利</div>' +
+      '<span class="pl-b done">已處理</span></div><div class="pl-m">NT$899</div></div>' +
+      '<div class="pl-meta"><span>填表 <b>07/12</b></span><span>最晚匯款 <b>07/20</b></span>' +
+      '<span>科目 <b>通訊費</b></span><span>方式 <b>匯款</b></span></div>' +
+      '<div class="pl-lock">已處理，無法編輯</div></div>' +
+  '</div>';
+}
+
 function _bookHtml(){
   var ppl = [['王小明',''],['陳大器',''],['林佩珊','特休 全天','off'],['張志豪','出差 全天','out']];
   return '<div class="bk" id="bk">' +
@@ -1484,6 +1650,15 @@ function _bookHtml(){
 
 /* 訂會議室：依 STEP 聚焦 / 顯示提示 */
 function setBook(sl){
+  var pf = sl.querySelector('.pf');
+  if (pf){
+    var s2 = SLIDES[IDX] || {}, c2 = (s2.steps || [])[Math.max(0, STEP-1)] || {};
+    var f2 = (STEP > 0) ? (c2.focus || '') : '';
+    pf.classList.toggle('focusing', !!f2);
+    pf.querySelectorAll('.part').forEach(function(p){
+      p.classList.toggle('hit', !!f2 && p.getAttribute('data-p') === f2);
+    });
+  }
   var bk = sl.querySelector('.bk'); if (!bk) return;
   var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
   var f = (STEP > 0) ? (cf.focus || '') : '';
