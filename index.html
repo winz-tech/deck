@@ -89,6 +89,51 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .rt.dev .mk{background:#4A4A55}
 .rt.dev b{color:#9A9AA6}
 
+
+/* ---------- 活介面示範頁 ---------- */
+.demo{display:flex;gap:56px;flex:1;min-height:0;align-items:center}
+.demo .caps{flex:1;display:grid;gap:16px;align-content:center}
+.cap{display:flex;gap:18px;align-items:flex-start;border-left:6px solid var(--line);padding:8px 0 8px 20px}
+.cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
+.cap h3{font-size:29px;font-weight:900;color:var(--ink);line-height:1.35}
+.cap p{font-size:22px;color:var(--sub);line-height:1.6;margin-top:4px}
+.cap.shown{border-left-color:var(--red)}
+
+.phone{width:352px;flex:none;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
+  padding:12px 12px 20px;box-shadow:0 22px 50px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.phone::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:96px;height:6px;background:#26262c;border-radius:4px}
+.pu-bar{display:flex;align-items:center;gap:8px;padding:16px 8px 8px;border-bottom:1px solid rgba(227,6,19,.35)}
+.pu-bar .pg{font-family:var(--en);font-weight:700;font-size:10px;letter-spacing:3px;color:var(--red)}
+.pu-bar .ck{margin-left:auto;font-family:var(--en);font-weight:600;font-size:12px;color:#fff;letter-spacing:1px}
+.pu-card{background:#15151a;border:1px solid rgba(255,255,255,.08);border-radius:9px;
+  padding:14px;margin:14px 4px;position:relative}
+.pu-card::before,.pu-card::after{content:'';position:absolute;width:12px;height:12px;border:2px solid var(--red)}
+.pu-card::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
+.pu-card::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
+.pu-date{font-family:var(--en);font-size:11px;letter-spacing:2px;color:#8a8a92}
+.pu-name{font-size:18px;font-weight:700;color:#fff;margin:2px 0 11px}
+.pu-row{display:flex;gap:9px}
+.pu-cell{flex:1;background:#0e0e12;border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:10px 4px;text-align:center}
+.pu-lab{font-family:var(--en);font-size:9px;letter-spacing:1.5px;color:#8a8a92;margin-bottom:3px}
+.pu-time{font-family:var(--en);font-weight:700;font-size:19px;color:#3a3a42;letter-spacing:1px}
+.pu-cell.done{border-color:rgba(227,6,19,.5)}
+.pu-cell.done .pu-time{color:var(--red);text-shadow:0 0 10px rgba(227,6,19,.55)}
+.pu-btn{display:block;width:92%;margin:0 auto 13px;height:74px;border:none;border-radius:7px;
+  transform:skewX(-18deg);position:relative;transition:.35s}
+.pu-btn::before{content:'';position:absolute;inset:4px;border:1px solid rgba(255,255,255,.28);border-radius:4px}
+.pu-btn .in2{transform:skewX(18deg);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:100%;gap:2px}
+.pu-btn .zh{color:#fff;font-size:19px;font-weight:700;letter-spacing:5px;margin-right:-5px}
+.pu-btn .en2{font-family:var(--en);font-weight:600;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.6)}
+.pu-btn.i{background:linear-gradient(135deg,#E30613,#8f0009);box-shadow:0 0 18px rgba(227,6,19,.4),0 5px 0 rgba(0,0,0,.5)}
+.pu-btn.o{background:linear-gradient(135deg,#2b4d6f,#16293c);border:1px solid rgba(120,190,255,.32);
+  box-shadow:0 0 14px rgba(60,130,200,.3),0 5px 0 rgba(0,0,0,.5)}
+.pu-btn.off{opacity:.3;filter:grayscale(1);box-shadow:none}
+.pu-btn.off .zh{letter-spacing:2px;margin-right:-2px;font-size:17px}
+.pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
+.pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
+
 /* ---------- 總覽 ---------- */
 #grid{position:absolute;inset:0;background:rgba(10,10,14,.97);display:none;
   padding:50px 60px;overflow:auto;z-index:40}
@@ -170,130 +215,220 @@ var FALLBACK = {
     "ver": "2026-07-25 / v1",
     "updated": "2026-07-25"
   },
-
   "routes": [
-    { "id": "all",      "name": "全公司場",   "desc": "7/28 全員場・只講共用功能", "hot": true },
-    { "id": "foreman",  "name": "廠務",       "desc": "共用功能 ＋ 廠務專屬" },
-    { "id": "r_and_d",  "name": "研發襄理",   "desc": "共用功能 ＋ 研發專屬" },
-    { "id": "qc",       "name": "品管組長",   "desc": "共用功能 ＋ 進貨檢驗" },
-    { "id": "operator", "name": "作業專員",   "desc": "共用功能 ＋ 現場單據" },
-    { "id": "_dev",     "name": "備課模式",   "desc": "全部頁面一次展開（自己看）", "dev": true }
+    {
+      "id": "all",
+      "name": "全公司場",
+      "desc": "7/28 全員場・只講共用功能",
+      "hot": true
+    },
+    {
+      "id": "foreman",
+      "name": "廠務",
+      "desc": "共用功能 ＋ 廠務專屬"
+    },
+    {
+      "id": "r_and_d",
+      "name": "研發襄理",
+      "desc": "共用功能 ＋ 研發專屬"
+    },
+    {
+      "id": "qc",
+      "name": "品管組長",
+      "desc": "共用功能 ＋ 進貨檢驗"
+    },
+    {
+      "id": "operator",
+      "name": "作業專員",
+      "desc": "共用功能 ＋ 現場單據"
+    },
+    {
+      "id": "_dev",
+      "name": "備課模式",
+      "desc": "全部頁面一次展開（自己看）",
+      "dev": true
+    }
   ],
-
   "slides": [
     {
       "type": "cover",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "公司的系統，<br>其實比你想的好用",
       "sub": "十分鐘，帶你把每天會用到的都走過一遍"
     },
-
     {
       "type": "section",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "no": "01",
       "title": "先從「進得去」開始",
       "sub": "登入這件事，只有第一次麻煩"
     },
-
     {
       "type": "list",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "登入時，那兩顆按鈕差在哪？",
       "lead": "選錯不會壞掉，只是下次要重登一次而已。",
       "items": [
-        { "h": "🔒 我的個人裝置", "p": "自己的手機、自己的電腦。系統會記得你，下次打開直接進去。" },
-        { "h": "👥 公司共用電腦", "p": "現場那台、會議室那台。刻意不記得你 —— 下一個人來，不會用到你的帳號。" },
-        { "h": "所以「共用電腦每次都要登入」不是壞掉", "p": "是故意的。那台電腦大家輪流用。" }
+        {
+          "h": "🔒 我的個人裝置",
+          "p": "自己的手機、自己的電腦。系統會記得你，下次打開直接進去。"
+        },
+        {
+          "h": "👥 公司共用電腦",
+          "p": "現場那台、會議室那台。刻意不記得你 —— 下一個人來，不會用到你的帳號。"
+        },
+        {
+          "h": "所以「共用電腦每次都要登入」不是壞掉",
+          "p": "是故意的。那台電腦大家輪流用。"
+        }
       ],
       "notes": "這頁一定要講。過去最多人問的就是「為什麼有時候要重登」。講完這頁，客服量會少一半。"
     },
-
     {
       "type": "section",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "no": "02",
       "title": "上下班打卡",
       "sub": "手機拿出來，兩秒的事"
     },
-
     {
-      "type": "list",
-      "roles": ["*"],
-      "title": "打卡：紅色上班，藍色下班",
-      "lead": "打完卡，按鈕會變灰，代表今天這一趟已經記錄好了。",
-      "items": [
-        { "h": "要在公司附近才打得到", "p": "系統會抓你的位置，離公司太遠會擋下來。記得開定位權限。" },
-        { "h": "第一次打不到？先別緊張", "p": "新手機第一次抓 GPS 會不準，抓過幾次就穩了。到窗邊再試一次。" },
-        { "h": "忘記打上班卡", "p": "系統會擋住下班卡，並帶你去申請「忘打卡」。送出後就能正常打下班卡。" },
-        { "h": "假日來上班", "p": "會先問你一次「今天是假日，確定要打嗎」。記得另外補加班單，不然不算加班費。" },
-        { "h": "太早到、太晚走", "p": "系統會問一句是公事還是私事。公事就去申請加班，私事寫一行原因就好。" }
+      "type": "demo",
+      "roles": [
+        "*"
       ],
-      "notes": "重點放在「擋下來不是刁難，是保護你的出勤紀錄」。"
+      "title": "打卡，其實只有兩顆按鈕",
+      "lead": "紅色上班、藍色下班。打完會變灰 —— 代表今天這一趟記好了。",
+      "who": "王小明",
+      "steps": [
+        {
+          "h": "早上到公司，按紅色那顆",
+          "p": "手機拿出來，兩秒的事。記得開定位權限。",
+          "state": "idle"
+        },
+        {
+          "h": "打完，紅色那顆就關起來了",
+          "p": "時間直接顯示在上面，不會有「到底打了沒」的疑慮。",
+          "state": "in"
+        },
+        {
+          "h": "下班按藍色那顆",
+          "p": "還沒到下班時間會先問你一次，避免手滑。",
+          "state": "in",
+          "hint": "🔒 尚未到下班時間，會再確認一次"
+        },
+        {
+          "h": "兩顆都灰了，今天結束",
+          "p": "打過就不能改。真的打錯，走「忘打卡」申請。",
+          "state": "out"
+        }
+      ],
+      "notes": "這頁投影出來直接指著螢幕講。按一下推進一步，畫面會跟著變 —— 不用切到真系統，也不會有截圖過期的問題。"
     },
-
     {
       "type": "section",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "no": "03",
       "title": "公司在發生什麼事",
       "sub": "佈告欄與行事曆"
     },
-
     {
       "type": "list",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "佈告欄：重要的事不會只在群組裡飄過去",
       "lead": "公告、活動、獎懲、規章、即時訊息，都在同一個地方。",
       "items": [
-        { "h": "會寄到你的信箱", "p": "重要的公告不只貼在牆上，還會主動送到你手上。" },
-        { "h": "看過的會記錄下來", "p": "發布的人知道誰還沒看到，就不用一個一個問。" },
-        { "h": "活動會自動跑到行事曆", "p": "不用自己抄時間。" }
+        {
+          "h": "會寄到你的信箱",
+          "p": "重要的公告不只貼在牆上，還會主動送到你手上。"
+        },
+        {
+          "h": "看過的會記錄下來",
+          "p": "發布的人知道誰還沒看到，就不用一個一個問。"
+        },
+        {
+          "h": "活動會自動跑到行事曆",
+          "p": "不用自己抄時間。"
+        }
       ]
     },
-
     {
       "type": "list",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "1F 會議室現在有人嗎？",
       "lead": "打開行事曆就知道，不用跑去看。",
       "items": [
-        { "h": "會議室不會被兩組人訂走", "p": "同一個時段只會有一組人訂得到。" },
-        { "h": "同事請假，行事曆上看得到", "p": "但只會顯示「不在公司」—— 不會寫是什麼假。" },
-        { "h": "為什麼不寫假別？", "p": "請假的理由是私事。系統只讓大家知道「今天找不找得到人」。" },
-        { "h": "唯一的例外", "p": "公出、出差會寫出來 —— 那是代表公司出去辦事，本來就是公事。" }
+        {
+          "h": "會議室不會被兩組人訂走",
+          "p": "同一個時段只會有一組人訂得到。"
+        },
+        {
+          "h": "同事請假，行事曆上看得到",
+          "p": "但只會顯示「不在公司」—— 不會寫是什麼假。"
+        },
+        {
+          "h": "為什麼不寫假別？",
+          "p": "請假的理由是私事。系統只讓大家知道「今天找不找得到人」。"
+        },
+        {
+          "h": "唯一的例外",
+          "p": "公出、出差會寫出來 —— 那是代表公司出去辦事，本來就是公事。"
+        }
       ],
       "notes": "隱私這段要慢慢講。這是全公司對系統建立信任的關鍵一頁。"
     },
-
     {
       "type": "todo",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "請款申請單",
       "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
     },
-
     {
       "type": "todo",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "樣品／耗材領用單",
       "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
     },
-
     {
       "type": "list",
-      "roles": ["qc"],
+      "roles": [
+        "qc"
+      ],
       "title": "進貨檢驗，不用再翻紙本",
       "lead": "貨到了、還沒驗的，系統會自己列出來。",
       "items": [
-        { "h": "待驗清單自動出現", "p": "不用去問採購今天到了什麼。" },
-        { "h": "驗完直接填結果", "p": "填完就進系統，後面的人馬上看得到。" }
+        {
+          "h": "待驗清單自動出現",
+          "p": "不用去問採購今天到了什麼。"
+        },
+        {
+          "h": "驗完直接填結果",
+          "p": "填完就進系統，後面的人馬上看得到。"
+        }
       ]
     },
-
     {
       "type": "end",
-      "roles": ["*"],
+      "roles": [
+        "*"
+      ],
       "title": "用不順，直接說",
       "sub": "系統是為了讓大家少做一點事。<br>哪裡卡住、哪裡難用，講出來就會改。"
     }
@@ -378,6 +513,27 @@ function buildDeck(){
              '<div class="h1">' + esc(s.title) + '</div>' +
              '<div class="lead">' + esc(s.sub) + '</div></div>';
     }
+    else if (s.type === 'demo'){
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo">' +
+             '<div class="phone" id="ph' + i + '">' +
+               '<div class="pu-bar"><div class="pg">// TIME ATTENDANCE</div><div class="ck">08:12:03</div></div>' +
+               '<div class="pu-card"><div class="pu-date">2026/07/28　MON</div>' +
+                 '<div class="pu-name">' + esc(s.who || '王小明') + '</div><div class="pu-row">' +
+                 '<div class="pu-cell" data-c="in"><div class="pu-lab">CLOCK IN · 上班</div><div class="pu-time">--:--:--</div></div>' +
+                 '<div class="pu-cell" data-c="out"><div class="pu-lab">CLOCK OUT · 下班</div><div class="pu-time">--:--:--</div></div>' +
+               '</div></div>' +
+               '<button class="pu-btn i"><span class="in2"><span class="zh">上班打卡</span><span class="en2">// CLOCK IN //</span></span></button>' +
+               '<button class="pu-btn o"><span class="in2"><span class="zh">下班打卡</span><span class="en2">// CLOCK OUT //</span></span></button>' +
+               '<div class="pu-hint"></div>' +
+             '</div><div class="caps">' +
+             (s.steps || []).map(function(c,k){
+               var n = (k+1) < 10 ? '0'+(k+1) : (k+1);
+               return '<div class="cap step"><div class="idx">' + n + '</div><div>' +
+                      '<h3>' + esc(c.h) + '</h3>' + (c.p ? '<p>' + esc(c.p) + '</p>' : '') + '</div></div>';
+             }).join('') + '</div></div>';
+    }
     else { /* list */
       var its = s.items || [];
       var two = its.length > 6 ? ' two' : '';
@@ -424,9 +580,36 @@ function show(){
   if (ROUTE === '_dev') expandAll();
 }
 function steps(){ return $('deck').querySelectorAll('.slide.on .step'); }
+
+/* 活介面：依 STEP 推進手機畫面 */
+function setPhone(){
+  var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
+  var ph = sl.querySelector('.phone'); if (!ph) return;
+  var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
+  var st = cf.state || 'idle';
+  var cIn = ph.querySelector('[data-c=in]'),  tIn  = cIn.querySelector('.pu-time');
+  var cOut= ph.querySelector('[data-c=out]'), tOut = cOut.querySelector('.pu-time');
+  var bIn = ph.querySelector('.pu-btn.i'),    bOut = ph.querySelector('.pu-btn.o');
+  var hint= ph.querySelector('.pu-hint');
+  function set(b, off, zh, en){
+    b.classList.toggle('off', !!off);
+    b.querySelector('.zh').textContent = zh;
+    b.querySelector('.en2').textContent = en;
+  }
+  var inDone  = (st === 'in' || st === 'out');
+  var outDone = (st === 'out');
+  tIn.textContent  = inDone  ? '08:12:03' : '--:--:--';
+  tOut.textContent = outDone ? '18:04:22' : '--:--:--';
+  cIn.classList.toggle('done', inDone);
+  cOut.classList.toggle('done', outDone);
+  set(bIn,  inDone,  inDone  ? '早安，今天加油' : '上班打卡', inDone  ? '記得吃早餐 · 08:12:03'   : '// CLOCK IN //');
+  set(bOut, outDone, outDone ? '今天辛苦了'     : '下班打卡', outDone ? '回家路上請小心 · 18:04:22' : '// CLOCK OUT //');
+  hint.textContent = cf.hint || '';
+}
 function applySteps(){
   var st = steps();
   for (var i=0;i<st.length;i++) st[i].classList.toggle('shown', i < STEP);
+  setPhone();
 }
 function expandAll(){ STEP = steps().length; applySteps(); }
 
@@ -439,6 +622,51 @@ function prev(){
   if (IDX > 0){ IDX--; show(); expandAll(); }   // 退回上一頁自動全展開
 }
 function goto(i){ IDX = i; STEP = 0; show(); closeGrid(); }
+
+
+/* ---------- 活介面示範頁 ---------- */
+.demo{display:flex;gap:56px;flex:1;min-height:0;align-items:center}
+.demo .caps{flex:1;display:grid;gap:16px;align-content:center}
+.cap{display:flex;gap:18px;align-items:flex-start;border-left:6px solid var(--line);padding:8px 0 8px 20px}
+.cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
+.cap h3{font-size:29px;font-weight:900;color:var(--ink);line-height:1.35}
+.cap p{font-size:22px;color:var(--sub);line-height:1.6;margin-top:4px}
+.cap.shown{border-left-color:var(--red)}
+
+.phone{width:352px;flex:none;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
+  padding:12px 12px 20px;box-shadow:0 22px 50px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.phone::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:96px;height:6px;background:#26262c;border-radius:4px}
+.pu-bar{display:flex;align-items:center;gap:8px;padding:16px 8px 8px;border-bottom:1px solid rgba(227,6,19,.35)}
+.pu-bar .pg{font-family:var(--en);font-weight:700;font-size:10px;letter-spacing:3px;color:var(--red)}
+.pu-bar .ck{margin-left:auto;font-family:var(--en);font-weight:600;font-size:12px;color:#fff;letter-spacing:1px}
+.pu-card{background:#15151a;border:1px solid rgba(255,255,255,.08);border-radius:9px;
+  padding:14px;margin:14px 4px;position:relative}
+.pu-card::before,.pu-card::after{content:'';position:absolute;width:12px;height:12px;border:2px solid var(--red)}
+.pu-card::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
+.pu-card::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
+.pu-date{font-family:var(--en);font-size:11px;letter-spacing:2px;color:#8a8a92}
+.pu-name{font-size:18px;font-weight:700;color:#fff;margin:2px 0 11px}
+.pu-row{display:flex;gap:9px}
+.pu-cell{flex:1;background:#0e0e12;border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:10px 4px;text-align:center}
+.pu-lab{font-family:var(--en);font-size:9px;letter-spacing:1.5px;color:#8a8a92;margin-bottom:3px}
+.pu-time{font-family:var(--en);font-weight:700;font-size:19px;color:#3a3a42;letter-spacing:1px}
+.pu-cell.done{border-color:rgba(227,6,19,.5)}
+.pu-cell.done .pu-time{color:var(--red);text-shadow:0 0 10px rgba(227,6,19,.55)}
+.pu-btn{display:block;width:92%;margin:0 auto 13px;height:74px;border:none;border-radius:7px;
+  transform:skewX(-18deg);position:relative;transition:.35s}
+.pu-btn::before{content:'';position:absolute;inset:4px;border:1px solid rgba(255,255,255,.28);border-radius:4px}
+.pu-btn .in2{transform:skewX(18deg);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:100%;gap:2px}
+.pu-btn .zh{color:#fff;font-size:19px;font-weight:700;letter-spacing:5px;margin-right:-5px}
+.pu-btn .en2{font-family:var(--en);font-weight:600;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.6)}
+.pu-btn.i{background:linear-gradient(135deg,#E30613,#8f0009);box-shadow:0 0 18px rgba(227,6,19,.4),0 5px 0 rgba(0,0,0,.5)}
+.pu-btn.o{background:linear-gradient(135deg,#2b4d6f,#16293c);border:1px solid rgba(120,190,255,.32);
+  box-shadow:0 0 14px rgba(60,130,200,.3),0 5px 0 rgba(0,0,0,.5)}
+.pu-btn.off{opacity:.3;filter:grayscale(1);box-shadow:none}
+.pu-btn.off .zh{letter-spacing:2px;margin-right:-2px;font-size:17px}
+.pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
+.pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
 
 /* ---------- 總覽 ---------- */
 function toggleGrid(){
