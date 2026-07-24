@@ -88,7 +88,8 @@
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "Imagery.png"
+      "photo": "Imagery.png",
+      "always": true
     },
     {
       "type": "section",
@@ -701,7 +702,8 @@
         "*"
       ],
       "title": "哪裡卡住，都可以跟我們說",
-      "sub": "系統是為了讓大家少做一點事。<br>哪裡難用、哪裡多餘，講出來我們就改。"
+      "sub": "系統是為了讓大家少做一點事。<br>哪裡難用、哪裡多餘，講出來我們就改。",
+      "always": true
     }
   ]
 }
