@@ -197,6 +197,8 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   background:rgba(255,255,255,.025);border:1px solid transparent}
 .hu-z i{width:19px;height:19px;border-radius:5px;background:rgba(227,6,19,.14);flex:none;
   font-style:normal;font-size:10px;display:flex;align-items:center;justify-content:center}
+.hu-z i img,.hu-c .ic img,.hu-fi i img{width:100%;height:100%;object-fit:cover;display:block;border-radius:5px}
+.hu-z i.hasimg,.hu-c .ic.hasimg,.hu-fi i.hasimg{background:transparent}
 .hu-z b{font-size:10px;font-weight:600;color:rgba(255,255,255,.72);white-space:nowrap}
 .hu-z.on{background:rgba(227,6,19,.16);border-color:rgba(227,6,19,.6)}
 .hu-z.on i{background:#E30613}
@@ -317,7 +319,20 @@ var FALLBACK = {
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
     "ver": "2026-07-25 / v1",
-    "updated": "2026-07-25"
+    "updated": "2026-07-25",
+    "icons": {
+      "生產管理": "img/02_生產管理.png",
+      "品質管理": "img/03_品質管理.png",
+      "採購管理": "img/04_採購管理.png",
+      "進銷存管理": "img/05_進銷存管理.png",
+      "申請管理": "img/07_申請管理.png",
+      "工具管理": "img/09_工具管理.png",
+      "佈告欄": "",
+      "員工通訊錄": "",
+      "個人資料維護": "",
+      "除蟲許願池": "img/32_除蟲許願池.png",
+      "打卡系統": ""
+    }
   },
   "routes": [
     {
@@ -584,43 +599,6 @@ var FALLBACK = {
       ]
     },
     {
-      "type": "shot",
-      "roles": [
-        "*"
-      ],
-      "title": "這是你自己的圖（範例頁）",
-      "lead": "把圖丟進 repo 的 img/ 資料夾，JSON 寫檔名就好。紅框會跟著講到哪就移到哪。",
-      "img": "img/sample.png",
-      "ver": "對應版本 2026-07",
-      "steps": [
-        {
-          "h": "第一步講這裡",
-          "p": "紅框會框住畫面左上角，其他地方變暗。",
-          "box": [
-            4,
-            6,
-            34,
-            22
-          ]
-        },
-        {
-          "h": "第二步移到這裡",
-          "p": "框會平滑滑過去，不用切圖、不用做動畫。",
-          "box": [
-            40,
-            34,
-            52,
-            30
-          ]
-        },
-        {
-          "h": "不框也可以",
-          "p": "這一步沒有寫 box，整張圖就恢復正常亮度。"
-        }
-      ],
-      "notes": "這頁是給家兒看機制用的，正式簡報請換成真的圖或直接刪掉。"
-    },
-    {
       "type": "end",
       "roles": [
         "*"
@@ -802,12 +780,18 @@ function _capsHtml(list){
 }
 
 function _hubHtml(){
-  var zones = [['生產管理','⚙'],['品質管理','🛡'],['採購管理','🛒'],['進銷存管理','📦'],['人事管理','👥'],['工具管理','🧰']];
+  var ICO = (DATA.meta && DATA.meta.icons) || {};
+  function _ic(key, emoji, cls){
+    var u = ICO[key];
+    return u ? '<' + cls + ' class="hasimg"><img src="' + esc(u) + '" onerror="var p=this.parentNode;p.classList.remove(\'hasimg\');p.textContent=\'' + emoji + '\'"></' + cls + '>'
+             : '<' + cls + '>' + emoji + '</' + cls + '>';
+  }
+  var zones = [['生產管理','⚙'],['品質管理','🛡'],['採購管理','🛒'],['進銷存管理','📦'],['申請管理','📄'],['工具管理','🧰']];
   var cards = [
-    ['📬','佈告欄','公告、活動、規章都在這裡', 'pin'],
-    ['📇','員工通訊錄','查同事分機、Email、座位',''],
-    ['👤','個人資料維護','維護聯絡方式、緊急聯絡人',''],
-    ['🐛','除蟲許願池','回報問題、許願新功能','']
+    ['佈告欄','公告、活動、規章都在這裡','📬','pin'],
+    ['員工通訊錄','查同事分機、Email、座位','📇',''],
+    ['個人資料維護','維護聯絡方式、緊急聯絡人','👤',''],
+    ['除蟲許願池','回報問題、許願新功能','🐛','']
   ];
   return '<div class="hub" id="hub">' +
     '<div class="hu-top part" data-p="top">' +
@@ -826,16 +810,16 @@ function _hubHtml(){
         '<div class="hu-calbtn"><span>⊞ 完整行事曆</span></div></div>' +
       '<div class="hu-work">' +
         '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
-          zones.map(function(z,i){ return '<div class="hu-z' + (i===5?' on':'') + '"><i>' + z[1] + '</i><b>' + z[0] + '</b></div>'; }).join('') +
+          zones.map(function(z,i){ return '<div class="hu-z' + (i===5?' on':'') + '">' + _ic(z[0], z[1], 'i') + '<b>' + z[0] + '</b></div>'; }).join('') +
         '</div>' +
         '<div class="hu-cards part" data-p="cards">' +
-          cards.map(function(c){ return '<div class="hu-c ' + c[3] + '"><div class="ic">' + c[0] + '</div>' +
-            '<div class="nm">' + c[1] + '</div><div class="ds">' + c[2] + '</div><div class="st">★</div></div>'; }).join('') +
+          cards.map(function(c){ return '<div class="hu-c ' + c[3] + '">' + _ic(c[0], c[2], 'div').replace('class="hasimg"','class="ic hasimg"').replace('<div>','<div class="ic">') +
+            '<div class="nm">' + c[0] + '</div><div class="ds">' + c[1] + '</div><div class="st">★</div></div>'; }).join('') +
         '</div>' +
         '<div class="hu-fav part" data-p="fav">' +
           '<div class="hu-fh"><span class="s">★</span><span class="t">我的釘選</span></div>' +
           '<div class="hu-fe" id="hu-fe">點卡片右上角的星號，把常用的釘在這裡。</div>' +
-          '<div class="hu-fi p1"><i>📬</i><b>佈告欄</b></div>' +
+          '<div class="hu-fi p1">' + _ic('佈告欄','📬','i') + '<b>佈告欄</b></div>' +
           '<div class="hu-fa"><div class="hu-fh"><span class="t">● 最常使用</span></div>' +
             '<div class="hu-fi p1"><i>🕐</i><b>打卡系統</b></div></div>' +
         '</div>' +
