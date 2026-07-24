@@ -364,7 +364,8 @@ var FALLBACK = {
       "廠商代號助手": "img/39_廠商代號助手.png",
       "外箱計算器": "img/40_外箱計算器.png",
       "打卡系統": "https://winz-tech.github.io/WINZ-ClockIn/icon-512.png"
-    }
+    },
+    "defaultRoute": "all"
   },
   "routes": [
     {
@@ -842,6 +843,10 @@ function setData(j, src){
   DATA = j;
   $('src').textContent = '資料來源：' + src + ' ｜ ' + esc(j.meta && j.meta.ver);
   renderRoutes();
+  // ★ 網址指定 > 預設路線；都沒有才停在選單
+  var q = (location.search.match(/[?&]route=([^&]+)/) || [])[1];
+  var go = q ? decodeURIComponent(q) : ((j.meta && j.meta.defaultRoute) || '');
+  if (go && (j.routes || []).some(function(r){ return r.id === go; })) pick(go);
 }
 
 /* ---------- 路線選單 ---------- */
@@ -1255,10 +1260,7 @@ if (document.fonts){
 }
 addEventListener('load', refit);
 [300, 900, 2000].forEach(function(t){ setTimeout(refit, t); });   // 保底：不管什麼原因沒量到，這三槍補上
-setTimeout(function(){
-  var m = location.search.match(/[?&]route=([^&]+)/);
-  if (m && DATA) pick(decodeURIComponent(m[1]));
-}, 400);
+
 </script>
 </body>
 </html>
