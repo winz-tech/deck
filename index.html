@@ -3,7 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>穎利科技　教育訓練簡報引擎</title>
+<title>穎利科技｜內部系統教育訓練</title>
+
+<!-- ★ LINE / Facebook 分享出去長什麼樣，就看這一段（改完 LINE 有快取，見下方註記）-->
+<meta name="description" content="十分鐘，帶你把每天會用到的功能都走過一遍。打卡系統・作業中心，手機也能看。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="穎利科技 WINZ TECHNOLOGY">
+<meta property="og:title" content="公司的系統，其實比你想的好用">
+<meta property="og:description" content="十分鐘，帶你把每天會用到的功能都走過一遍。打卡系統・作業中心，手機也能看。">
+<meta property="og:url" content="https://winz-tech.github.io/deck/">
+<meta property="og:image" content="https://winz-tech.github.io/deck/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="穎利科技 內部系統教育訓練">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="公司的系統，其實比你想的好用">
+<meta name="twitter:description" content="十分鐘，帶你把每天會用到的功能都走過一遍。">
+<meta name="twitter:image" content="https://winz-tech.github.io/deck/og.png">
+<meta name="theme-color" content="#101014">
+<link rel="icon" href="og.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Chakra+Petch:wght@600;700&display=swap"
       rel="stylesheet" media="print" onload="this.media='all'">
 <style>
@@ -1324,7 +1343,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / by VladJia",
+    "ver": "2026-07-28 / v14",
     "updated": "2026-07-28",
     "icons": {
       "今日總覽": "img/61_今日總覽.png",
@@ -3674,7 +3693,10 @@ function renderRoutes(){
             lock.map(function(r){ return btn(r, 'lock', '<i class="lk">🔒</i>'); }).join('');
         return h;
       })() + '</div>' : '') +
-    '</div><div class="wl-foot">' + esc(m.ver || '') + '</div>';
+    '</div><div class="'</div><div class="wl-foot">' + esc(m.ver || '') +
+      '<span style="color:#E30613;margin:0 10px">·</span>' +
+      '<span style="color:#8A8A96">built by</span> ' +
+      '<b style="color:#fff;font-weight:700;letter-spacing:2px">WINZ SYSTEM VladJia</b></div>';wl-foot">' + esc(m.ver || '') + '</div>';
 
   $('routes').innerHTML = hh;
   $('routes').classList.add('on');
