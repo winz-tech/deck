@@ -564,7 +564,8 @@ var FALLBACK = {
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "Imagery.png"
+      "photo": "Imagery.png",
+      "always": true
     },
     {
       "type": "section",
@@ -1177,7 +1178,8 @@ var FALLBACK = {
         "*"
       ],
       "title": "哪裡卡住，都可以跟我們說",
-      "sub": "系統是為了讓大家少做一點事。<br>哪裡難用、哪裡多餘，講出來我們就改。"
+      "sub": "系統是為了讓大家少做一點事。<br>哪裡難用、哪裡多餘，講出來我們就改。",
+      "always": true
     }
   ]
 };
@@ -1237,7 +1239,7 @@ function renderRoutes(){
     '<div class="wl-pick"><span class="wl-lab">場次</span>' +
       rs.map(function(r){
         var own = (DATA.slides || []).filter(function(s){
-          return (s.roles || []).indexOf(r.id) > -1;
+          return !s.always && (s.roles || []).indexOf(r.id) > -1;
         }).length;
         var soon = (r.id !== 'all' && r.id !== '_dev' && own === 0);
         var tag = soon ? '<span class="tag">尚未建置</span>'
@@ -1265,8 +1267,10 @@ function pick(id){
   ROUTE = id;
   SLIDES = (DATA.slides || []).filter(function(s){
     if (id === '_dev') return true;
+    if (s.always) return true;                 // 封面／結尾：每一場都要
     var r = s.roles || ['*'];
-    return r.indexOf('*') > -1 || r.indexOf(id) > -1;
+    if (id === 'all') return r.indexOf('*') > -1 || r.indexOf('all') > -1;
+    return r.indexOf(id) > -1;                 // ★ 部門場只放自己的，不重播綜合功能
   });
   IDX = 0; STEP = 0;
   $('routes').classList.remove('on');
