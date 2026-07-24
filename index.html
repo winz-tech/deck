@@ -1056,6 +1056,29 @@ var FALLBACK = {
       "notes": "這頁講完可以接一句：訂完之後，首頁上面那條行事曆就會看到它。"
     },
     {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "要請錢的時候",
+      "lead": "申請跟查詢是兩個地方，別跑錯。",
+      "items": [
+        {
+          "n": "請款申請單",
+          "z": "申請管理",
+          "d": "費用要請款，從這裡送出。",
+          "e": "💳"
+        },
+        {
+          "n": "請款單查詢",
+          "z": "財會管理",
+          "d": "還沒簽核的請款單，可以回來修改或取消。",
+          "e": "🔎"
+        }
+      ],
+      "notes": "強調：送單在「申請管理」，改單在「財會管理」。這是最多人跑錯的一組。"
+    },
+    {
       "type": "demo",
       "comp": "payform",
       "roles": [
@@ -1115,14 +1138,6 @@ var FALLBACK = {
       "notes": "承上頁。這頁講完就把「送單在申請管理、改單在財會管理」再帶一次。"
     },
     {
-      "type": "todo",
-      "roles": [
-        "*"
-      ],
-      "title": "樣品／耗材領用單",
-      "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
-    },
-    {
       "type": "list",
       "roles": [
         "qc"
@@ -1174,29 +1189,6 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "title": "要請錢的時候",
-      "lead": "申請跟查詢是兩個地方，別跑錯。",
-      "items": [
-        {
-          "n": "請款申請單",
-          "z": "申請管理",
-          "d": "費用要請款，從這裡送出。",
-          "e": "💳"
-        },
-        {
-          "n": "請款單查詢",
-          "z": "財會管理",
-          "d": "還沒簽核的請款單，可以回來修改或取消。",
-          "e": "🔎"
-        }
-      ],
-      "notes": "強調：送單在「申請管理」，改單在「財會管理」。這是最多人跑錯的一組。"
-    },
-    {
-      "type": "cardgrid",
-      "roles": [
-        "*"
-      ],
       "title": "要領東西、要報廢的時候",
       "lead": "通通在申請管理，四張單子分工很清楚。",
       "items": [
@@ -1226,6 +1218,14 @@ var FALLBACK = {
         }
       ],
       "notes": "耗材那張要多講一句，是全公司最常用到的。"
+    },
+    {
+      "type": "todo",
+      "roles": [
+        "*"
+      ],
+      "title": "樣品／耗材領用單",
+      "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
     },
     {
       "type": "cardgrid",
@@ -1537,9 +1537,21 @@ function routeName(){
 }
 
 /* ---------- 顯示 / 逐步展開 ---------- */
-var MIN_K = 0.9;   // ★ 投影可讀下限；再放不下就是那頁該拆，不縮圖
+var MIN_K = 0.9;   // ★ 投影可讀下限；再放不下就是那頁該拆
+/* 畫面元件比版面高 → 整塊等比縮小（不重排、不變形） */
+function fitVisual(sl){
+  var demo = sl.querySelector('.demo'); if (!demo) return;
+  var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot'); if (!vis) return;
+  vis.style.transform = '';
+  var H = demo.clientHeight, hh = vis.getBoundingClientRect().height;
+  if (H > 0 && hh > H + 2){
+    vis.style.transformOrigin = 'center center';
+    vis.style.transform = 'scale(' + (H / hh) + ')';
+  }
+}
 function autofit(){
   var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
+  fitVisual(sl);
   sl.querySelectorAll('.items, .caps').forEach(function(box){
     var k = 1; box.style.setProperty('--k', 1);
     while (box.scrollHeight > box.clientHeight + 4 && k > MIN_K){
