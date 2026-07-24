@@ -3693,10 +3693,10 @@ function renderRoutes(){
             lock.map(function(r){ return btn(r, 'lock', '<i class="lk">🔒</i>'); }).join('');
         return h;
       })() + '</div>' : '') +
-    '</div><div class="'</div><div class="wl-foot">' + esc(m.ver || '') +
+    '</div><div class="wl-foot">' + esc(m.ver |'</div><div class="wl-foot">' + esc(m.ver || '') +
       '<span style="color:#E30613;margin:0 10px">·</span>' +
       '<span style="color:#8A8A96">built by</span> ' +
-      '<b style="color:#fff;font-weight:700;letter-spacing:2px">WINZ SYSTEM VladJia</b></div>';wl-foot">' + esc(m.ver || '') + '</div>';
+      '<b style="color:#fff;font-weight:700;letter-spacing:2px">WINZ SYSTEM VladJia</b></div>';| '') + '</div>';
 
   $('routes').innerHTML = hh;
   $('routes').classList.add('on');
