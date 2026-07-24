@@ -834,11 +834,32 @@ var esc = function(s){ return String(s == null ? '' : s); };
 
 /* ---------- 載入 ---------- */
 function boot(){
-  fetch('deck-data.json', {cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-    .then(function(j){ setData(j, '外部 deck-data.json'); })
-    .catch(function(){ setData(FALLBACK, '內建快照（抓不到外部檔）'); });
+  var done = false;
+  function useFallback(why){
+    if (done) return; done = true;
+    try { setData(FALLBACK, '內建快照（' + (why || '抓不到外部檔') + '）'); }
+    catch(e){ showFatal(e); }
+  }
+  try {
+    if (typeof fetch !== 'function') return useFallback('瀏覽器不支援 fetch');
+    fetch('deck-data.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){ if (done) return; done = true; setData(j, '外部 deck-data.json'); })
+      .catch(function(){ useFallback(); });
+    setTimeout(function(){ useFallback('外部檔逾時'); }, 3000);   // ★ 3 秒保底，絕不空白
+  } catch(e){ useFallback('讀取失敗'); }
 }
+
+/* ★ 真的爆了就把錯誤印在畫面上，不要留一片白 */
+function showFatal(e){
+  var d = $('deck');
+  if (d) d.innerHTML = '<div class="slide on" style="padding:80px 96px">' +
+    '<div class="h1">簡報載入失敗</div>' +
+    '<div class="lead">請按 F12 看 Console，或把下面這行貼給工程師。</div>' +
+    '<div class="rule"></div><div style="font-size:20px;color:#8a8a92;font-family:monospace">' +
+    String(e && (e.stack || e.message) || e).slice(0, 400) + '</div></div>';
+}
+addEventListener('error', function(ev){ if (!SLIDES.length) showFatal(ev.error || ev.message); });
 function setData(j, src){
   DATA = j;
   $('src').textContent = '資料來源：' + src + ' ｜ ' + esc(j.meta && j.meta.ver);
@@ -882,7 +903,8 @@ function pick(id){
 function buildDeck(){
   var m = DATA.meta || {};
   var html = SLIDES.map(function(s, i){
-    var dark = (s.type === 'cover' || s.type === 'section' || s.type === 'end');
+    var light = (s.type === 'cover' && s.light);
+    var dark  = !light && (s.type === 'cover' || s.type === 'section' || s.type === 'end');
     var body = '';
 
     if (s.type === 'cover' && s.light){
