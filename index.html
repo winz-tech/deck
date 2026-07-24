@@ -227,6 +227,64 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pl-act .e{color:#2563eb}.pl-act .c{color:var(--red);border-left:1px solid #f0f0f0}
 .pl-lock{padding:10px;text-align:center;font-size:12px;color:#aaa;border-top:1px solid #f0f0f0}
 
+/* ---------- 請購系列 ---------- */
+.pf-tb{width:100%;border-collapse:collapse;font-size:11px}
+.pf-tb th{background:#1A1A1A;color:#fff;padding:7px 5px;font-weight:400;font-size:10px}
+.pf-tb td{padding:7px 5px;text-align:center;border-bottom:1px solid #f0f0f0;color:#333}
+.pf-tb td.l{text-align:left}
+.pf-tb .buy{color:var(--red);font-weight:700}
+.pf-tb .tr{color:#2e86c1}
+.pf-cnt{margin-left:auto;background:var(--red);color:#fff;font-size:10px;padding:1px 9px;border-radius:20px}
+.pf-hd2{background:#1A1A1A;color:#fff;padding:9px 14px;font-weight:700;font-size:12px;display:flex;align-items:center}
+/* 進度追蹤 */
+.rt-card{background:#fff;border:1px solid #e0e0e0;border-radius:11px;margin:12px 14px;overflow:hidden}
+.rt-hd{padding:10px 15px;background:#f8f8f8;border-bottom:1px solid #e0e0e0;display:flex;
+  align-items:center;gap:9px;font-size:12px;color:#888}
+.rt-no{font-family:ui-monospace,monospace;font-weight:700;font-size:13px;color:#1A1A1A}
+.rt-who{margin-left:auto}
+.rt-item{padding:13px 15px}
+.rt-nm{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px}
+.rt-nm b{font-size:13px;color:#1A1A1A}
+.rt-nm code{font-family:ui-monospace,monospace;color:#888;font-size:11px}
+.rt-nm .q{margin-left:auto;color:#888}
+.rt-wrap{position:relative;padding:0 14px}
+.rt-line{position:absolute;top:12px;left:14px;right:14px;height:3px;background:#e0e0e0}
+.rt-fill{position:absolute;left:0;top:0;height:100%;background:#185FA5;transition:width .6s}
+.rt-steps{display:flex;justify-content:space-between;position:relative}
+.rt-s{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1}
+.rt-dot{width:24px;height:24px;border-radius:50%;border:3px solid #e0e0e0;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.rt-dot.done{background:#185FA5;border-color:#185FA5}
+.rt-dot.done::after{content:'✓'}
+.rt-dot.now{border-color:#185FA5}
+.rt-dot.now::after{content:'';width:9px;height:9px;background:#185FA5;border-radius:50%;
+  animation:rtB 1.5s ease-in-out infinite}
+@keyframes rtB{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.6}}
+.rt-lb{font-size:9px;color:#888;text-align:center;line-height:1.35;max-width:62px}
+.rt-lb.done{color:#185FA5;font-weight:600}.rt-lb.now{color:#185FA5;font-weight:700}
+/* 查詢結果列 */
+.rl-search{display:flex;gap:9px;padding:12px 14px}
+.rl-search .i{flex:1;border:1.5px solid #e0e0e0;border-radius:7px;padding:8px 12px;
+  font-size:12px;color:#aaa;background:#fff}
+.rl-search .b{background:var(--red);color:#fff;font-size:12px;font-weight:700;
+  padding:8px 16px;border-radius:7px}
+.rl-badges{display:flex;gap:7px;padding:0 14px 8px}
+.rl-bg{color:#fff;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px}
+.rl-row{display:flex;align-items:center;gap:11px;padding:11px 14px;border-bottom:1px solid #f0f0f0;
+  background:#fff}
+.rl-no{font-family:ui-monospace,monospace;font-weight:700;font-size:12px;min-width:98px;color:#1A1A1A}
+.rl-info{flex:1;font-size:11px}
+.rl-ap{color:#555;font-size:12px}
+.rl-ty{display:inline-block;background:#f0f0f0;color:#666;font-size:10px;padding:1px 8px;
+  border-radius:12px;margin-top:3px}
+.rl-sg{display:inline-block;font-size:10px;font-weight:700;padding:1px 8px;border-radius:12px;margin-left:5px}
+.rl-sg.wait{background:#fef9e7;color:#d4ac0d}.rl-sg.ok{background:#eafaf1;color:#1e8449}
+.rl-dt{font-size:11px;color:#aaa}
+.rl-btns{display:flex;gap:5px}
+.rl-b{font-size:10px;padding:5px 10px;border-radius:6px;background:#f0f0f0;color:#1A1A1A;white-space:nowrap}
+.rl-b.blue{background:#2e86c1;color:#fff}
+.rl-b.off{background:#ddd;color:#aaa}
+
 /* ---------- 功能卡片牆 ---------- */
 .cg{display:grid;gap:22px;flex:1;min-height:0;align-content:center;
   grid-template-columns:repeat(3,1fr)}
@@ -555,7 +613,7 @@ var FALLBACK = {
       "員工商品訂購單": "img/37_員工商品訂購單.png",
       "除蟲許願池": "img/32_除蟲許願池.png",
       "工具管理": "img/09_工具管理.png",
-      "人事管理": "",
+      "人事管理": "img/48_人事管理.png",
       "員工通訊錄": "img/50_通訊錄.png",
       "佈告欄": "img/53_布告欄.png",
       "個人資料維護": "img/52_個人資料維護.png",
@@ -569,8 +627,8 @@ var FALLBACK = {
       "樣品領用單": "img/34_樣品領用單.png",
       "報廢單": "img/35_報廢單.png",
       "耗材領用單": "img/36_耗材請購領用單.png",
-      "請款單查詢": "",
-      "穎利科技 OTP": ""
+      "請款單查詢": "img/47_請款單查詢.png",
+      "穎利科技 OTP": "img/43_OTP程式.png"
     },
     "defaultRoute": "all",
     "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
@@ -1056,6 +1114,130 @@ var FALLBACK = {
       "notes": "這頁講完可以接一句：訂完之後，首頁上面那條行事曆就會看到它。"
     },
     {
+      "type": "section",
+      "roles": [
+        "*"
+      ],
+      "no": "05",
+      "title": "要東西、要錢的時候",
+      "sub": "請購、請款、領用，都有自己的單子"
+    },
+    {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "要跟公司要東西的時候",
+      "lead": "從請購開始，到查進度、改單子，都在採購管理。",
+      "items": [
+        {
+          "n": "請購申請",
+          "z": "採購管理",
+          "d": "需要什麼東西，從這裡提出來。",
+          "e": "📝"
+        },
+        {
+          "n": "請購進度追蹤",
+          "z": "採購管理",
+          "d": "我的單子現在跑到哪一關了。",
+          "e": "📍"
+        },
+        {
+          "n": "請購單相關作業",
+          "z": "採購管理",
+          "d": "還沒簽核的單子，可以回來改。",
+          "e": "🔍"
+        }
+      ],
+      "notes": "三張連著講：提出 → 追蹤 → 修改，是同一件事的三個階段。"
+    },
+    {
+      "type": "demo",
+      "comp": "reqform",
+      "roles": [
+        "*"
+      ],
+      "title": "要請購，怎麼填？",
+      "lead": "選申請人 → 選品項 → 加入清單 → 送出，四步。",
+      "steps": [
+        {
+          "h": "單號不用自己編",
+          "p": "開頁就給你一組，不會跟別人撞號。",
+          "focus": "no"
+        },
+        {
+          "h": "選申請人，部門自動帶出來",
+          "p": "再選需求日期跟請購類別。<b>沒看到你要的類別，跟元家說一聲</b>，元家會再問咪姐要不要開。",
+          "focus": "who"
+        },
+        {
+          "h": "打關鍵字找品項，填數量加進清單",
+          "p": "一張單可以放很多品項，不用每樣東西開一張。",
+          "focus": "pick"
+        },
+        {
+          "h": "★「應採購」是系統幫你算的",
+          "p": "需求量扣掉倉庫現有的，再扣掉<b>採購已經買了、還沒到廠內</b>的，剩下才是真的要買的量。",
+          "focus": "cart"
+        }
+      ],
+      "notes": "最後一點是這頁的重點：過去最容易「倉庫明明有、或已經在路上，卻又買一批」。類別那句要講，讓大家知道有窗口可以問。"
+    },
+    {
+      "type": "demo",
+      "comp": "reqtrack",
+      "roles": [
+        "*"
+      ],
+      "title": "我的單子，現在跑到哪了？",
+      "lead": "不用問採購，自己打開就看得到。",
+      "steps": [
+        {
+          "h": "預設只看未完成的，而且只看得到自己的",
+          "p": "想看歷史再切「已完成」或「全部」。也可以直接搜單號、品名或申請人。",
+          "focus": "find"
+        },
+        {
+          "h": "一條線走完八關",
+          "p": "打勾的是已經過的，會呼吸的那顆就是現在卡在哪一關。",
+          "focus": "bar"
+        },
+        {
+          "h": "除了客供料，每張單都會跑完這八關",
+          "p": "同一張單裡的每個品項各自跑 —— 有的先到、有的還在等，進度是分開看的。",
+          "focus": "bar"
+        }
+      ],
+      "notes": "八關：請購申請→請購單簽核→議價→議價簽核→採購完成→廠商發貨中→品檢中→進貨完成。只有客供料會跳關。"
+    },
+    {
+      "type": "demo",
+      "comp": "reqlist",
+      "roles": [
+        "*"
+      ],
+      "title": "還沒簽核的，可以回來改",
+      "lead": "搜尋 → 檢視 → 編輯，簽核前都還來得及。",
+      "steps": [
+        {
+          "h": "上面直接告訴你有幾筆要處理",
+          "p": "待簽核、待轉議價各幾筆，一眼看完。",
+          "focus": "badge"
+        },
+        {
+          "h": "還沒簽核的，可以進去改",
+          "p": "點「檢視」進去，右上角會有編輯鈕。",
+          "focus": "wait"
+        },
+        {
+          "h": "簽核之後就鎖住了",
+          "p": "這時候「轉議價」跟「列印」才會亮起來 —— 單子已經往下一關走了。",
+          "focus": "ok"
+        }
+      ],
+      "notes": "這頁跟請款單查詢是同一套邏輯：沒簽核前可以改，簽核後就鎖住。"
+    },
+    {
       "type": "cardgrid",
       "roles": [
         "*"
@@ -1160,35 +1342,6 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "title": "要跟公司要東西的時候",
-      "lead": "從請購開始，到查進度、改單子，都在採購管理。",
-      "items": [
-        {
-          "n": "請購申請",
-          "z": "採購管理",
-          "d": "需要什麼東西，從這裡提出來。",
-          "e": "📝"
-        },
-        {
-          "n": "請購進度追蹤",
-          "z": "採購管理",
-          "d": "我的單子現在跑到哪一關了。",
-          "e": "📍"
-        },
-        {
-          "n": "請購單相關作業",
-          "z": "採購管理",
-          "d": "還沒簽核的單子，可以回來改。",
-          "e": "🔍"
-        }
-      ],
-      "notes": "三張連著講：提出 → 追蹤 → 修改，是同一件事的三個階段。"
-    },
-    {
-      "type": "cardgrid",
-      "roles": [
-        "*"
-      ],
       "title": "要領東西、要報廢的時候",
       "lead": "通通在申請管理，四張單子分工很清楚。",
       "items": [
@@ -1226,6 +1379,15 @@ var FALLBACK = {
       ],
       "title": "樣品／耗材領用單",
       "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
+    },
+    {
+      "type": "section",
+      "roles": [
+        "*"
+      ],
+      "no": "06",
+      "title": "還有這些，也是你的",
+      "sub": "隨時看的、屬於你自己的"
     },
     {
       "type": "cardgrid",
@@ -1473,6 +1635,13 @@ function buildDeck(){
                  '<div class="cg-d">' + esc(c.d) + '</div></div>';
              }).join('') + '</div>';
     }
+    else if (s.type === 'demo' && (s.comp === 'reqform' || s.comp === 'reqtrack' || s.comp === 'reqlist')){
+      var mk = { reqform:_reqFormHtml, reqtrack:_reqTrackHtml, reqlist:_reqListHtml }[s.comp];
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo wide">' + mk() +
+             '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
     else if (s.type === 'demo' && (s.comp === 'payform' || s.comp === 'paylist')){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
@@ -1543,7 +1712,8 @@ function fitVisual(sl){
   var demo = sl.querySelector('.demo'); if (!demo) return;
   var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot'); if (!vis) return;
   vis.style.transform = '';
-  var H = demo.clientHeight, hh = vis.getBoundingClientRect().height;
+  // ★ 兩個都要用版面尺標（offsetHeight），不能用 getBoundingClientRect —— 舞台本身有 scale
+  var H = demo.clientHeight, hh = vis.offsetHeight;
   if (H > 0 && hh > H + 2){
     vis.style.transformOrigin = 'center center';
     vis.style.transform = 'scale(' + (H / hh) + ')';
@@ -1586,6 +1756,83 @@ function _capsHtml(list){
     return '<div class="cap step"><div class="idx">' + n + '</div><div>' +
            '<h3>' + esc(c.h) + '</h3>' + (c.p ? '<p>' + esc(c.p) + '</p>' : '') + '</div></div>';
   }).join('');
+}
+
+function _reqFormHtml(){
+  var rows = [
+    ['A4紙','影印紙 A4 70g','包','物料','20','5','15'],
+    ['GLV01','無塵手套 M','雙','耗材','300','0','300']
+  ];
+  return '<div class="pf" id="pf">' +
+    '<div class="pf-nav part" data-p="flow"><span class="num">●</span>填寫請購單　選申請人 › 選品項 › 加入清單 › 送出</div>' +
+    '<div class="pf-card"><div class="pf-hd"><i>▮</i>請購基本資訊</div><div class="pf-bd">' +
+      '<div class="pf-g part" data-p="no"><div class="pf-l">請購單號</div>' +
+        '<div class="pf-i" style="background:linear-gradient(135deg,#1A1A1A,#333);color:#fff;' +
+        'text-align:center;letter-spacing:3px;font-family:ui-monospace,monospace">20260725001</div></div>' +
+      '<div class="pf-row part" data-p="who">' +
+        '<div class="pf-g"><div class="pf-l">申請人</div><div class="pf-i sel">王小明</div></div>' +
+        '<div class="pf-g"><div class="pf-l">申請部門</div><div class="pf-i ro">生產部</div></div>' +
+        '<div class="pf-g"><div class="pf-l">需求日期</div><div class="pf-i">2026/08/05</div></div>' +
+        '<div class="pf-g"><div class="pf-l">請購類別</div><div class="pf-i sel">辦公用品</div></div></div>' +
+    '</div></div>' +
+    '<div class="pf-card part" data-p="pick"><div class="pf-hd"><i>▮</i>選擇請購品項</div><div class="pf-bd">' +
+      '<div class="pf-i ph" style="margin-bottom:9px">🔍 輸入品號或品名關鍵字…</div>' +
+      '<div class="pf-row"><div class="pf-g"><div class="pf-l">申請數量</div><div class="pf-i">20</div></div>' +
+      '<div class="pf-g" style="flex:0 0 118px;justify-content:flex-end">' +
+        '<div class="pf-i" style="background:#1A1A1A;color:#fff;text-align:center;font-weight:700">＋ 加入清單</div></div></div>' +
+    '</div></div>' +
+    '<div class="pf-card part" data-p="cart"><div class="pf-hd2">🛒 待提交清單<span class="pf-cnt">2 筆</span></div>' +
+      '<table class="pf-tb"><thead><tr><th>品號</th><th>品名</th><th>單位</th><th>屬性</th>' +
+      '<th>需求量</th><th>在途</th><th>應採購</th></tr></thead><tbody>' +
+      rows.map(function(r){ return '<tr><td>' + r[0] + '</td><td class="l">' + r[1] + '</td><td>' + r[2] +
+        '</td><td>' + r[3] + '</td><td>' + r[4] + '</td><td class="tr">' + (r[5]==='0'?'—':'🚚 '+r[5]) +
+        '</td><td class="buy">' + r[6] + '</td></tr>'; }).join('') +
+      '</tbody></table></div>' +
+    '<div style="margin:0 14px 14px"><div class="pf-go part" data-p="go">✈ 確認送出請購單</div></div>' +
+  '</div>';
+}
+
+function _reqTrackHtml(){
+  var st = [['請購申請',1],['簽核完成',1],['議價完成',1],['簽核完成',1],
+            ['採購完成',2],['廠商發貨中',0],['品檢中',0],['待入庫',0]];
+  var doneN = st.filter(function(x){ return x[1]===1; }).length;
+  var pct = (doneN - 1) / (st.length - 1) * 100;
+  return '<div class="pf" id="pf">' +
+    '<div class="rl-search part" data-p="find"><div class="i">🔍 搜尋請購單號、品名、申請人…</div></div>' +
+    '<div class="rl-badges part" data-p="find"><span class="rl-bg" style="background:#185FA5">未完成</span>' +
+      '<span class="rl-bg" style="background:#bbb">已完成</span><span class="rl-bg" style="background:#bbb">全部</span></div>' +
+    '<div class="rt-card part" data-p="bar"><div class="rt-hd"><span class="rt-no">20260725001</span>' +
+      '<span>申請日：2026-07-25</span><span class="rt-who">👤 王小明</span></div>' +
+      '<div class="rt-item"><div class="rt-nm"><b>影印紙 A4 70g</b><code>A4紙</code>' +
+        '<span class="q">20 包</span></div>' +
+        '<div class="rt-wrap"><div class="rt-line"><div class="rt-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="rt-steps">' + st.map(function(x){
+          var c = x[1]===1 ? 'done' : (x[1]===2 ? 'now' : '');
+          return '<div class="rt-s"><div class="rt-dot ' + c + '"></div>' +
+                 '<div class="rt-lb ' + c + '">' + x[0] + '</div></div>';
+        }).join('') + '</div></div></div></div>' +
+  '</div>';
+}
+
+function _reqListHtml(){
+  function row(no, who, ty, ok, dt){
+    return '<div class="rl-row"><div class="rl-no">' + no + '</div><div class="rl-info">' +
+      '<div class="rl-ap">' + who + '</div><span class="rl-ty">' + ty + '</span>' +
+      '<span class="rl-sg ' + (ok?'ok':'wait') + '">' + (ok?'✅ 姬姐 已簽核':'⏳ 待簽核') + '</span></div>' +
+      '<div class="rl-dt">' + dt + '</div><div class="rl-btns">' +
+      '<div class="rl-b">👁 檢視</div>' +
+      '<div class="rl-b ' + (ok?'blue':'off') + '">🤝 轉議價</div>' +
+      '<div class="rl-b ' + (ok?'':'off') + '">🖨 列印</div></div></div>';
+  }
+  return '<div class="pf" id="pf">' +
+    '<div class="rl-search part" data-p="find"><div class="i">輸入單號、申請人或類別…</div>' +
+      '<div class="b">🔍 搜尋</div></div>' +
+    '<div class="rl-badges part" data-p="badge"><span class="rl-bg" style="background:#E30613">待簽核：2 筆</span>' +
+      '<span class="rl-bg" style="background:#f39c12">待轉議價：1 筆</span></div>' +
+    '<div class="pf-card" style="margin-top:4px"><div class="pf-hd2">📋 搜尋結果<span class="pf-cnt">2 筆</span></div>' +
+      '<div class="part" data-p="wait">' + row('20260725001','王小明','辦公用品',false,'07/25') + '</div>' +
+      '<div class="part" data-p="ok">' + row('20260720003','陳大器','耗材',true,'07/20') + '</div>' +
+    '</div></div>';
 }
 
 function _payFormHtml(){
