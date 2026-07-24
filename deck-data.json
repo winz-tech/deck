@@ -3,7 +3,7 @@
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v4",
+    "ver": "2026-07-28 / v5",
     "updated": "2026-07-28",
     "icons": {
       "生產管理": "img/02_生產管理.png",
@@ -48,8 +48,9 @@
       "en": "TIME ATTENDANCE",
       "speaker": "姬姐",
       "speakerEn": "PAGGIE",
-      "photo": "paggie.png",
-      "desc": "上下班打卡，手機拿出來就好"
+      "desc": "上下班打卡，手機拿出來就好",
+      "sys": "punch",
+      "face": "paggie.png"
     },
     {
       "id": "hub",
@@ -59,8 +60,9 @@
       "en": "OPERATIONS HUB",
       "speaker": "咪姐",
       "speakerEn": "MIMI TSAI",
-      "photo": "mimi.png",
-      "desc": "每天都會用到的那些功能"
+      "desc": "每天都會用到的那些功能",
+      "sys": "hub",
+      "face": "mimi.png"
     },
     {
       "id": "foreman",
@@ -104,7 +106,8 @@
       "speakerEn": "PAGGIE",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "paggie.png"
+      "sys": "punch",
+      "face": "paggie.png"
     },
     {
       "type": "cover",
@@ -124,7 +127,8 @@
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "mimi.png"
+      "sys": "hub",
+      "face": "mimi.png"
     },
     {
       "type": "section",
