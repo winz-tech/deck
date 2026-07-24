@@ -348,6 +348,9 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pf.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
 .pf.focusing .part.hit::after{content:'';position:absolute;inset:-7px;border:2px solid var(--red);
   border-radius:9px;box-shadow:0 0 18px rgba(227,6,19,.5);pointer-events:none}
+/* ★ 滿版區塊（pf-nav / rl-search / rl-badges）左右沒有留白，
+   紅框畫在 -7px 會被 .pf 的 overflow:hidden 切成兩條橫線 → 改成往內畫 */
+.pf.focusing .part.hit.fw::after{inset:-3px 9px}
 .bk .part{transition:opacity .35s,filter .35s}
 .bk.focusing .part{opacity:.26;filter:saturate(.3)}
 .bk.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
@@ -558,6 +561,74 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   font-style:normal;margin-left:2px}
 .hu-dog img{width:66px;display:block;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
 
+/* ---------- 作業中心 v2：今日總覽 / 泳道行事曆 ---------- */
+.hu-mid{flex:1;min-width:0}
+.hu-z s{margin-left:auto;text-decoration:none;font-size:8px;color:rgba(255,255,255,.32);
+  background:rgba(255,255,255,.06);border-radius:8px;padding:1px 5px}
+.hu-z .hm{font-size:11px}
+.hu-cl{flex:0 0 126px}
+.hu-cm{flex:1;min-width:0}
+.hu-away{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:6px}
+.capl{font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.32);margin-right:3px}
+.cap{font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.78)}
+.cap.out{background:rgba(255,150,40,.16);color:#ffb066}
+.cap i{font-style:normal;opacity:.5;margin-left:5px}
+.hu-lanes{position:relative}
+.hu-ticks{position:relative;height:12px;margin-left:60px}
+.hu-ticks .tk{position:absolute;top:0;font-size:8px;color:rgba(255,255,255,.28);transform:translateX(-50%)}
+.hu-lwrap{position:relative}
+.hu-lane{display:flex;align-items:center;gap:6px;height:20px}
+.hu-lane .ln{flex:0 0 54px;width:54px;text-align:right;font-size:8px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.45)}
+.hu-lane .lb{position:relative;flex:1;min-width:0;height:15px;
+  background:rgba(255,255,255,.03);border-radius:4px}
+.hu-lane .hu-ev{top:0;bottom:0;height:auto;line-height:15px;border-radius:4px}
+.hu-ev.meet{background:rgba(227,6,19,.62)}
+.hu-ev.guest{background:rgba(120,90,255,.5)}
+.hu-ev.out{background:rgba(255,150,40,.55)}
+.hu-ev.evt{background:rgba(79,208,106,.5)}
+.hu-nowwrap{position:absolute;left:60px;right:0;top:0;bottom:0;pointer-events:none}
+.hu-calbtn em{font-style:normal;background:rgba(255,255,255,.25);border-radius:6px;
+  padding:0 4px;margin-left:4px}
+
+.hu-view{position:relative}
+.hu-v{display:none}
+.hub.show-ag .hu-v.ag{display:block}
+.hub:not(.show-ag) .hu-v.cw{display:block}
+
+.ag-hd{display:flex;align-items:baseline;gap:8px}
+.ag-hd .t{font-size:13px;font-weight:900;color:#fff}
+.ag-hd .s{font-family:var(--en);font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3)}
+.ag-sub{font-size:9px;color:rgba(255,255,255,.35);margin:3px 0 8px}
+.ag-caps{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:9px;
+  padding:7px 9px;background:rgba(255,255,255,.03);border-radius:8px}
+.ag-row{display:flex;gap:8px;margin-bottom:6px}
+.ag-row.past{opacity:.4}
+.ag-tm{flex:0 0 38px;text-align:right;padding-top:6px}
+.ag-tm b{display:block;font-family:var(--en);font-size:10px;color:rgba(255,255,255,.8)}
+.ag-tm i{display:block;font-style:normal;font-family:var(--en);font-size:8px;color:rgba(255,255,255,.28)}
+.ag-c{position:relative;flex:1;min-width:0;padding:7px 10px;border-radius:0 8px 8px 0;
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-left:3px solid #3a3a42}
+.ag-c.meet{border-left-color:#E30613}
+.ag-c.guest{border-left-color:#7a5aff}
+.ag-c.out{border-left-color:#ff9628}
+.ag-c.evt{border-left-color:#4fd06a}
+.ag-c .n{font-size:11px;font-weight:700;color:#fff}
+.ag-c .m{font-size:8px;color:rgba(255,255,255,.4);margin-top:2px}
+.ag-c.mine::after{content:'我的';position:absolute;top:6px;right:8px;font-size:8px;font-weight:700;
+  padding:1px 6px;border-radius:9px;background:rgba(227,6,19,.18);color:#ff8a90}
+.ag-now{display:flex;align-items:center;gap:6px;margin:2px 0 8px;padding-left:46px}
+.ag-now .d{width:5px;height:5px;border-radius:50%;background:#E30613;flex:none;
+  box-shadow:0 0 6px rgba(227,6,19,.9)}
+.ag-now .x{font-family:var(--en);font-size:8px;color:#ff6168;letter-spacing:1px}
+.ag-now .l{flex:1;height:1px;background:linear-gradient(90deg,rgba(227,6,19,.7),transparent)}
+
+/* 報廢單 / 員工商品訂購單：沿用樣品單版型，只換左側色條 */
+.sm-card.sc .sm-ttl::before{background:#5d6d7e}
+.sm-card.eo .sm-ttl::before{background:#2e86c1}
+.pf-tb .scq{color:#c0392b;font-weight:700}
+
 /* ---------- 總覽 ---------- */
 #grid{position:absolute;inset:0;background:rgba(10,10,14,.97);display:none;
   padding:50px 60px;overflow:auto;z-index:40}
@@ -636,8 +707,8 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-25 / v2",
-    "updated": "2026-07-25",
+    "ver": "2026-07-28 / v3",
+    "updated": "2026-07-28",
     "icons": {
       "生產管理": "img/02_生產管理.png",
       "品質管理": "img/03_品質管理.png",
@@ -766,49 +837,31 @@ var FALLBACK = {
       "sub": "所有系統的入口，都在同一頁"
     },
     {
-      "type": "demo",
-      "comp": "hub",
-      "roles": [
-        "*"
-      ],
-      "title": "登入之後，你會看到這一頁",
-      "lead": "所有系統的入口都在這。看得到的，就是你用得到的。",
-      "steps": [
-        {
-          "h": "左邊是功能區",
-          "p": "生產、品質、採購…點一個，右邊就換一批。手機上是左上角的 ☰。",
-          "focus": "nav"
-        },
-        {
-          "h": "中間每一張卡，就是一個系統",
-          "p": "卡片上寫了它能做什麼，點下去直接進去，不用再登入一次。",
-          "focus": "cards"
-        },
-        {
-          "h": "每個人看到的都不一樣",
-          "p": "畫面上只放跟你工作有關的，你就不用在一堆用不到的東西裡面找。之後需要用到什麼，跟我們說一聲就好。",
-          "focus": "cards"
-        }
-      ],
-      "notes": "這頁是全場的地基，後面所有功能都從這裡點進去。第三點要講清楚，不然同事會以為系統壞掉。",
+      "view": "agenda",
       "zones": [
         {
-          "n": "生產管理"
+          "n": "生產管理",
+          "c": 5
         },
         {
-          "n": "品質管理"
+          "n": "品質管理",
+          "c": 2
         },
         {
-          "n": "採購管理"
+          "n": "採購管理",
+          "c": 8
         },
         {
-          "n": "進銷存管理"
+          "n": "進銷存管理",
+          "c": 3
         },
         {
-          "n": "申請管理"
+          "n": "申請管理",
+          "c": 6
         },
         {
           "n": "工具管理",
+          "c": 5,
           "on": true
         }
       ],
@@ -832,9 +885,218 @@ var FALLBACK = {
         }
       ],
       "favPin": "佈告欄",
-      "favAuto": "打卡系統"
+      "favAuto": "打卡系統",
+      "day": "2026 / 07 / 28",
+      "nowHM": "11:20",
+      "nowPct": 33,
+      "mineN": 1,
+      "calN": 3,
+      "away": [
+        {
+          "n": "陳大器",
+          "t": "09:00–18:00",
+          "out": true
+        },
+        {
+          "n": "林佩珊",
+          "t": "13:00–18:00"
+        }
+      ],
+      "rooms": [
+        {
+          "k": "1F",
+          "n": "1F 會議室"
+        },
+        {
+          "k": "2F",
+          "n": "2F 會議室"
+        },
+        {
+          "k": "",
+          "n": "不佔場地"
+        }
+      ],
+      "events": [
+        {
+          "n": "廠商來訪",
+          "s": "09:30",
+          "e": "10:30",
+          "a": 15,
+          "w": 10,
+          "room": "2F",
+          "roomName": "2F 會議室",
+          "c": "guest",
+          "by": "咪姐"
+        },
+        {
+          "n": "品號會議",
+          "s": "14:00",
+          "e": "15:00",
+          "a": 60,
+          "w": 10,
+          "room": "1F",
+          "roomName": "1F 會議室",
+          "c": "meet",
+          "by": "咪姐",
+          "att": "王小明、陳大器",
+          "mine": true
+        },
+        {
+          "n": "全公司清潔日",
+          "s": "16:00",
+          "e": "17:00",
+          "a": 80,
+          "w": 10,
+          "room": "",
+          "c": "evt",
+          "by": "管理部"
+        }
+      ],
+      "type": "demo",
+      "comp": "hub",
+      "roles": [
+        "*"
+      ],
+      "title": "登入之後，先看到的是今天",
+      "lead": "今天誰不在、幾點有會、下一場在哪 —— 開頁就在中間。",
+      "steps": [
+        {
+          "h": "一進來，中間就是今日總覽",
+          "p": "今天公司有哪些事、哪幾件是你的，不用點就看得到。",
+          "focus": "cards",
+          "view": "agenda"
+        },
+        {
+          "h": "左邊選一個功能區，右邊就換一批",
+          "p": "生產、品質、採購…點一個，中間就換成那一區的卡片。手機上是左上角的 ☰。",
+          "focus": "nav",
+          "view": "cards"
+        },
+        {
+          "h": "每一張卡就是一個系統，而且每個人看到的不一樣",
+          "p": "畫面上只放跟你工作有關的，你就不用在一堆用不到的東西裡面找。之後需要用到什麼，跟我們說一聲就好。",
+          "focus": "cards",
+          "view": "cards"
+        }
+      ],
+      "notes": "這頁是全場的地基，後面所有功能都從這裡點進去。第二步按下去中間會從今日總覽換成卡片，停一下讓大家看清楚。第三點要講清楚，不然同事會以為系統壞掉。"
     },
     {
+      "view": "cards",
+      "zones": [
+        {
+          "n": "生產管理",
+          "c": 5
+        },
+        {
+          "n": "品質管理",
+          "c": 2
+        },
+        {
+          "n": "採購管理",
+          "c": 8
+        },
+        {
+          "n": "進銷存管理",
+          "c": 3
+        },
+        {
+          "n": "申請管理",
+          "c": 6
+        },
+        {
+          "n": "工具管理",
+          "c": 5,
+          "on": true
+        }
+      ],
+      "cards": [
+        {
+          "n": "佈告欄",
+          "d": "公告、活動、規章，看過的會記錄",
+          "pin": true
+        },
+        {
+          "n": "員工通訊錄",
+          "d": "查同事分機、Email、座位，本月壽星"
+        },
+        {
+          "n": "廠商代號助手",
+          "d": "中文轉首字母、自動產生廠商代號"
+        },
+        {
+          "n": "外箱計算器",
+          "d": "產品尺寸自動配箱、推薦箱型"
+        }
+      ],
+      "favPin": "佈告欄",
+      "favAuto": "打卡系統",
+      "day": "2026 / 07 / 28",
+      "nowHM": "11:20",
+      "nowPct": 33,
+      "mineN": 1,
+      "calN": 3,
+      "away": [
+        {
+          "n": "陳大器",
+          "t": "09:00–18:00",
+          "out": true
+        },
+        {
+          "n": "林佩珊",
+          "t": "13:00–18:00"
+        }
+      ],
+      "rooms": [
+        {
+          "k": "1F",
+          "n": "1F 會議室"
+        },
+        {
+          "k": "2F",
+          "n": "2F 會議室"
+        },
+        {
+          "k": "",
+          "n": "不佔場地"
+        }
+      ],
+      "events": [
+        {
+          "n": "廠商來訪",
+          "s": "09:30",
+          "e": "10:30",
+          "a": 15,
+          "w": 10,
+          "room": "2F",
+          "roomName": "2F 會議室",
+          "c": "guest",
+          "by": "咪姐"
+        },
+        {
+          "n": "品號會議",
+          "s": "14:00",
+          "e": "15:00",
+          "a": 60,
+          "w": 10,
+          "room": "1F",
+          "roomName": "1F 會議室",
+          "c": "meet",
+          "by": "咪姐",
+          "att": "王小明、陳大器",
+          "mine": true
+        },
+        {
+          "n": "全公司清潔日",
+          "s": "16:00",
+          "e": "17:00",
+          "a": 80,
+          "w": 10,
+          "room": "",
+          "c": "evt",
+          "by": "管理部"
+        }
+      ],
       "type": "demo",
       "comp": "hub",
       "roles": [
@@ -845,42 +1107,54 @@ var FALLBACK = {
       "steps": [
         {
           "h": "點卡片右上角那顆星",
-          "p": "釘起來之後就固定在右邊，開頁就看得到。",
+          "p": "釘起來之後就固定在右邊那一欄，開頁就看得到。",
           "focus": "cards",
+          "view": "cards",
           "pinned": true
         },
         {
           "h": "沒空整理也沒關係",
           "p": "系統會記住你常點哪幾個，自動幫你排進「最常使用」。",
           "focus": "fav",
+          "view": "cards",
           "pinned": true
         },
         {
           "h": "右下角的狗狗，頭上是你的待辦",
           "p": "點牌子看清單。牠可以拖到你喜歡的位置，也可以換成貓咪。",
           "focus": "dog",
+          "view": "cards",
           "pinned": true
         }
       ],
-      "notes": "釘選那步按下去右邊會跑出來，停一下讓大家看清楚。狗狗這段可以輕鬆一點講。",
+      "notes": "釘選那步按下去右邊會跑出來，停一下讓大家看清楚。狗狗這段可以輕鬆一點講。"
+    },
+    {
+      "view": "agenda",
       "zones": [
         {
-          "n": "生產管理"
+          "n": "生產管理",
+          "c": 5
         },
         {
-          "n": "品質管理"
+          "n": "品質管理",
+          "c": 2
         },
         {
-          "n": "採購管理"
+          "n": "採購管理",
+          "c": 8
         },
         {
-          "n": "進銷存管理"
+          "n": "進銷存管理",
+          "c": 3
         },
         {
-          "n": "申請管理"
+          "n": "申請管理",
+          "c": 6
         },
         {
           "n": "工具管理",
+          "c": 5,
           "on": true
         }
       ],
@@ -904,79 +1178,104 @@ var FALLBACK = {
         }
       ],
       "favPin": "佈告欄",
-      "favAuto": "打卡系統"
-    },
-    {
+      "favAuto": "打卡系統",
+      "day": "2026 / 07 / 28",
+      "nowHM": "11:20",
+      "nowPct": 33,
+      "mineN": 1,
+      "calN": 3,
+      "away": [
+        {
+          "n": "陳大器",
+          "t": "09:00–18:00",
+          "out": true
+        },
+        {
+          "n": "林佩珊",
+          "t": "13:00–18:00"
+        }
+      ],
+      "rooms": [
+        {
+          "k": "1F",
+          "n": "1F 會議室"
+        },
+        {
+          "k": "2F",
+          "n": "2F 會議室"
+        },
+        {
+          "k": "",
+          "n": "不佔場地"
+        }
+      ],
+      "events": [
+        {
+          "n": "廠商來訪",
+          "s": "09:30",
+          "e": "10:30",
+          "a": 15,
+          "w": 10,
+          "room": "2F",
+          "roomName": "2F 會議室",
+          "c": "guest",
+          "by": "咪姐"
+        },
+        {
+          "n": "品號會議",
+          "s": "14:00",
+          "e": "15:00",
+          "a": 60,
+          "w": 10,
+          "room": "1F",
+          "roomName": "1F 會議室",
+          "c": "meet",
+          "by": "咪姐",
+          "att": "王小明、陳大器",
+          "mine": true
+        },
+        {
+          "n": "全公司清潔日",
+          "s": "16:00",
+          "e": "17:00",
+          "a": 80,
+          "w": 10,
+          "room": "",
+          "c": "evt",
+          "by": "管理部"
+        }
+      ],
       "type": "demo",
       "comp": "hub",
       "roles": [
         "*"
       ],
       "title": "上面那一條，是今天的行事曆",
-      "lead": "誰在開會、誰出差、你下一場幾點，一眼看完。",
+      "lead": "誰在開會、誰不在、你下一場幾點，一眼看完。",
       "steps": [
         {
-          "h": "紅線就是「現在」",
-          "p": "線走到哪，就是現在幾點。左右的色塊是今天的行程。",
+          "h": "一間會議室一條線",
+          "p": "哪一間、幾點到幾點被用掉，一眼就看得出來。紅色那條直線就是「現在」。",
           "focus": "cal",
+          "view": "agenda",
           "pinned": true
         },
         {
-          "h": "你的下一場會寫在左邊",
-          "p": "幾點、什麼會、在哪間會議室，不用點開就看得到。",
+          "h": "今天不在的人，列在上面那一排",
+          "p": "只寫「誰」跟「什麼時候不在」，不會寫原因。等一下有一頁會專門講這件事。",
           "focus": "cal",
+          "view": "agenda",
           "pinned": true
         },
         {
-          "h": "要看整個月，點「完整行事曆」",
-          "p": "可以訂會議室、看誰有空、建立定期會議。",
+          "h": "要看整個月，點右邊「完整行事曆」",
+          "p": "可以訂會議室、看誰有空、排定期會議。",
           "focus": "cal",
+          "view": "agenda",
           "pinned": true
         }
       ],
-      "notes": "這頁接下一段行事曆隱私，先鋪陳「大家看得到彼此的時間」，下一頁再講「但看不到假別」。",
-      "zones": [
-        {
-          "n": "生產管理"
-        },
-        {
-          "n": "品質管理"
-        },
-        {
-          "n": "採購管理"
-        },
-        {
-          "n": "進銷存管理"
-        },
-        {
-          "n": "申請管理"
-        },
-        {
-          "n": "工具管理",
-          "on": true
-        }
-      ],
-      "cards": [
-        {
-          "n": "佈告欄",
-          "d": "公告、活動、規章，看過的會記錄",
-          "pin": true
-        },
-        {
-          "n": "員工通訊錄",
-          "d": "查同事分機、Email、座位，本月壽星"
-        },
-        {
-          "n": "廠商代號助手",
-          "d": "中文轉首字母、自動產生廠商代號"
-        },
-        {
-          "n": "外箱計算器",
-          "d": "產品尺寸自動配箱、推薦箱型"
-        }
-      ],
-      "favPin": "佈告欄",
-      "favAuto": "打卡系統"
+      "notes": "這頁只鋪陳「大家看得到彼此的時間」；假別為什麼不揭露，留到後面「1F 會議室現在有人嗎？」那頁講。"
     },
     {
       "type": "section",
@@ -1496,6 +1795,114 @@ var FALLBACK = {
       "notes": "★這頁最重要：耗材單「不用簽核」，送出就完成，之後在查詢記錄隨時可以列印。樣品單則要咪姐簽核後才能列印 —— 兩張差在這裡，一定要講清楚。"
     },
     {
+      "type": "demo",
+      "comp": "eoform",
+      "roles": [
+        "*"
+      ],
+      "title": "想買自家的東西，線上填一張",
+      "lead": "搜尋、填數量、送出，三步就結束。",
+      "steps": [
+        {
+          "h": "單號、日期、你是誰、哪個部門，我們幫你填好",
+          "p": "這四格都是自動帶出來的，你只要看一眼對不對就好。",
+          "focus": "base"
+        },
+        {
+          "h": "只會出現還有現貨的成品",
+          "p": "打品號或品名都找得到。旁邊的庫存是即時的，看到多少就是還有多少。",
+          "focus": "pick"
+        },
+        {
+          "h": "填數量，備註想寫再寫",
+          "p": "備註留白也沒關係。送出之後等咪姐簽核，簽完就可以列印。",
+          "focus": "list"
+        }
+      ],
+      "notes": "這張單同事最容易忘記「要簽核才能印」，講到第三點時順口帶一次。"
+    },
+    {
+      "type": "demo",
+      "comp": "eolist",
+      "roles": [
+        "*"
+      ],
+      "title": "訂了什麼、簽了沒，都在這裡",
+      "lead": "打開預設就是還沒簽的那幾張。",
+      "steps": [
+        {
+          "h": "上面三顆鈕切狀態",
+          "p": "待簽核／已簽核／全部。也可以直接搜單號或申請人。",
+          "focus": "filter"
+        },
+        {
+          "h": "還在等簽核的，列印先不亮",
+          "p": "不是壞掉，是還沒簽完。簽完它自己會亮起來。",
+          "focus": "wait"
+        },
+        {
+          "h": "簽完了，明細跟列印都打得開",
+          "p": "誰簽的、幾點簽的都會寫在上面。",
+          "focus": "done"
+        }
+      ],
+      "notes": "「列印是灰的」是這張單最常被問的，第二點要講清楚。"
+    },
+    {
+      "type": "demo",
+      "comp": "scrapform",
+      "roles": [
+        "*"
+      ],
+      "title": "東西壞了、過期了，登記一張就好",
+      "lead": "批號跟有效日期都幫你帶出來，不用自己抄。",
+      "steps": [
+        {
+          "h": "單號、日期、你是誰，一樣都幫你帶好",
+          "p": "只有下面的品項要自己選。",
+          "focus": "base"
+        },
+        {
+          "h": "搜到品項，連批號跟有效日期一起出來",
+          "p": "倉庫現在有的批號都會列出來，挑一個就好。挑錯了也不要緊，右邊可以刪掉重來。",
+          "focus": "pick"
+        },
+        {
+          "h": "數量跟原因兩個都要填",
+          "p": "原因寫「桶身破損受潮」這種就可以。少填的話，送出前會提醒你補。",
+          "focus": "list"
+        }
+      ],
+      "notes": "報廢會直接影響庫存數字，所以原因一定要寫。這頁講慢一點。"
+    },
+    {
+      "type": "demo",
+      "comp": "scraplist",
+      "roles": [
+        "*"
+      ],
+      "title": "報廢單送出去之後",
+      "lead": "等咪姐簽核，簽完才印得出來。",
+      "steps": [
+        {
+          "h": "預設先給你看還沒簽的",
+          "p": "要翻舊的就切「已簽核」或「全部」。",
+          "focus": "filter"
+        },
+        {
+          "h": "等簽核的時候，列印是灰的",
+          "p": "跟其他單子一樣，簽完自己會亮。",
+          "focus": "wait"
+        },
+        {
+          "h": "簽完就能看明細、印單子",
+          "p": "品號、批號、數量、原因都留著，之後要查有紀錄。",
+          "focus": "done"
+        }
+      ],
+      "notes": "跟員工訂購單同一套邏輯，這頁可以講快一點。"
+    },
+    {
       "type": "section",
       "roles": [
         "*"
@@ -1750,9 +2157,12 @@ function buildDeck(){
                  '<div class="cg-d">' + esc(c.d) + '</div></div>';
              }).join('') + '</div>';
     }
-    else if (s.type === 'demo' && ['reqform','reqtrack','reqlist','smpform','smplist','conform'].indexOf(s.comp) > -1){
+    else if (s.type === 'demo' && ['reqform','reqtrack','reqlist','smpform','smplist','conform',
+                                   'scrapform','scraplist','eoform','eolist'].indexOf(s.comp) > -1){
       var mk = { reqform:_reqFormHtml, reqtrack:_reqTrackHtml, reqlist:_reqListHtml,
-                 smpform:_smpFormHtml, smplist:_smpListHtml, conform:_conFormHtml }[s.comp];
+                 smpform:_smpFormHtml, smplist:_smpListHtml, conform:_conFormHtml,
+                 scrapform:_scrapFormHtml, scraplist:_scrapListHtml,
+                 eoform:_eoFormHtml,       eolist:_eoListHtml }[s.comp];
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
              '<div class="rule"></div><div class="demo wide">' + mk() +
@@ -1878,7 +2288,7 @@ function _conFormHtml(){
   var rows=[['1','CS-G001','無塵手套 M','雙','480','50','產線每日更換'],
             ['2','CS-P004','A4 影印紙 70g','包','36','5','辦公室補充']];
   return '<div class="pf" id="pf">' +
-    '<div class="pf-nav part" data-p="flow"><span class="num">●</span>耗材領用單' +
+    '<div class="pf-nav part fw" data-p="flow"><span class="num">●</span>耗材領用單' +
       '<span class="q">📋 查詢記錄</span></div>' +
     '<div class="sm-card pp part" data-p="base"><div class="sm-ttl">基本資料</div>' +
       '<div class="pf-row"><div class="pf-g"><div class="pf-l">單號（自動產生）</div>' +
@@ -1911,7 +2321,7 @@ function _smpFormHtml(){
   var rows=[['1','SP-A012','保濕精華 30ml 樣品','瓶','成品','48','2'],
             ['2','SP-B007','洗手乳 250ml 樣品','瓶','成品','6','1']];
   return '<div class="pf" id="pf">' +
-    '<div class="pf-nav part" data-p="flow"><span class="num">●</span>樣品領用單' +
+    '<div class="pf-nav part fw" data-p="flow"><span class="num">●</span>樣品領用單' +
       '<span class="q">📋 查詢記錄</span></div>' +
     '<div class="sm-card part" data-p="base"><div class="sm-ttl">基本資料</div>' +
       '<div class="pf-row"><div class="pf-g"><div class="pf-l">單號（自動產生）</div>' +
@@ -1954,7 +2364,7 @@ function _smpListHtml(){
     '</div>';
   }
   return '<div class="pf" id="pf">' +
-    '<div class="rl-search part" data-p="filter" style="align-items:center;gap:7px;flex-wrap:wrap">' +
+    '<div class="rl-search part fw" data-p="filter" style="align-items:center;gap:7px;flex-wrap:wrap">' +
       '<span class="sm-chip">全部</span><span class="sm-chip amber">🟡 待簽核</span>' +
       '<span class="sm-chip green">✅ 已簽核</span><span class="sm-chip">⛔ 已駁回</span>' +
       '<div class="i" style="flex:0 0 150px">搜尋單號/申請人…</div></div>' +
@@ -1965,13 +2375,136 @@ function _smpListHtml(){
   '</div>';
 }
 
+function _scrapFormHtml(){
+  var rows=[['1','RM-0231','甘油 99%','kg','B2604A','2027/03/12','120','8','桶身破損受潮'],
+            ['2','PK-0088','250ml 空瓶','個','B2605C','—','640','35','壓傷變形']];
+  return '<div class="pf" id="pf">' +
+    '<div class="pf-nav part fw" data-p="flow"><span class="num">●</span>報廢單' +
+      '<span class="q">📋 查詢記錄</span></div>' +
+    '<div class="sm-card sc part" data-p="base"><div class="sm-ttl">基本資料</div>' +
+      '<div class="pf-row"><div class="pf-g"><div class="pf-l">單號（自動產生）</div>' +
+        '<div class="pf-i ro">SC26072801</div></div>' +
+        '<div class="pf-g"><div class="pf-l">單據日期</div><div class="pf-i ro">2026/07/28</div></div>' +
+        '<div class="pf-g"><div class="pf-l">申請人員</div><div class="pf-i ro">王小明</div></div>' +
+        '<div class="pf-g"><div class="pf-l">申請部門</div><div class="pf-i ro">生產部</div></div></div>' +
+    '</div>' +
+    '<div class="sm-card sc part" data-p="pick"><div class="sm-ttl">新增品項（搜尋倉庫現有的）</div>' +
+      '<div class="pf-i ph">🔍 輸入品號或品名搜尋…</div>' +
+      '<div class="sm-dd"><div class="sm-di"><b>RM-0231</b><span>甘油 99%</span>' +
+        '<i>批號：B2604A　有效：2027/03/12　庫存：120 kg</i></div>' +
+        '<div class="sm-di"><b>PK-0088</b><span>250ml 空瓶</span>' +
+        '<i>批號：B2605C　有效：—　庫存：640 個</i></div></div>' +
+    '</div>' +
+    '<div class="sm-card sc part" data-p="list" style="padding:0;overflow:hidden">' +
+      '<div class="sm-ttl" style="padding:14px 16px 0;margin:0">品項清單</div>' +
+      '<table class="pf-tb" style="margin-top:10px"><thead><tr><th>序</th><th>品號</th><th>品名</th>' +
+      '<th>單位</th><th>批號</th><th>有效日</th><th>庫存量</th><th>報廢數量</th><th>報廢原因</th></tr></thead><tbody>' +
+      rows.map(function(r){ return '<tr><td>'+r[0]+'</td><td style="color:#2e86c1;font-weight:700">'+r[1]+
+        '</td><td class="l">'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td><td>'+r[5]+
+        '</td><td>'+r[6]+'</td><td class="scq">'+r[7]+'</td><td class="l">'+r[8]+'</td></tr>'; }).join('') +
+      '</tbody></table>' +
+      '<div style="display:flex;gap:9px;justify-content:flex-end;padding:12px 16px">' +
+        '<div class="sm-b">🔄 重置</div>' +
+        '<div class="sm-b" style="background:#27ae60;color:#fff;font-weight:700">📤 提交申請</div></div>' +
+    '</div></div>';
+}
+
+function _scrapListHtml(){
+  function card(no, who, dept, n, dt, st, extra){
+    var tag = st==='d' ? '✅ 已簽核' : '🟡 待簽核';
+    return '<div class="sm-oc"><div class="sm-om">' +
+      '<div><div class="sm-no">' + no + '</div><div class="sm-tag ' + st + '">' + tag + '</div></div>' +
+      '<div class="sm-oi"><b>申請人：' + who + '　部門：' + dept + '　共 ' + n + ' 項</b>' +
+        '<div>📅 ' + dt + (extra || '') + '</div></div>' +
+      '<div class="sm-ob"><div class="sm-b">📋 查看明細</div>' +
+        '<div class="sm-b ' + (st==='d'?'blue':'off') + '">🖨 列印</div></div></div>' +
+      (st==='d' ? '<div class="sm-panel" style="padding:0 14px 12px">' +
+        '<table class="pf-tb"><thead><tr><th>序</th><th>品號</th><th>品名</th><th>單位</th>' +
+        '<th>批號</th><th>庫存量</th><th>報廢數量</th><th>報廢原因</th></tr></thead><tbody>' +
+        '<tr><td>1</td><td style="color:#2e86c1;font-weight:700">RM-0198</td><td class="l">乳化劑 A</td>' +
+        '<td>kg</td><td>B2603F</td><td>45</td><td class="scq">3</td><td class="l">超過有效期限</td></tr>' +
+        '</tbody></table></div>' : '') +
+    '</div>';
+  }
+  return '<div class="pf" id="pf">' +
+    '<div class="rl-search part fw" data-p="filter" style="align-items:center;gap:7px;flex-wrap:wrap">' +
+      '<span class="sm-chip">全部</span><span class="sm-chip amber">🟡 待簽核</span>' +
+      '<span class="sm-chip green">✅ 已簽核</span>' +
+      '<div class="i" style="flex:0 0 150px">搜尋單號/申請人…</div></div>' +
+    '<div class="part" data-p="wait">' + card('SC26072801','王小明','生產部',2,'2026/07/28','p') + '</div>' +
+    '<div class="part" data-p="done">' + card('SC26072105','林佩珊','品保部',1,'2026/07/21','d',
+      '　<span style="color:#27ae60">✍️ 咪姐　07/22 09:40</span>') + '</div>' +
+  '</div>';
+}
+
+function _eoFormHtml(){
+  var rows=[['1','FG-A102','保濕精華 30ml','瓶','48','2','送禮'],
+            ['2','FG-B215','洗手乳 250ml','瓶','126','3','']];
+  return '<div class="pf" id="pf">' +
+    '<div class="pf-nav part fw" data-p="flow"><span class="num">●</span>員工商品訂購單' +
+      '<span class="q">📋 查詢記錄</span></div>' +
+    '<div class="sm-card eo part" data-p="base"><div class="sm-ttl">基本資料</div>' +
+      '<div class="pf-row"><div class="pf-g"><div class="pf-l">單號（自動產生）</div>' +
+        '<div class="pf-i ro">EO26072801</div></div>' +
+        '<div class="pf-g"><div class="pf-l">單據日期</div><div class="pf-i ro">2026/07/28</div></div>' +
+        '<div class="pf-g"><div class="pf-l">申請人</div><div class="pf-i ro">王小明</div></div>' +
+        '<div class="pf-g"><div class="pf-l">申請部門</div><div class="pf-i ro">生產部</div></div></div>' +
+    '</div>' +
+    '<div class="sm-card eo part" data-p="pick"><div class="sm-ttl">新增品項（只會出現有現貨的成品）</div>' +
+      '<div class="pf-i ph">🔍 輸入品號或品名搜尋…</div>' +
+      '<div class="sm-dd"><div class="sm-di"><b>FG-A102</b><span>保濕精華 30ml</span>' +
+        '<i>庫存：48 瓶</i></div>' +
+        '<div class="sm-di"><b>FG-B215</b><span>洗手乳 250ml</span><i>庫存：126 瓶</i></div></div>' +
+    '</div>' +
+    '<div class="sm-card eo part" data-p="list" style="padding:0;overflow:hidden">' +
+      '<div class="sm-ttl" style="padding:14px 16px 0;margin:0">品項清單</div>' +
+      '<table class="pf-tb" style="margin-top:10px"><thead><tr><th>序號</th><th>品號</th><th>品名</th>' +
+      '<th>單位</th><th>庫存量</th><th>訂購數量</th><th>備註</th></tr></thead><tbody>' +
+      rows.map(function(r){ return '<tr><td>'+r[0]+'</td><td style="color:#2e86c1;font-weight:700">'+r[1]+
+        '</td><td class="l">'+r[2]+'</td><td>'+r[3]+'</td><td>'+r[4]+
+        '</td><td class="buy">'+r[5]+'</td><td class="l" style="color:#888">'+(r[6]||'—')+'</td></tr>'; }).join('') +
+      '</tbody></table>' +
+      '<div style="display:flex;gap:9px;justify-content:flex-end;padding:12px 16px">' +
+        '<div class="sm-b">🔄 重置</div>' +
+        '<div class="sm-b" style="background:#27ae60;color:#fff;font-weight:700">📤 提交申請</div></div>' +
+    '</div></div>';
+}
+
+function _eoListHtml(){
+  function card(no, who, dept, n, dt, st, extra){
+    var tag = st==='d' ? '已簽核' : '待簽核';
+    return '<div class="sm-oc"><div class="sm-om">' +
+      '<div><div class="sm-no">' + no + '</div><div class="sm-tag ' + st + '">' + tag + '</div></div>' +
+      '<div class="sm-oi"><b>' + who + ' [' + dept + ']　共 ' + n + ' 項</b>' +
+        '<div>' + dt + (extra || '') + '</div></div>' +
+      '<div class="sm-ob"><div class="sm-b">明細</div>' +
+        '<div class="sm-b ' + (st==='d'?'blue':'off') + '">列印</div></div></div>' +
+      (st==='d' ? '<div class="sm-panel" style="padding:0 14px 12px">' +
+        '<table class="pf-tb"><thead><tr><th>序</th><th>品號</th><th>品名</th><th>單位</th>' +
+        '<th>庫存量</th><th>訂購數量</th><th>備註</th></tr></thead><tbody>' +
+        '<tr><td>1</td><td style="color:#2e86c1;font-weight:700">FG-A102</td>' +
+        '<td class="l">保濕精華 30ml</td><td>瓶</td><td>48</td><td class="buy">1</td>' +
+        '<td class="l" style="color:#888">—</td></tr></tbody></table></div>' : '') +
+    '</div>';
+  }
+  return '<div class="pf" id="pf">' +
+    '<div class="rl-search part fw" data-p="filter" style="align-items:center;gap:7px;flex-wrap:wrap">' +
+      '<span class="sm-chip">全部</span><span class="sm-chip amber">待簽核</span>' +
+      '<span class="sm-chip green">已簽核</span>' +
+      '<div class="i" style="flex:0 0 150px">搜尋單號/申請人…</div></div>' +
+    '<div class="part" data-p="wait">' + card('EO26072801','王小明','生產部',2,'2026/07/28','p') + '</div>' +
+    '<div class="part" data-p="done">' + card('EO26071902','陳大器','業務部',1,'2026/07/19','d',
+      '　<span style="color:#27ae60">咪姐　07/20 11:05</span>') + '</div>' +
+  '</div>';
+}
+
 function _reqFormHtml(){
   var rows = [
     ['A4紙','影印紙 A4 70g','包','物料','20','5','15'],
     ['GLV01','無塵手套 M','雙','耗材','300','0','300']
   ];
   return '<div class="pf" id="pf">' +
-    '<div class="pf-nav part" data-p="flow"><span class="num">●</span>填寫請購單　選申請人 › 選品項 › 加入清單 › 送出</div>' +
+    '<div class="pf-nav part fw" data-p="flow"><span class="num">●</span>填寫請購單　選申請人 › 選品項 › 加入清單 › 送出</div>' +
     '<div class="pf-card"><div class="pf-hd"><i>▮</i>請購基本資訊</div><div class="pf-bd">' +
       '<div class="pf-g part" data-p="no"><div class="pf-l">請購單號</div>' +
         '<div class="pf-i" style="background:linear-gradient(135deg,#1A1A1A,#333);color:#fff;' +
@@ -2005,9 +2538,11 @@ function _reqTrackHtml(){
   var doneN = st.filter(function(x){ return x[1]===1; }).length;
   var pct = (doneN - 1) / (st.length - 1) * 100;
   return '<div class="pf" id="pf">' +
-    '<div class="rl-search part" data-p="find"><div class="i">🔍 搜尋請購單號、品名、申請人…</div></div>' +
-    '<div class="rl-badges part" data-p="find"><span class="rl-bg" style="background:#185FA5">未完成</span>' +
-      '<span class="rl-bg" style="background:#bbb">已完成</span><span class="rl-bg" style="background:#bbb">全部</span></div>' +
+    '<div class="part fw" data-p="find">' +
+      '<div class="rl-search"><div class="i">🔍 搜尋請購單號、品名、申請人…</div></div>' +
+      '<div class="rl-badges"><span class="rl-bg" style="background:#185FA5">未完成</span>' +
+      '<span class="rl-bg" style="background:#bbb">已完成</span>' +
+      '<span class="rl-bg" style="background:#bbb">全部</span></div></div>' +
     '<div class="rt-card part" data-p="bar"><div class="rt-hd"><span class="rt-no">20260725001</span>' +
       '<span>申請日：2026-07-25</span><span class="rt-who">👤 王小明</span></div>' +
       '<div class="rt-item"><div class="rt-nm"><b>影印紙 A4 70g</b><code>A4紙</code>' +
@@ -2032,9 +2567,9 @@ function _reqListHtml(){
       '<div class="rl-b ' + (ok?'':'off') + '">🖨 列印</div></div></div>';
   }
   return '<div class="pf" id="pf">' +
-    '<div class="rl-search part" data-p="find"><div class="i">輸入單號、申請人或類別…</div>' +
+    '<div class="rl-search part fw" data-p="find"><div class="i">輸入單號、申請人或類別…</div>' +
       '<div class="b">🔍 搜尋</div></div>' +
-    '<div class="rl-badges part" data-p="badge"><span class="rl-bg" style="background:#E30613">待簽核：2 筆</span>' +
+    '<div class="rl-badges part fw" data-p="badge"><span class="rl-bg" style="background:#E30613">待簽核：2 筆</span>' +
       '<span class="rl-bg" style="background:#f39c12">待轉議價：1 筆</span></div>' +
     '<div class="pf-card" style="margin-top:4px"><div class="pf-hd2">📋 搜尋結果<span class="pf-cnt">2 筆</span></div>' +
       '<div class="part" data-p="wait">' + row('20260725001','王小明','辦公用品',false,'07/25') + '</div>' +
@@ -2103,8 +2638,8 @@ function _bookHtml(){
       ppl.map(function(p){ return '<div class="bk-ai on"><span class="bk-ck"></span>' + esc(p[0]) +
         (p[1] ? '<span class="lv ' + (p[2]||'') + '">' + esc(p[1]) + '</span>' : '') + '</div>'; }).join('') +
     '</div></div>' +
-    '<div class="bk-rep part" data-p="rep"><span class="bk-chip" id="bk-rc">🔁 定期會議</span>' +
-      '<span id="bk-repbox" style="display:none;align-items:center;gap:8px">' +
+    '<div class="bk-rep part" data-p="rep"><span class="bk-chip bk-rc" id="bk-rc">🔁 定期會議</span>' +
+      '<span class="bk-repbox" id="bk-repbox" style="display:none;align-items:center;gap:8px">' +
         '<span class="bk-chip on">每週</span><span>共 <b style="color:#fff">23</b> 次</span>' +
         '<span class="bk-to">（排到 12/30）</span>' +
         '<span class="bk-chip">3個月</span><span class="bk-chip">半年</span><span class="bk-chip">到年底</span>' +
@@ -2132,10 +2667,10 @@ function setBook(sl){
   bk.querySelectorAll('.part').forEach(function(p){
     p.classList.toggle('hit', !!f && p.getAttribute('data-p') === f);
   });
-  var w = bk.querySelector('#bk-warn');
+  var w = bk.querySelector('.bk-warn');
   w.className = 'bk-warn' + (cf.warn ? ' on ' + (cf.warnType || 'ok') : '');
   w.textContent = cf.warn || '';
-  var rb = bk.querySelector('#bk-repbox'), rc = bk.querySelector('#bk-rc');
+  var rb = bk.querySelector('.bk-repbox'), rc = bk.querySelector('.bk-rc');
   rb.style.display = cf.rep ? 'inline-flex' : 'none';
   rc.classList.toggle('on', !!cf.rep);
 }
@@ -2152,38 +2687,120 @@ function _hubHtml(s){
   var cards = s.cards || [];
   var favP  = s.favPin || '';
   var favA  = s.favAuto || '';
+  var away  = s.away || [];
+  var evs   = s.events || [];
+  var rooms = s.rooms || [];
+  var nowPct = (s.nowPct == null) ? 41 : s.nowPct;
+  var nowHM  = s.nowHM || '11:20';
+  var day    = s.day || '2026 / 07 / 28';
+
+  /* 上排：今天不在的人（假別一律不揭露，只有公出/出差寫明） */
+  function capsHtml(cls){
+    if (!away.length) return '';
+    return '<span class="' + cls + 'l">今天不在</span>' +
+      away.map(function(a){
+        return '<span class="' + cls + ' ' + (a.out ? 'out' : '') + '">' + esc(a.n) +
+               (a.t ? '<i>' + esc(a.t) + '</i>' : '') + '</span>';
+      }).join('');
+  }
+
+  /* 泳道：有幾個場地畫幾條 */
+  var lanes = rooms.map(function(r){
+    var bars = evs.filter(function(e){ return (e.room || '') === (r.k || ''); }).map(function(e){
+      return '<div class="hu-ev ' + esc(e.c || 'meet') + '" style="left:' + e.a + '%;width:' + e.w + '%">' +
+             esc(e.n) + '</div>';
+    }).join('');
+    return '<div class="hu-lane"><span class="ln">' + esc(r.n) + '</span>' +
+           '<div class="lb">' + bars + '</div></div>';
+  }).join('');
+  var ticks = ['8:00','10:00','12:00','14:00','16:00','18:00'].map(function(t,k){
+    return '<span class="tk" style="left:' + (k*20) + '%">' + t + '</span>';
+  }).join('');
+
+  /* 今日總覽（中間預設頁） */
+  var agRows = '', drawn = false;
+  evs.concat([]).sort(function(a,b){ return a.s < b.s ? -1 : 1; }).forEach(function(e){
+    if (!drawn && e.s > nowHM){
+      agRows += '<div class="ag-now"><span class="d"></span><span class="x">NOW ' + esc(nowHM) +
+                '</span><span class="l"></span></div>';
+      drawn = true;
+    }
+    var past = e.e <= nowHM;
+    var meta = [];
+    if (e.roomName) meta.push('📍 ' + esc(e.roomName));
+    if (e.by)       meta.push('👤 ' + esc(e.by));
+    if (e.att)      meta.push('👥 ' + esc(e.att));
+    agRows += '<div class="ag-row' + (past ? ' past' : '') + '">' +
+      '<div class="ag-tm"><b>' + esc(e.s) + '</b><i>' + esc(e.e) + '</i></div>' +
+      '<div class="ag-c ' + esc(e.c || 'meet') + (e.mine ? ' mine' : '') + '">' +
+      '<div class="n">' + esc(e.n) + '</div>' +
+      '<div class="m">' + (meta.length ? meta.join('　') : esc(e.c || '')) + '</div></div></div>';
+  });
+  if (!drawn) agRows += '<div class="ag-now"><span class="d"></span><span class="x">NOW ' +
+                        esc(nowHM) + '</span><span class="l"></span></div>';
+
+  var agenda = '<div class="hu-ag">' +
+    '<div class="ag-hd"><span class="t">今日總覽</span><span class="s">TODAY</span></div>' +
+    '<div class="ag-sub">' + esc(day) + '　·　共 ' + evs.length + ' 件' +
+      (s.mineN ? '，你的 ' + s.mineN + ' 件' : '') + '</div>' +
+    (away.length && s.agCaps ? '<div class="ag-caps">' + capsHtml('cap') + '</div>' : '') +
+    agRows + '</div>';
+
+  var cardWall = '<div class="hu-cards">' +
+    cards.map(function(c){
+      return '<div class="hu-c ' + (c.pin ? 'pin' : '') + '">' +
+        _ic(c.n, c.e || '▪', 'div').replace('class="hasimg"','class="ic hasimg"').replace('<div>','<div class="ic">') +
+        '<div class="nm">' + esc(c.n) + '</div><div class="ds">' + esc(c.d) + '</div>' +
+        '<div class="st">★</div></div>';
+    }).join('') + '</div>';
+
   return '<div class="hub" id="hub">' +
     '<div class="hu-top part" data-p="top">' +
       '<div><div class="hu-brand">作業中心</div><div class="hu-en">WINZ TECHNOLOGY</div></div>' +
       '<div class="hu-user"><div class="hu-un">王小明<i>生產部 · 作業專員</i></div>' +
       '<div class="hu-av">王</div><div class="hu-out">🚪 登出</div></div>' +
     '</div>' +
-    '<div class="hu-body">' +
-      '<div class="hu-hi part" data-p="top">☕ 早安，<b>王小明</b></div>' +
-      '<div class="hu-cal part" data-p="cal"><div style="min-width:118px">' +
-        '<div class="lab">TODAY · 07/28</div><div class="msg">你今天 <b>14:00</b> 品號會議 · 1F</div></div>' +
-        '<div class="hu-track">' +
-          '<div class="hu-ev" style="left:12%;width:16%;background:rgba(255,150,40,.55)">出差</div>' +
-          '<div class="hu-ev" style="left:56%;width:20%;background:rgba(227,6,19,.6)">品號會議</div>' +
-          '<div class="hu-now" style="left:41%"></div></div>' +
-        '<div class="hu-calbtn"><span>⊞ 完整行事曆</span></div></div>' +
-      '<div class="hu-work">' +
-        '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
-          zones.map(function(z){ return '<div class="hu-z' + (z.on ? ' on' : '') + '">' + _ic(z.n, z.e || '▪', 'i') + '<b>' + esc(z.n) + '</b></div>'; }).join('') +
+    '<div class="hu-body"><div class="hu-work">' +
+
+      '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
+        '<div class="hu-z home' + (s.view === 'cards' ? '' : ' on') + '">' +
+          '<i class="hm">▤</i><b>今日總覽</b></div>' +
+        zones.map(function(z){
+          return '<div class="hu-z' + (z.on ? ' on' : '') + '">' + _ic(z.n, z.e || '▪', 'i') +
+                 '<b>' + esc(z.n) + '</b>' + (z.c ? '<s>' + z.c + '</s>' : '') + '</div>';
+        }).join('') +
+      '</div>' +
+
+      '<div class="hu-mid">' +
+        '<div class="hu-hi part" data-p="top">☕ 早安，<b>王小明</b></div>' +
+        '<div class="hu-cal part" data-p="cal">' +
+          '<div class="hu-cl"><div class="lab">TODAY · 07/28</div>' +
+            '<div class="msg">你今天 <b>14:00</b> 品號會議 · 1F 會議室</div></div>' +
+          '<div class="hu-cm">' +
+            (away.length ? '<div class="hu-away">' + capsHtml('cap') + '</div>' : '') +
+            '<div class="hu-lanes"><div class="hu-ticks">' + ticks + '</div>' +
+              '<div class="hu-lwrap">' + lanes +
+                '<div class="hu-nowwrap"><div class="hu-now" style="left:' + nowPct + '%"></div></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="hu-calbtn"><span>⊞ 完整行事曆<em>' + (s.calN || evs.length) + '</em></span></div>' +
         '</div>' +
-        '<div class="hu-cards part" data-p="cards">' +
-          cards.map(function(c){ return '<div class="hu-c ' + (c.pin ? 'pin' : '') + '">' + _ic(c.n, c.e || '▪', 'div').replace('class="hasimg"','class="ic hasimg"').replace('<div>','<div class="ic">') +
-            '<div class="nm">' + esc(c.n) + '</div><div class="ds">' + esc(c.d) + '</div><div class="st">★</div></div>'; }).join('') +
-        '</div>' +
-        '<div class="hu-fav part" data-p="fav">' +
-          '<div class="hu-fh"><span class="s">★</span><span class="t">我的釘選</span></div>' +
-          '<div class="hu-fe" id="hu-fe">點卡片右上角的星號，把常用的釘在這裡。</div>' +
-          '<div class="hu-fi p1">' + _ic(favP,'▪','i') + '<b>' + esc(favP) + '</b></div>' +
-          '<div class="hu-fa"><div class="hu-fh"><span class="t">● 最常使用</span></div>' +
-            '<div class="hu-fi p1"><i>🕐</i><b>打卡系統</b></div></div>' +
+        '<div class="hu-view part" data-p="cards">' +
+          '<div class="hu-v ag">' + agenda + '</div>' +
+          '<div class="hu-v cw">' + cardWall + '</div>' +
         '</div>' +
       '</div>' +
-    '</div>' +
+
+      '<div class="hu-fav part" data-p="fav">' +
+        '<div class="hu-fh"><span class="s">★</span><span class="t">我的釘選</span></div>' +
+        '<div class="hu-fe" id="hu-fe">點卡片右上角的星號，把常用的釘在這裡。</div>' +
+        '<div class="hu-fi p1">' + _ic(favP,'▪','i') + '<b>' + esc(favP) + '</b></div>' +
+        '<div class="hu-fa"><div class="hu-fh"><span class="t">● 最常使用</span></div>' +
+          '<div class="hu-fi p1">' + _ic(favA,'🕐','i') + '<b>' + esc(favA) + '</b></div></div>' +
+      '</div>' +
+
+    '</div></div>' +
     '<div class="hu-dog part" data-p="dog"><div class="bg">📋 待辦 <em>3</em></div>' +
       '<img src="https://winz-tech.github.io/shimeji/img/dog/01.png" alt=""></div>' +
   '</div>';
@@ -2201,13 +2818,18 @@ function setShot(sl){
   sp.classList.add('on');
 }
 
-/* 作業中心：依 STEP 聚焦 / 釘選 */
+/* 作業中心：依 STEP 聚焦 / 釘選 / 切換中間看板 */
 function setHub(sl){
   var hb = sl.querySelector('.hub'); if (!hb) return;
   var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
   var f = (STEP > 0) ? (cf.focus || '') : '';
   hb.classList.toggle('focusing', !!f);
   hb.classList.toggle('pinned', !!cf.pinned);
+  /* 中間看板：步驟的 view 優先，其次整頁的 view，預設卡片牆 */
+  var view = cf.view || s.view || 'cards';
+  hb.classList.toggle('show-ag', view === 'agenda');
+  var hz = hb.querySelector('.hu-z.home');
+  if (hz) hz.classList.toggle('on', view === 'agenda');
   var fe = hb.querySelector('#hu-fe');
   if (fe) fe.style.display = cf.pinned ? 'none' : 'block';
   hb.querySelectorAll('.part').forEach(function(p){
