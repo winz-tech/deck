@@ -3,7 +3,7 @@
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-25 / v1",
+    "ver": "2026-07-25 / v2",
     "updated": "2026-07-25",
     "icons": {
       "生產管理": "img/02_生產管理.png",
@@ -34,7 +34,10 @@
       "請款單查詢": "",
       "穎利科技 OTP": ""
     },
-    "defaultRoute": "all"
+    "defaultRoute": "all",
+    "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+    "welcome": "內部系統教育訓練",
+    "welcomeSub": "穎利科技　2026 / 07 / 28"
   },
   "routes": [
     {
