@@ -574,8 +574,6 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   background:var(--red);transform:skewX(-18deg)}
 .lc-sys{display:flex;align-items:center;justify-content:center;overflow:visible}
 .lc-sys .sys{transform:scale(.86);box-shadow:0 22px 46px rgba(0,0,0,.3)}
-.lc-face{width:82px;height:82px;border-radius:50%;object-fit:cover;
-  border:3px solid var(--red);box-shadow:0 6px 18px rgba(0,0,0,.2)}
 .lc-photo img{position:relative;width:100%;height:100%;object-fit:contain;
   filter:drop-shadow(0 22px 40px rgba(0,0,0,.22))}
 
@@ -886,9 +884,10 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v5",
+    "ver": "2026-07-28 / v7",
     "updated": "2026-07-28",
     "icons": {
+      "今日總覽": "img/61_今日總覽.png",
       "生產管理": "img/02_生產管理.png",
       "品質管理": "img/03_品質管理.png",
       "採購管理": "img/04_採購管理.png",
@@ -989,8 +988,7 @@ var FALLBACK = {
       "speakerEn": "PAGGIE",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "sys": "punch",
-      "face": "paggie.png"
+      "photo": "paggie.png"
     },
     {
       "type": "cover",
@@ -1010,8 +1008,7 @@ var FALLBACK = {
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "sys": "hub",
-      "face": "mimi.png"
+      "photo": "mimi.png"
     },
     {
       "type": "section",
@@ -2472,8 +2469,6 @@ function buildDeck(){
             '<img src="' + esc(s.photo) + '" alt="" onerror="this.parentNode.style.display=\'none\'"></div>' : '') +
         '</div>' +
         '<div class="lc-foot"><div class="lc-sp"><div class="tag">Speaker</div>' +
-          (s.face ? '<img class="lc-face" src="' + esc(s.face) + '" alt="" ' +
-                    'onerror="this.style.display=\'none\'">' : '') +
           '<div class="who"><b>' + esc(s.speaker || '') + '</b><i>' + esc(s.speakerEn || '') + '</i></div></div>' +
           '<div class="lc-meta">' + esc(s.when || '') + '<br>' + esc(s.where || '') + '</div></div>' +
         (s.photo ? '<div class="lc-cue">按 → 繼續</div>' : '');
@@ -3142,7 +3137,7 @@ function _hubHtml(s){
 
       '<div class="hu-nav part" data-p="nav"><div class="hu-nt">// 功能區</div>' +
         '<div class="hu-z home' + (s.view === 'cards' ? '' : ' on') + '">' +
-          '<i class="hm">▤</i><b>今日總覽</b></div>' +
+          _ic('今日總覽', '▤', 'i') + '<b>今日總覽</b></div>' +
         zones.map(function(z){
           return '<div class="hu-z' + (z.on ? ' on' : '') + '">' + _ic(z.n, z.e || '▪', 'i') +
                  '<b>' + esc(z.n) + '</b>' + (z.c ? '<s>' + z.c + '</s>' : '') + '</div>';
