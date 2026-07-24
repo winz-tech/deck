@@ -135,6 +135,24 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
 .pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
 
+/* ---------- 功能卡片牆 ---------- */
+.cg{display:grid;gap:22px;flex:1;min-height:0;align-content:center;
+  grid-template-columns:repeat(3,1fr)}
+.cg.n2{grid-template-columns:repeat(2,1fr);max-width:1000px}
+.cg.n4{grid-template-columns:repeat(2,1fr)}
+.cg-c{background:#15151a;border:1px solid rgba(255,255,255,.1);border-radius:16px;
+  padding:26px 24px;position:relative;overflow:hidden}
+.cg-c::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red);
+  transform:skewX(-14deg) translateX(-3px)}
+.cg-z{font-family:var(--en);font-size:13px;letter-spacing:2px;color:#8a8a92;margin-bottom:14px}
+.cg-ic{width:74px;height:74px;border-radius:16px;background:var(--red);display:flex;
+  align-items:center;justify-content:center;font-size:34px;margin-bottom:16px;overflow:hidden}
+.cg-ic.hasimg{background:transparent}
+.cg-ic img{width:100%;height:100%;object-fit:cover;display:block}
+.cg-n{font-size:29px;font-weight:900;color:#fff;line-height:1.3}
+.cg-d{font-size:21px;color:#9A9AA6;line-height:1.6;margin-top:9px}
+.cg-d b{color:#ff6168;font-weight:700}
+
 /* ---------- 訂會議室活介面 ---------- */
 .bk{width:100%;background:#111116;border:1px solid rgba(227,6,19,.3);border-radius:12px;
   padding:20px;box-shadow:0 18px 44px rgba(0,0,0,.3);position:relative;overflow:hidden}
@@ -446,7 +464,16 @@ var FALLBACK = {
       "個人資料維護": "img/52_個人資料維護.png",
       "廠商代號助手": "img/39_廠商代號助手.png",
       "外箱計算器": "img/40_外箱計算器.png",
-      "打卡系統": "https://winz-tech.github.io/WINZ-ClockIn/icon-512.png"
+      "打卡系統": "https://winz-tech.github.io/WINZ-ClockIn/icon-512.png",
+      "排程系統": "img/15_排程系統.png",
+      "請購申請": "img/20_請購申請.png",
+      "請購進度追蹤": "img/21_請購進度追蹤.png",
+      "請購單相關作業": "img/23_請購相關作業.png",
+      "樣品領用單": "img/34_樣品領用單.png",
+      "報廢單": "img/35_報廢單.png",
+      "耗材領用單": "img/36_耗材請購領用單.png",
+      "請款單查詢": "",
+      "穎利科技 OTP": ""
     },
     "defaultRoute": "all"
   },
@@ -962,6 +989,151 @@ var FALLBACK = {
       ]
     },
     {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "要跟公司要東西的時候",
+      "lead": "從請購開始，到查進度、改單子，都在採購管理。",
+      "items": [
+        {
+          "n": "請購申請",
+          "z": "採購管理",
+          "d": "需要什麼東西，從這裡提出來。",
+          "e": "📝"
+        },
+        {
+          "n": "請購進度追蹤",
+          "z": "採購管理",
+          "d": "我的單子現在跑到哪一關了。",
+          "e": "📍"
+        },
+        {
+          "n": "請購單相關作業",
+          "z": "採購管理",
+          "d": "還沒簽核的單子，可以回來改。",
+          "e": "🔍"
+        }
+      ],
+      "notes": "三張連著講：提出 → 追蹤 → 修改，是同一件事的三個階段。"
+    },
+    {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "要請錢的時候",
+      "lead": "申請跟查詢是兩個地方，別跑錯。",
+      "items": [
+        {
+          "n": "請款申請單",
+          "z": "申請管理",
+          "d": "費用要請款，從這裡送出。",
+          "e": "💳"
+        },
+        {
+          "n": "請款單查詢",
+          "z": "財會管理",
+          "d": "還沒簽核的請款單，可以回來修改或取消。",
+          "e": "🔎"
+        }
+      ],
+      "notes": "強調：送單在「申請管理」，改單在「財會管理」。這是最多人跑錯的一組。"
+    },
+    {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "要領東西、要報廢的時候",
+      "lead": "通通在申請管理，四張單子分工很清楚。",
+      "items": [
+        {
+          "n": "樣品領用單",
+          "z": "申請管理",
+          "d": "要拿樣品的時候用。",
+          "e": "🧪"
+        },
+        {
+          "n": "耗材領用單",
+          "z": "申請管理",
+          "d": "產線手套、A4 紙、報表紙…都走這張。",
+          "e": "🧰"
+        },
+        {
+          "n": "員工商品訂購單",
+          "z": "申請管理",
+          "d": "想買自家成品的時候用。",
+          "e": "🛍️"
+        },
+        {
+          "n": "報廢單",
+          "z": "申請管理",
+          "d": "東西壞了、不能用了，走這張登記。",
+          "e": "🗑️"
+        }
+      ],
+      "notes": "耗材那張要多講一句，是全公司最常用到的。"
+    },
+    {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "每天都會看一眼的",
+      "lead": "公告、找人、看排程。",
+      "items": [
+        {
+          "n": "佈告欄",
+          "z": "工具管理",
+          "d": "公司公告都留在這裡，不會在群組裡飄走。",
+          "e": "📬"
+        },
+        {
+          "n": "員工通訊錄",
+          "z": "工具管理",
+          "d": "分機、Email、座位，還有本月壽星。",
+          "e": "📇"
+        },
+        {
+          "n": "排程系統",
+          "z": "生產管理",
+          "d": "看公司目前的生產排程。",
+          "e": "🗓️"
+        }
+      ],
+      "notes": "這三張是「不用申請、隨時看」的類型，跟前面幾頁的單據性質不一樣。"
+    },
+    {
+      "type": "cardgrid",
+      "roles": [
+        "*"
+      ],
+      "title": "屬於你自己的",
+      "lead": "改資料、換頭貼、回報問題，還有免拿公務機的 OTP。",
+      "items": [
+        {
+          "n": "個人資料維護",
+          "z": "人事管理",
+          "d": "編輯自己的資料 —— <b>暱稱跟大頭貼也在這裡改</b>。",
+          "e": "👤"
+        },
+        {
+          "n": "除蟲許願池",
+          "z": "申請管理",
+          "d": "發現問題、想要新功能，都可以許願。",
+          "e": "🐛"
+        },
+        {
+          "n": "穎利科技 OTP",
+          "z": "工具管理",
+          "d": "雙重驗證直接綁在自己電腦，<b>不用再跑去拿公務機</b>。",
+          "e": "🔑"
+        }
+      ],
+      "notes": "暱稱大頭貼那句要停一下，這是最多人不知道可以改的。OTP 那張講「省下跑來跑去」最有感。"
+    },
+    {
       "type": "end",
       "roles": [
         "*"
@@ -1106,6 +1278,24 @@ function buildDeck(){
              '</div>' +
              (s.steps && s.steps.length ? '<div class="caps">' + _capsHtml(s.steps) + '</div>' : '') +
              '</div>';
+    }
+    else if (s.type === 'cardgrid'){
+      var ICO = (DATA.meta && DATA.meta.icons) || {};
+      var its = s.items || [];
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div>' +
+             '<div class="cg n' + its.length + '">' +
+             its.map(function(c){
+               var u = ICO[c.n];
+               return '<div class="cg-c step">' +
+                 '<div class="cg-z">// ' + esc(c.z || '') + '</div>' +
+                 '<div class="cg-ic' + (u ? ' hasimg' : '') + '">' +
+                   (u ? '<img src="' + esc(u) + '" onerror="var p=this.parentNode;p.classList.remove(\'hasimg\');p.textContent=\'' + (c.e || '▪') + '\'">' : esc(c.e || '▪')) +
+                 '</div>' +
+                 '<div class="cg-n">' + esc(c.n) + '</div>' +
+                 '<div class="cg-d">' + esc(c.d) + '</div></div>';
+             }).join('') + '</div>';
     }
     else if (s.type === 'demo' && s.comp === 'book'){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
