@@ -187,32 +187,36 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .lc-photo img{position:relative;width:100%;height:100%;object-fit:contain;
   filter:drop-shadow(0 22px 40px rgba(0,0,0,.22))}
 
-/* 依序登場：加 .play 才跑，回到封面會重播 */
+/* ── 第一段：進頁自動跑（標題群）── */
 .slide.light .anim{opacity:0}
 .slide.light.play .anim{animation:lcRise .8s cubic-bezier(.2,.85,.3,1) both}
 @keyframes lcRise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .slide.light.play .a1{animation-delay:.15s} .slide.light.play .a2{animation-delay:.40s}
 .slide.light.play .a3{animation-delay:.62s} .slide.light.play .a4{animation-delay:1.02s}
-.slide.light.play .a6{animation-delay:2.10s} .slide.light.play .a7{animation-delay:2.42s}
-/* 紅槓：由左往右刷開 */
 .slide.light.play .lc-rule{animation:lcWipe .55s cubic-bezier(.2,.85,.3,1) .78s both}
 @keyframes lcWipe{from{opacity:0;width:0}to{opacity:1;width:150px}}
-/* 照片：斜切遮罩掃開 + 微微落定 */
-.slide.light .lc-photo{opacity:0}
-.slide.light.play .lc-photo{animation:lcPhoto 1.05s cubic-bezier(.2,.85,.3,1) 1.30s both}
+.slide.light.play .lc-bar{animation:lcBar .7s cubic-bezier(.2,.85,.3,1) both}
+@keyframes lcBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.lc-bar{transform-origin:top}
+
+/* ── 第二段：按下一步才出現（人物 ＋ 名字）── */
+.slide.light .lc-photo, .slide.light .lc-sp, .slide.light .lc-meta{opacity:0}
+.slide.light.reveal .lc-photo{animation:lcPhoto 1.05s cubic-bezier(.2,.85,.3,1) both}
 @keyframes lcPhoto{
   0%{opacity:0;clip-path:polygon(0 0,0 0,-14% 100%,0 100%);transform:translateX(46px) scale(1.05)}
   60%{opacity:1}
   100%{opacity:1;clip-path:polygon(0 0,124% 0,110% 100%,0 100%);transform:none}}
-/* 照片掃過的一道紅光 */
-.slide.light.play .lc-photo::after{content:'';position:absolute;top:-4%;bottom:-4%;width:70px;
+.slide.light.reveal .lc-photo::after{content:'';position:absolute;top:-4%;bottom:-4%;width:70px;
   background:linear-gradient(90deg,transparent,rgba(227,6,19,.55),transparent);
-  transform:skewX(-18deg);animation:lcSweep .85s ease-out 1.45s both;pointer-events:none}
+  transform:skewX(-18deg);animation:lcSweep .85s ease-out .18s both;pointer-events:none}
 @keyframes lcSweep{from{left:-14%;opacity:0}20%{opacity:1}to{left:112%;opacity:0}}
-/* 左側紅直槓：由上往下長出來 */
-.slide.light.play .lc-bar{animation:lcBar .7s cubic-bezier(.2,.85,.3,1) both}
-@keyframes lcBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.lc-bar{transform-origin:top}
+.slide.light.reveal .lc-sp{animation:lcRise .7s cubic-bezier(.2,.85,.3,1) .55s both}
+.slide.light.reveal .lc-meta{animation:lcRise .7s cubic-bezier(.2,.85,.3,1) .80s both}
+/* 提示：還沒按下一步時，右下角輕輕呼吸 */
+.slide.light .lc-cue{position:absolute;right:96px;bottom:64px;font-family:var(--en);
+  font-size:15px;letter-spacing:3px;color:#B9B9C0;z-index:3;animation:lcCue 1.8s ease-in-out infinite}
+.slide.light.reveal .lc-cue{display:none}
+@keyframes lcCue{0%,100%{opacity:.35}50%{opacity:.9}}
 
 .slide.light{background:#fff}
 .lc-mark{position:absolute;right:-150px;top:-120px;width:760px;height:760px;
@@ -1056,12 +1060,13 @@ function buildDeck(){
           '<div class="lc-rule"></div>' +
           '<div class="lc-sub anim a4">' + esc(s.sub) + '</div>' +
         '</div>' +
-        (s.photo ? '<div class="lc-photo"><div class="plate"></div><div class="edge"></div>' +
+        (s.photo ? '<div class="lc-photo step"><div class="plate"></div><div class="edge"></div>' +
           '<img src="' + esc(s.photo) + '" alt="" onerror="this.parentNode.style.display=\'none\'"></div>' : '') +
         '</div>' +
-        '<div class="lc-foot"><div class="lc-sp anim a6"><div class="tag">Speaker</div>' +
+        '<div class="lc-foot"><div class="lc-sp"><div class="tag">Speaker</div>' +
           '<div class="who"><b>' + esc(s.speaker || '') + '</b><i>' + esc(s.speakerEn || '') + '</i></div></div>' +
-          '<div class="lc-meta anim a7">' + esc(s.when || '') + '<br>' + esc(s.where || '') + '</div></div>';
+          '<div class="lc-meta">' + esc(s.when || '') + '<br>' + esc(s.where || '') + '</div></div>' +
+        (s.photo ? '<div class="lc-cue">按 → 繼續</div>' : '');
     }
     else if (s.type === 'cover'){
       body = '<div class="cover-wrap"><div class="eyebrow">// ' + esc(m.org) + '</div>' +
@@ -1345,6 +1350,8 @@ function setPhone(){
 function applySteps(){
   var st = steps();
   for (var i=0;i<st.length;i++) st[i].classList.toggle('shown', i < STEP);
+  var lc = $('deck').querySelector('.slide.on.light');
+  if (lc) lc.classList.toggle('reveal', STEP >= 1);
   setPhone();
 }
 function expandAll(){ STEP = steps().length; applySteps(); }
