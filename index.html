@@ -1242,8 +1242,19 @@ addEventListener('mousemove', function(){
 /* 網址帶路線：?route=qc 直接開 */
 fit();
 boot();
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+/* ★ 字型載入時序坑：中文字型還沒到就量高度會算錯 → 多點保底重量 */
+if (document.fonts){
+  try{
+    Promise.all([
+      document.fonts.load('900 64px "Noto Sans TC"'),
+      document.fonts.load('400 24px "Noto Sans TC"'),
+      document.fonts.load('700 20px "Chakra Petch"')
+    ]).then(refit).catch(function(){});
+  }catch(e){}
+  if (document.fonts.ready) document.fonts.ready.then(refit);
+}
 addEventListener('load', refit);
+[300, 900, 2000].forEach(function(t){ setTimeout(refit, t); });   // 保底：不管什麼原因沒量到，這三槍補上
 setTimeout(function(){
   var m = location.search.match(/[?&]route=([^&]+)/);
   if (m && DATA) pick(decodeURIComponent(m[1]));
