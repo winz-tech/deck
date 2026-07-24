@@ -44,7 +44,7 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   font-size:280px;color:rgba(227,6,19,.16);line-height:.8;letter-spacing:-10px}
 
 /* 條列 */
-.items{display:grid;gap:calc(20px*var(--k,1));align-content:start;flex:1;min-height:0;overflow:hidden}
+.items{display:grid;gap:calc(20px*var(--k,1));align-content:start;flex:1;min-height:0;overflow:hidden;min-width:0}
 .items.two{grid-template-columns:1fr 1fr;gap:calc(20px*var(--k,1)) 40px}
 .item{display:flex;gap:20px;align-items:flex-start;
   border-left:6px solid var(--line);padding:calc(10px*var(--k,1)) 0 calc(10px*var(--k,1)) 22px}
@@ -121,6 +121,103 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .wl-r.empty{color:#5A5A66;border-color:rgba(255,255,255,.09)}
 .wl-r.empty.on{color:#cfcfcf}
 .wl-note{margin-top:18px;font-size:16px;color:#5A5A66;letter-spacing:1px}
+/* ---------- 選角迎賓頁（X4 風）---------- */
+.cs{position:relative;z-index:2;width:1600px;height:900px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;padding:0 70px}
+.cs-hd{text-align:center;margin-bottom:30px}
+.cs-logo{height:56px;filter:drop-shadow(0 0 22px rgba(227,6,19,.35));margin-bottom:12px}
+.cs-eb{font-family:var(--en);font-weight:700;font-size:14px;letter-spacing:8px;color:var(--red)}
+.cs-t{font-size:44px;font-weight:900;color:#fff;letter-spacing:3px;margin-top:6px}
+.cs-s{font-family:var(--en);font-size:13px;letter-spacing:6px;color:#5A5A66;margin-top:9px}
+
+.cs-stage{display:flex;align-items:stretch;gap:0;width:100%;max-width:1300px;height:452px}
+.cs-mid{flex:0 0 46px;position:relative}
+.cs-mid::before{content:'';position:absolute;left:50%;top:-14px;bottom:-14px;width:3px;
+  transform:translateX(-50%) skewX(-9deg);
+  background:linear-gradient(180deg,transparent,var(--red),transparent);
+  box-shadow:0 0 18px rgba(227,6,19,.7)}
+.cs-mid i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) skewX(-9deg);
+  font-family:var(--en);font-style:normal;font-weight:700;font-size:12px;letter-spacing:3px;
+  color:#5A5A66;background:var(--dark);padding:9px 3px;writing-mode:vertical-rl}
+
+.cs-p{position:relative;flex:1;min-width:0;cursor:pointer;padding:0;overflow:hidden;
+  background:#0F0F14;border:2px solid rgba(255,255,255,.10);border-radius:4px;
+  transform:skewX(-9deg);font-family:var(--zh);
+  transition:border-color .18s,box-shadow .18s,transform .18s,background .18s}
+.cs-p>*{transform:skewX(9deg)}
+.cs-p .cs-in{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;padding:22px 30px 24px}
+.cs-ph{position:absolute;inset:0;overflow:hidden}
+.cs-ph img{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%) scale(1);
+  height:118%;max-width:none;object-fit:contain;
+  filter:grayscale(.85) brightness(.5) contrast(1.1);
+  transition:filter .22s,transform .3s cubic-bezier(.2,.8,.3,1)}
+.cs-ph::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,14,.35) 0%,rgba(10,10,14,.1) 38%,
+             rgba(10,10,14,.88) 74%,rgba(10,10,14,.98) 100%)}
+.cs-ph.miss{background:radial-gradient(ellipse 70% 60% at 50% 38%,rgba(227,6,19,.16),transparent 70%)}
+.cs-miss{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);
+  font-size:250px;font-weight:900;line-height:1;color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,.13);user-select:none}
+.cs-scan{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .2s;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.055) 0 1px,transparent 1px 4px)}
+.cs-cnr{position:absolute;width:26px;height:26px;border:3px solid var(--red);
+  opacity:0;transition:opacity .2s}
+.cs-cnr.tl{top:9px;left:9px;border-right:none;border-bottom:none}
+.cs-cnr.tr{top:9px;right:9px;border-left:none;border-bottom:none}
+.cs-cnr.bl{bottom:9px;left:9px;border-right:none;border-top:none}
+.cs-cnr.br{bottom:9px;right:9px;border-left:none;border-top:none}
+
+.cs-no{position:absolute;top:16px;left:22px;font-family:var(--en);font-weight:700;
+  font-size:52px;line-height:1;color:rgba(255,255,255,.10);letter-spacing:-1px;transition:color .2s}
+.cs-nm{font-size:46px;font-weight:900;color:#fff;letter-spacing:4px;line-height:1.1;
+  text-shadow:0 3px 18px rgba(0,0,0,.85)}
+.cs-en{font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:6px;
+  color:#8A8A96;margin-top:5px}
+.cs-ds{font-size:19px;color:#B4B4BE;margin-top:12px;letter-spacing:.5px}
+.cs-sp{margin-top:15px;display:inline-flex;align-items:center;gap:9px;
+  padding:7px 17px;border:1px solid rgba(255,255,255,.16);border-radius:2px;
+  background:rgba(0,0,0,.42);transition:border-color .2s,background .2s}
+.cs-sp b{font-size:20px;font-weight:900;color:#fff;letter-spacing:2px}
+.cs-sp em{font-family:var(--en);font-style:normal;font-size:11px;letter-spacing:2px;color:#8A8A96}
+.cs-sp span{font-size:12px;color:#6A6A76;letter-spacing:2px}
+.cs-ct{position:absolute;top:18px;right:20px;font-family:var(--en);font-size:12px;
+  letter-spacing:2px;color:#6A6A76;border:1px solid rgba(255,255,255,.14);padding:4px 10px}
+
+/* 選中 / 滑過 */
+.cs-p:hover,.cs-p.on{border-color:var(--red);background:#15151b;
+  box-shadow:0 0 0 1px rgba(227,6,19,.45),0 0 46px rgba(227,6,19,.34),
+             inset 0 0 70px rgba(227,6,19,.10)}
+.cs-p:hover .cs-ph img,.cs-p.on .cs-ph img{filter:grayscale(0) brightness(1) contrast(1);
+  transform:translate(-50%,-50%) scale(1.05)}
+.cs-p:hover .cs-scan,.cs-p.on .cs-scan{opacity:1}
+.cs-p:hover .cs-cnr,.cs-p.on .cs-cnr{opacity:1}
+.cs-p:hover .cs-no,.cs-p.on .cs-no{color:rgba(227,6,19,.55)}
+.cs-p:hover .cs-sp,.cs-p.on .cs-sp{border-color:rgba(227,6,19,.75);background:rgba(227,6,19,.16)}
+.cs-p.on{transform:skewX(-9deg) translateY(-7px)}
+.cs-p.on::after{content:'READY';position:absolute;left:0;right:0;bottom:0;
+  transform:none;font-family:var(--en);font-weight:700;font-size:12px;letter-spacing:7px;
+  color:#fff;background:linear-gradient(90deg,var(--red),var(--red-d,#8f0009));padding:6px 0;
+  animation:csReady 1.5s ease-in-out infinite}
+@keyframes csReady{0%,100%{opacity:1}50%{opacity:.45}}
+.cs-p.go{animation:csGo .34s ease-out forwards}
+@keyframes csGo{0%{transform:skewX(-9deg) translateY(-7px)}
+  40%{transform:skewX(-9deg) scale(1.04);box-shadow:0 0 0 4px #fff,0 0 90px rgba(255,255,255,.9)}
+  100%{transform:skewX(-9deg) scale(1.16);opacity:0}}
+
+.cs-tip{margin-top:26px;font-size:16px;color:#5A5A66;letter-spacing:1px}
+.cs-tip b{color:#9A9AA6;font-weight:700;border:1px solid rgba(255,255,255,.18);
+  border-radius:3px;padding:1px 8px;margin:0 3px;font-family:var(--en);font-size:13px}
+.cs-more{margin-top:16px;display:flex;align-items:center;justify-content:center;
+  gap:8px;flex-wrap:wrap}
+.cs-more .lab{font-family:var(--en);font-size:12px;letter-spacing:4px;color:#4A4A55;margin-right:4px}
+.cs-more button{background:transparent;border:1px solid rgba(255,255,255,.14);color:#7A7A86;
+  font-family:var(--zh);font-size:15px;padding:6px 15px;border-radius:3px;cursor:pointer;
+  transform:skewX(-9deg);transition:.16s}
+.cs-more button>span{display:block;transform:skewX(9deg)}
+.cs-more button:hover{border-color:rgba(227,6,19,.6);color:#fff}
+.cs-more button.on{background:rgba(227,6,19,.16);border-color:var(--red);color:#fff;font-weight:700}
+.cs-more .tag{font-family:var(--en);font-size:11px;color:#C8811A;margin-left:6px}
 .wl-foot{position:absolute;bottom:44px;font-family:var(--en);font-size:14px;
   letter-spacing:4px;color:#4A4A55;z-index:2}
 
@@ -128,7 +225,10 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 /* ---------- 活介面示範頁 ---------- */
 .demo{display:grid;grid-template-columns:760px 1fr;gap:46px;flex:1;min-height:0;align-items:center;overflow:hidden}
 .demo.d-phone{grid-template-columns:400px 1fr}
-.demo .caps{display:grid;gap:calc(16px*var(--k,1));align-content:center;overflow:hidden;min-height:0}
+.demo .caps{display:grid;gap:calc(16px*var(--k,1));align-content:center;overflow:hidden;min-height:0;min-width:0}
+/* ★ grid/flex 子項預設 min-width:auto，會撐到 max-content 不換行 → 整段被切掉。一定要歸零 */
+.demo .caps>*,.cap,.cap>div,.item,.item>div{min-width:0}
+.cap h3,.cap p,.item h3,.item p{overflow-wrap:break-word}
 .cap{display:flex;gap:16px;align-items:flex-start;border-left:6px solid var(--line);padding:calc(6px*var(--k,1)) 0 calc(6px*var(--k,1)) 18px}
 .cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
 .cap h3{font-size:calc(31px*var(--k,1));font-weight:900;color:var(--ink);line-height:1.3}
@@ -569,11 +669,11 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .hu-cl{flex:0 0 126px}
 .hu-cm{flex:1;min-width:0}
 .hu-away{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:6px}
-.capl{font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.32);margin-right:3px}
-.cap{font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;
+.hu-capl{font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.32);margin-right:3px}
+.hu-cap{font-size:9px;padding:3px 8px;border-radius:10px;white-space:nowrap;
   background:rgba(255,255,255,.07);color:rgba(255,255,255,.78)}
-.cap.out{background:rgba(255,150,40,.16);color:#ffb066}
-.cap i{font-style:normal;opacity:.5;margin-left:5px}
+.hu-cap.out{background:rgba(255,150,40,.16);color:#ffb066}
+.hu-cap i{font-style:normal;opacity:.5;margin-left:5px}
 .hu-lanes{position:relative}
 .hu-ticks{position:relative;height:12px;margin-left:60px}
 .hu-ticks .tk{position:absolute;top:0;font-size:8px;color:rgba(255,255,255,.28);transform:translateX(-50%)}
@@ -707,7 +807,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v3",
+    "ver": "2026-07-28 / v4",
     "updated": "2026-07-28",
     "icons": {
       "生產管理": "img/02_生產管理.png",
@@ -738,43 +838,59 @@ var FALLBACK = {
       "請款單查詢": "img/47_請款單查詢.png",
       "穎利科技 OTP": "img/43_OTP程式.png"
     },
-    "defaultRoute": "all",
+    "defaultRoute": "hub",
     "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
     "welcome": "內部系統教育訓練",
     "welcomeSub": "穎利科技　2026 / 07 / 28"
   },
   "routes": [
     {
-      "id": "all",
-      "name": "全公司場",
-      "desc": "7/28 全員場・只講共用功能",
-      "hot": true
+      "id": "punch",
+      "main": true,
+      "no": "01",
+      "name": "打卡系統",
+      "en": "TIME ATTENDANCE",
+      "speaker": "姬姐",
+      "speakerEn": "PAGGIE",
+      "photo": "paggie.png",
+      "desc": "上下班打卡，手機拿出來就好"
+    },
+    {
+      "id": "hub",
+      "main": true,
+      "no": "02",
+      "name": "作業中心",
+      "en": "OPERATIONS HUB",
+      "speaker": "咪姐",
+      "speakerEn": "MIMI TSAI",
+      "photo": "mimi.png",
+      "desc": "每天都會用到的那些功能"
     },
     {
       "id": "foreman",
       "name": "廠務",
-      "desc": "共用功能 ＋ 廠務專屬"
+      "desc": "作業中心 ＋ 廠務專屬"
     },
     {
       "id": "r_and_d",
       "name": "研發襄理",
-      "desc": "共用功能 ＋ 研發專屬"
+      "desc": "作業中心 ＋ 研發專屬"
     },
     {
       "id": "qc",
       "name": "品管組長",
-      "desc": "共用功能 ＋ 進貨檢驗"
+      "desc": "作業中心 ＋ 進貨檢驗"
     },
     {
       "id": "operator",
       "name": "作業專員",
-      "desc": "共用功能 ＋ 現場單據"
+      "desc": "作業中心 ＋ 現場單據"
     },
     {
       "id": "_dev",
+      "dev": true,
       "name": "備課模式",
-      "desc": "全部頁面一次展開（自己看）",
-      "dev": true
+      "desc": "全部頁面一次展開（自己看）"
     }
   ],
   "slides": [
@@ -782,7 +898,27 @@ var FALLBACK = {
       "type": "cover",
       "light": true,
       "roles": [
-        "*"
+        "punch"
+      ],
+      "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+      "org": "WINZ TECHNOLOGY",
+      "title": "上下班打卡，<br>手機拿出來就好",
+      "sub": "走到公司就能打，不用排隊、不用刷卡",
+      "speaker": "姬姐",
+      "speakerEn": "PAGGIE",
+      "when": "2026 / 07 / 28",
+      "where": "內部系統教育訓練",
+      "photo": "paggie.png"
+    },
+    {
+      "type": "cover",
+      "light": true,
+      "roles": [
+        "hub",
+        "foreman",
+        "r_and_d",
+        "qc",
+        "operator"
       ],
       "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
       "org": "WINZ TECHNOLOGY",
@@ -792,8 +928,7 @@ var FALLBACK = {
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "Imagery.png",
-      "always": true
+      "photo": "mimi.png"
     },
     {
       "type": "section",
@@ -1280,16 +1415,16 @@ var FALLBACK = {
     {
       "type": "section",
       "roles": [
-        "*"
+        "punch"
       ],
-      "no": "03",
+      "no": "01",
       "title": "上下班打卡",
       "sub": "手機拿出來，兩秒的事"
     },
     {
       "type": "demo",
       "roles": [
-        "*"
+        "punch"
       ],
       "title": "上班：按紅色那顆",
       "lead": "手機拿出來，兩秒就好。",
@@ -1311,7 +1446,7 @@ var FALLBACK = {
     {
       "type": "demo",
       "roles": [
-        "*"
+        "punch"
       ],
       "title": "下班：按藍色那顆",
       "lead": "兩顆都變灰，今天就結束了。",
@@ -1336,7 +1471,7 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "no": "04",
+      "no": "03",
       "title": "公司在發生什麼事",
       "sub": "佈告欄與行事曆"
     },
@@ -1454,7 +1589,7 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "no": "05",
+      "no": "04",
       "title": "要東西、要錢的時候",
       "sub": "請購、請款、領用，都有自己的單子"
     },
@@ -1907,7 +2042,7 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "no": "06",
+      "no": "05",
       "title": "還有這些，也是你的",
       "sub": "隨時看的、屬於你自己的"
     },
@@ -2024,41 +2159,148 @@ function setData(j, src){
 }
 
 var PICKED = '';
+/* ---------- 選角音效（Web Audio，不用外部檔）---------- */
+var _CSAC = null;
+function _csAC(){
+  try{
+    if (!_CSAC) _CSAC = new (window.AudioContext || window.webkitAudioContext)();
+    if (_CSAC.state === 'suspended') _CSAC.resume();
+  }catch(e){ _CSAC = null; }
+  return _CSAC;
+}
+/* 瀏覽器要有使用者互動過才准出聲 → 任何一次點擊/按鍵先把音訊解鎖 */
+addEventListener('pointerdown', _csAC, {passive:true});
+addEventListener('keydown', _csAC);
+
+function csBlip(){                       /* hover：短促上掃 */
+  var ac = _csAC(); if (!ac) return;
+  var t = ac.currentTime;
+  var o = ac.createOscillator(), g = ac.createGain();
+  o.type = 'square';
+  o.frequency.setValueAtTime(620, t);
+  o.frequency.exponentialRampToValueAtTime(1240, t + 0.05);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.07, t + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+  o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 0.12);
+}
+function csConfirm(){                    /* click：確定音（雙音 + 低頻推力）*/
+  var ac = _csAC(); if (!ac) return;
+  var t = ac.currentTime;
+  [[880, 0], [1320, 0.075]].forEach(function(x){
+    var o = ac.createOscillator(), g = ac.createGain(), tt = t + x[1];
+    o.type = 'square'; o.frequency.setValueAtTime(x[0], tt);
+    g.gain.setValueAtTime(0.0001, tt);
+    g.gain.exponentialRampToValueAtTime(0.10, tt + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, tt + 0.19);
+    o.connect(g); g.connect(ac.destination); o.start(tt); o.stop(tt + 0.2);
+  });
+  var b = ac.createOscillator(), bg = ac.createGain();
+  b.type = 'sine'; b.frequency.setValueAtTime(150, t);
+  b.frequency.exponentialRampToValueAtTime(52, t + 0.32);
+  bg.gain.setValueAtTime(0.0001, t);
+  bg.gain.exponentialRampToValueAtTime(0.16, t + 0.02);
+  bg.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+  b.connect(bg); bg.connect(ac.destination); b.start(t); b.stop(t + 0.42);
+}
+
+/* 這個場次會播幾頁（跟 pick() 同一套規則）*/
+function routeCount(id){
+  return (DATA.slides || []).filter(function(s){
+    if (id === '_dev') return true;
+    if (s.always) return true;
+    var r = s.roles || ['*'];
+    if (id === 'hub' || id === 'all') return r.indexOf('*') > -1 || r.indexOf('hub') > -1 || r.indexOf('all') > -1;
+    return r.indexOf(id) > -1;
+  }).length;
+}
+function mainRoutes(){ return (DATA.routes || []).filter(function(r){ return r.main; }); }
+
 function renderRoutes(){
   var m = DATA.meta || {}, rs = DATA.routes || [];
-  PICKED = PICKED || m.defaultRoute || (rs[0] && rs[0].id) || '';
-  var hh = '<div class="wl-grid"></div><div class="wl-slash"></div><div class="wl">' +
-    (m.logo ? '<img class="wl-logo" src="' + esc(m.logo) + '" onerror="this.style.display=\'none\'">' : '') +
-    '<div class="wl-eb">// ' + esc(m.org || '') + '</div>' +
-    '<div class="wl-t">' + esc(m.welcome || m.title || '') + '</div>' +
-    '<div class="wl-s">' + esc(m.welcomeSub || '') + '</div>' +
-    '<button class="wl-start" onclick="startDeck()"><span>START</span></button>' +
-    '<div class="wl-pick"><span class="wl-lab">場次</span>' +
-      rs.map(function(r){
-        var own = (DATA.slides || []).filter(function(s){
-          return !s.always && (s.roles || []).indexOf(r.id) > -1;
-        }).length;
-        var soon = (r.id !== 'all' && r.id !== '_dev' && own === 0);
-        var tag = soon ? '<span class="tag">尚未建置</span>'
-                       : (own ? '<span class="tag ok">＋' + own + ' 頁</span>' : '');
-        return '<button class="wl-r' + (r.id === PICKED ? ' on' : '') + (soon ? ' empty' : '') +
-               '" data-id="' + r.id + '" onclick="setRoute(\'' + r.id + '\')">' +
-               esc(r.name) + tag + '</button>';
-      }).join('') +
+  var mains = mainRoutes(), subs = rs.filter(function(r){ return !r.main; });
+  PICKED = PICKED || m.defaultRoute || (mains[0] && mains[0].id) || '';
+
+  function panel(r){
+    var n = routeCount(r.id);
+    return '<button class="cs-p' + (r.id === PICKED ? ' on' : '') + '" data-id="' + esc(r.id) + '" ' +
+      'onmouseenter="csHover(\'' + esc(r.id) + '\')" onclick="csGo(\'' + esc(r.id) + '\')">' +
+      '<div class="cs-ph"><img src="' + esc(r.photo || '') + '" alt="" ' +
+        'onerror="csNoPhoto(this,\'' + esc((r.speaker||'?').charAt(0)) + '\')"></div>' +
+      '<div class="cs-scan"></div>' +
+      '<span class="cs-cnr tl"></span><span class="cs-cnr tr"></span>' +
+      '<span class="cs-cnr bl"></span><span class="cs-cnr br"></span>' +
+      '<div class="cs-no">' + esc(r.no || '') + '</div>' +
+      '<div class="cs-ct">' + n + ' 頁</div>' +
+      '<div class="cs-in">' +
+        '<div class="cs-nm">' + esc(r.name) + '</div>' +
+        '<div class="cs-en">' + esc(r.en || '') + '</div>' +
+        '<div class="cs-ds">' + esc(r.desc || '') + '</div>' +
+        '<div class="cs-sp"><span>報告人</span><b>' + esc(r.speaker || '') + '</b>' +
+          '<em>' + esc(r.speakerEn || '') + '</em></div>' +
+      '</div></button>';
+  }
+
+  var hh = '<div class="wl-grid"></div><div class="wl-slash"></div><div class="cs">' +
+    '<div class="cs-hd">' +
+      (m.logo ? '<img class="cs-logo" src="' + esc(m.logo) + '" onerror="this.style.display=\'none\'">' : '') +
+      '<div class="cs-eb">// ' + esc(m.org || '') + '</div>' +
+      '<div class="cs-t">' + esc(m.welcome || m.title || '') + '</div>' +
+      '<div class="cs-s">SELECT YOUR SESSION</div>' +
     '</div>' +
-    '<div class="wl-note">標「尚未建置」的場次，內容目前與全公司場相同</div>' +
+    '<div class="cs-stage">' + panel(mains[0] || {}) +
+      '<div class="cs-mid"><i>SELECT</i></div>' + panel(mains[1] || {}) + '</div>' +
+    '<div class="cs-tip">用 <b>←</b><b>→</b> 選，<b>Enter</b> 開始　·　也可以直接用滑鼠點</div>' +
+    (subs.length ? '<div class="cs-more"><span class="lab">其他場次</span>' +
+      subs.map(function(r){
+        var own = (DATA.slides || []).filter(function(s){
+          return !s.always && (s.roles || []).indexOf(r.id) > -1; }).length;
+        var soon = (!r.dev && own === 0);
+        return '<button data-id="' + esc(r.id) + '" onclick="csGo(\'' + esc(r.id) + '\')">' +
+               '<span>' + esc(r.name) + (soon ? '<i class="tag">尚未建置</i>' : '') + '</span></button>';
+      }).join('') + '</div>' : '') +
     '</div><div class="wl-foot">' + esc(m.ver || '') + '</div>';
+
   $('routes').innerHTML = hh;
   $('routes').classList.add('on');
   $('deck').innerHTML = '';
 }
+
+/* 圖檔缺席時的保底：不留白，改用姓名大字（版面不會塌）*/
+function csNoPhoto(img, ch){
+  var box = img.parentNode; if (!box) return;
+  img.style.display = 'none';
+  box.classList.add('miss');
+  box.insertAdjacentHTML('afterbegin', '<span class="cs-miss">' + ch + '</span>');
+}
+
+/* 滑過／方向鍵移動選擇 */
+function csHover(id){
+  if (id === PICKED) return;
+  setRoute(id); csBlip();
+}
+function csMove(dir){
+  var mains = mainRoutes(); if (mains.length < 2) return;
+  var i = mains.map(function(r){ return r.id; }).indexOf(PICKED);
+  var j = (i < 0) ? 0 : (i + dir + mains.length) % mains.length;
+  csHover(mains[j].id);
+}
+/* 確定：閃一下 + 確定音，動畫跑完才進場 */
+function csGo(id){
+  if (id) setRoute(id);
+  csConfirm();
+  var el = $('routes').querySelector('.cs-p[data-id="' + (id || PICKED) + '"]');
+  if (el){ el.classList.add('go'); setTimeout(function(){ pick(id || PICKED); }, 330); }
+  else pick(id || PICKED);
+}
+
 function setRoute(id){
   PICKED = id;
-  $('routes').querySelectorAll('.wl-r').forEach(function(b){
+  $('routes').querySelectorAll('.cs-p,.cs-more button').forEach(function(b){
     b.classList.toggle('on', b.getAttribute('data-id') === id);
   });
 }
-function startDeck(){ pick(PICKED); }
+function startDeck(){ csGo(PICKED); }
 
 function pick(id){
   ROUTE = id;
@@ -2066,7 +2308,7 @@ function pick(id){
     if (id === '_dev') return true;
     if (s.always) return true;                 // 封面／結尾：每一場都要
     var r = s.roles || ['*'];
-    if (id === 'all') return r.indexOf('*') > -1 || r.indexOf('all') > -1;
+    if (id === 'hub' || id === 'all') return r.indexOf('*') > -1 || r.indexOf('hub') > -1 || r.indexOf('all') > -1;
     return r.indexOf(id) > -1;                 // ★ 部門場只放自己的，不重播綜合功能
   });
   IDX = 0; STEP = 0;
@@ -2743,7 +2985,7 @@ function _hubHtml(s){
     '<div class="ag-hd"><span class="t">今日總覽</span><span class="s">TODAY</span></div>' +
     '<div class="ag-sub">' + esc(day) + '　·　共 ' + evs.length + ' 件' +
       (s.mineN ? '，你的 ' + s.mineN + ' 件' : '') + '</div>' +
-    (away.length && s.agCaps ? '<div class="ag-caps">' + capsHtml('cap') + '</div>' : '') +
+    (away.length && s.agCaps ? '<div class="ag-caps">' + capsHtml('hu-cap') + '</div>' : '') +
     agRows + '</div>';
 
   var cardWall = '<div class="hu-cards">' +
@@ -2777,7 +3019,7 @@ function _hubHtml(s){
           '<div class="hu-cl"><div class="lab">TODAY · 07/28</div>' +
             '<div class="msg">你今天 <b>14:00</b> 品號會議 · 1F 會議室</div></div>' +
           '<div class="hu-cm">' +
-            (away.length ? '<div class="hu-away">' + capsHtml('cap') + '</div>' : '') +
+            (away.length ? '<div class="hu-away">' + capsHtml('hu-cap') + '</div>' : '') +
             '<div class="hu-lanes"><div class="hu-ticks">' + ticks + '</div>' +
               '<div class="hu-lwrap">' + lanes +
                 '<div class="hu-nowwrap"><div class="hu-now" style="left:' + nowPct + '%"></div></div>' +
@@ -2944,7 +3186,12 @@ addEventListener('resize', function(){ fit(); autofit(); });
 addEventListener('keydown', function(e){
   var k = e.key;
   if ($('editor').classList.contains('on')){ if (k === 'Escape') toggleEditor(false); return; }
-  if (!ROUTE){ if (k === 'Enter' || k === ' ') { e.preventDefault(); startDeck(); } return; }
+  if (!ROUTE){
+    if (k === 'ArrowLeft'){ e.preventDefault(); csMove(-1); }
+    else if (k === 'ArrowRight'){ e.preventDefault(); csMove(1); }
+    else if (k === 'Enter' || k === ' '){ e.preventDefault(); startDeck(); }
+    return;
+  }
   if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ e.preventDefault(); next(); }
   else if (k === 'ArrowLeft' || k === 'PageUp'){ e.preventDefault(); prev(); }
   else if (k === 'ArrowDown'){ e.preventDefault(); expandAll(); }
