@@ -121,6 +121,296 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .wl-r.empty{color:#5A5A66;border-color:rgba(255,255,255,.09)}
 .wl-r.empty.on{color:#cfcfcf}
 .wl-note{margin-top:18px;font-size:16px;color:#5A5A66;letter-spacing:1px}
+/* ---------- 佈告欄 ---------- */
+.bd-tabs{display:flex;background:#fff;border-bottom:1px solid #e8e4e4}
+.bd-tab{flex:1;padding:11px 0;text-align:center;font-size:13px;font-weight:700;color:#a5a0a0;position:relative}
+.bd-tab.on{color:#1A1A1A}
+.bd-tab.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:3px;background:#E30613}
+.bd-chips{display:flex;align-items:center;gap:7px;padding:10px 14px;background:rgba(255,255,255,.6);
+  border-bottom:1px solid #e8e4e4}
+.bd-chip{transform:skewX(-18deg);border:1.5px solid #d9d2d2;background:#fff;border-radius:8px}
+.bd-chip>span{display:block;transform:skewX(18deg);padding:6px 14px;font-size:11px;font-weight:700;
+  color:#6b6b6b;white-space:nowrap}
+.bd-chip.on{border-color:#E30613;background:linear-gradient(135deg,#E30613,#b30510);
+  box-shadow:0 3px 12px rgba(227,6,19,.35)}
+.bd-chip.on>span{color:#fff}
+.bd-card{background:#fff;border:1px solid #e8e4e4;border-left:4px solid #E30613;border-radius:12px;
+  padding:13px 15px;margin:11px 14px}
+.bd-card.c2{border-left-color:#3b82f6}
+.bd-top{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.bd-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:11px;background:#fdeeee;color:#c00}
+.bd-badge.b2{background:#e8f0fe;color:#1d4ed8}
+.bd-sub{font-size:10px;font-weight:600;padding:3px 8px;border-radius:11px;background:#f0f0f0;color:#6b6b6b}
+.bd-ver{font-size:10px;font-weight:700;padding:3px 7px;border-radius:5px;background:#1A1A1A;color:#fff;
+  font-family:var(--en)}
+.bd-ttl{font-size:14px;font-weight:700;color:#1A1A1A;line-height:1.4}
+.bd-meta{font-size:10px;color:#a5a0a0;margin:4px 0 8px;display:flex;gap:9px}
+.bd-meta .w{font-weight:600;color:#6b6b6b}
+.bd-body{font-size:11px;line-height:1.7;color:#6b6b6b;padding:9px 11px;background:#fbf7f7;
+  border:1px solid #e8e4e4;border-radius:8px}
+.bd-foot{margin-top:10px;padding-top:10px;border-top:1px solid #e8e4e4;display:flex;align-items:center;gap:10px}
+.bd-ack{flex:1;padding:9px;background:#E30613;color:#fff;border-radius:16px;font-size:12px;
+  font-weight:700;text-align:center;letter-spacing:1px;box-shadow:0 3px 12px rgba(227,6,19,.3)}
+.bd-acked{flex:1;padding:9px;text-align:center;background:#e6f6ec;border-radius:10px;
+  color:#3d8a72;font-size:11px;font-weight:700}
+.bd-cnt{font-size:10px;color:#a5a0a0;font-family:var(--en);white-space:nowrap}
+.bd-vbtn{font-size:10px;color:#a5a0a0;font-weight:600;white-space:nowrap}
+
+/* ---------- 員工通訊錄 ---------- */
+.dr-wrap{padding:12px 14px}
+.dr-stars{position:relative;overflow:hidden;border-radius:12px;padding:10px 13px;margin-bottom:11px;
+  background:linear-gradient(135deg,rgba(255,138,0,.20),rgba(255,0,110,.20));
+  border:1.5px solid rgba(255,190,80,.6)}
+.dr-stars h4{font-size:12px;font-weight:800;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dr-chips{display:flex;flex-wrap:wrap;gap:6px}
+.dr-chip{background:#fff;border:1px solid rgba(255,190,80,.7);border-radius:16px;padding:4px 10px;
+  font-size:11px;font-weight:700;color:#7a3b00;display:flex;align-items:center;gap:6px}
+.dr-chip i{font-style:normal;color:#fff;font-weight:800;font-size:10px;padding:1px 7px;border-radius:10px;
+  background:linear-gradient(135deg,#ffb347,#ff8a00)}
+.dr-ctrl{display:flex;gap:7px;margin-bottom:11px}
+.dr-ctrl div{flex:1;padding:8px 11px;border:1px solid #e2e2e2;border-radius:8px;font-size:11px;
+  background:#fff;color:#aaa}
+.dr-row{display:flex;gap:11px;align-items:flex-start}
+.dr-people{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.dr-c{position:relative;overflow:hidden;background:#fff;border:1.5px solid #e5e5e5;border-radius:12px;
+  display:flex;flex-direction:column}
+.dr-c.boss{background:linear-gradient(135deg,#f6f8f1,#e9eee0);border-color:#9db07e}
+.dr-cb{display:flex;gap:9px;padding:10px 11px 7px;flex:1}
+.dr-ava{position:relative;width:46px;height:46px;border-radius:50%;border:2.5px solid #E30613;
+  background:#fafafa;display:flex;align-items:center;justify-content:center;font-size:19px;
+  font-weight:800;color:#E30613;flex:none}
+.dr-c.boss .dr-ava{border-color:#6e7c5b;color:#6e7c5b}
+.dr-crown{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:13px}
+.dr-nm{font-size:14px;font-weight:900;color:#1A1A1A;line-height:1.1}
+.dr-c.boss .dr-nm{color:#4f5e40}
+.dr-nm em{font-style:normal;font-size:10px;font-weight:600;color:#9a9a9a}
+.dr-dp{font-size:9px;color:#9a9a9a;margin-top:2px}
+.dr-line{width:30px;height:2.5px;background:#E30613;border-radius:2px;margin:6px 0 6px}
+.dr-c.boss .dr-line{background:linear-gradient(90deg,#6e7c5b,#c6a15b);width:42px}
+.dr-mt{display:flex;flex-direction:column;gap:4px;font-size:10px}
+.dr-mr{display:flex;align-items:center;gap:6px;color:#1A1A1A}
+.dr-mi{width:15px;height:15px;border-radius:50%;background:#E30613;color:#fff;font-size:8px;
+  display:flex;align-items:center;justify-content:center;flex:none}
+.dr-mi.k{background:#1A1A1A}
+.dr-mr b{color:#E30613;font-weight:800}
+.dr-bar{height:15px;background:#1A1A1A;position:relative}
+.dr-c.boss .dr-bar{background:linear-gradient(90deg,#6e7c5b,#97a57e 45%,#c6a15b)}
+.dr-pubs{flex:0 0 176px}
+.dr-fl{background:#fff;border:1.5px solid #e5e5e5;border-radius:12px;padding:10px 11px;margin-bottom:8px}
+.dr-fl h5{font-size:11px;font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.dr-fl h5::before{content:'';width:3px;height:11px;background:#E30613;border-radius:2px}
+.dr-fl h5 i{margin-left:auto;font-style:normal;font-size:9px;font-weight:700;color:#9a9a9a;
+  background:#F4F4F4;border-radius:10px;padding:1px 7px}
+.dr-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dr-tile{aspect-ratio:1/1;background:#fcfcfc;border:1.5px solid #ececec;border-radius:10px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.dr-tile b{font-size:14px;font-weight:900;color:#E30613;font-family:var(--en)}
+.dr-tile span{font-size:8px;font-weight:700;color:#1A1A1A;text-align:center;line-height:1.2}
+
+/* ---------- 排程系統 ---------- */
+.sd-vt{display:flex;background:#fff;border-radius:9px;padding:3px;gap:3px;margin:12px 14px 10px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sd-vt div{flex:1;padding:7px 0;text-align:center;font-size:12px;font-weight:500;color:#999;border-radius:7px}
+.sd-vt div.on{background:#2C3E50;color:#fff;font-weight:700}
+.sd-card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:12px;margin:0 14px 11px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.sd-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sd-nav b{font-size:13px;font-weight:700}
+.sd-nav span{background:#fff;border:1.5px solid #e0e0e0;border-radius:7px;padding:5px 11px;font-size:11px;
+  font-weight:600;color:#555}
+.sd-tb{width:100%;border-collapse:collapse;font-size:10px}
+.sd-tb th{background:#2C3E50;color:#fff;padding:6px 3px;font-weight:600;font-size:10px;text-align:center}
+.sd-tb th.sun{background:#E30613}.sd-tb th.sat{background:#27ae60}.sd-tb th.now{background:#f39c12}
+.sd-tb td{border:1px solid #e0e0e0;padding:3px;vertical-align:top;height:38px}
+.sd-tb td.now{background:#FFF3F3}
+.sd-tb td.nm{font-size:10px;font-weight:600;white-space:nowrap;padding:5px 4px;border-left:none}
+.sd-cell{padding:3px 5px;border-radius:5px;font-size:9px;font-weight:600;margin-bottom:2px;line-height:1.3}
+.sd-未開始{background:#f0f0f0;color:#666}
+.sd-進行中{background:#fff3cd;color:#856404}
+.sd-完成{background:#d4edda;color:#155724}
+.sd-重製{background:#f8d7da;color:#721c24}
+
+/* ---------- 個人資料維護 ---------- */
+.pr-wrap{padding:12px 14px}
+.pr-av{background:#fff;border:1px solid #e6e6e6;border-radius:12px;padding:13px;margin-bottom:11px;
+  display:flex;align-items:center;gap:13px}
+.pr-pic{width:56px;height:56px;border-radius:50%;background:#E30613;flex:none;display:flex;
+  align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:800}
+.pr-nm{font-size:16px;font-weight:900}
+.pr-dp{font-size:11px;color:#8a8a8a;margin-top:2px}
+.pr-st{display:inline-block;margin-top:5px;font-size:10px;font-weight:700;padding:2px 10px;
+  border-radius:16px;background:#e8f8ef;color:#27ae60}
+.pr-c{background:#fff;border:1px solid #e6e6e6;border-radius:12px;padding:12px 14px;margin-bottom:10px;
+  border-top:3px solid #ccc}
+.pr-c.m{border-top-color:#27ae60}.pr-c.l{border-top-color:#9e9e9e}.pr-c.a{border-top-color:#2E86C1}
+.pr-t{font-size:12px;font-weight:800;display:flex;align-items:center;gap:7px}
+.pr-t i{font-style:normal;font-size:9px;font-weight:700;padding:2px 8px;border-radius:9px;color:#fff}
+.pr-c.m .pr-t i{background:#27ae60}.pr-c.l .pr-t i{background:#9e9e9e}.pr-c.a .pr-t i{background:#2E86C1}
+.pr-n{font-size:10px;color:#8a8a8a;margin:3px 0 10px}
+.pr-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pr-f label{display:block;font-size:9px;color:#666;font-weight:600;margin-bottom:3px}
+.pr-f div{padding:6px 8px;border:1.5px solid #e0e0e0;border-radius:7px;font-size:10px;background:#fafafa;color:#333}
+.pr-f.ro div{background:#f0f0f0;color:#888}
+
+/* ---------- 除蟲許願池 ---------- */
+.ws-wrap{padding:12px 14px}
+.ws-hero{display:flex;align-items:flex-end;gap:9px;margin-bottom:12px}
+.ws-fig{width:74px;flex:none;height:96px;border-radius:10px;background:linear-gradient(180deg,#eef7f1,#dff0e6);
+  display:flex;align-items:center;justify-content:center;font-size:38px}
+.ws-bub{position:relative;background:#fff;border:1px solid #e0e0e0;border-radius:14px 14px 14px 3px;
+  padding:10px 13px;flex:1;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.ws-bub h5{font-size:10px;font-weight:700;color:#27ae60;margin-bottom:3px}
+.ws-bub p{font-size:11px;line-height:1.7;color:#333}
+.ws-ask{background:#fff;border:1px solid #e0e0e0;border-radius:16px;padding:12px 13px 11px;
+  box-shadow:0 3px 14px rgba(0,0,0,.06);margin-bottom:13px}
+.ws-hint{font-size:10px;color:#aaa;margin-bottom:8px}
+.ws-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ws-cat{padding:5px 12px;border:1.5px solid #e0e0e0;border-radius:16px;background:#fafafa;color:#666;font-size:11px}
+.ws-cat.on{color:#fff;font-weight:700;border-color:transparent;background:#E30613;
+  box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.ws-ta{border:1.5px solid #eaeaea;border-radius:12px;padding:10px 13px;font-size:11px;color:#333;
+  background:#fafafa;min-height:42px}
+.ws-foot{display:flex;align-items:center;gap:7px;margin-top:9px}
+.ws-tool{width:31px;height:31px;border-radius:50%;border:1.5px solid #eaeaea;background:#fafafa;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.ws-tip{font-size:9px;color:#bbb;flex:1}
+.ws-send{width:36px;height:36px;border-radius:50%;background:#27ae60;color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 10px rgba(39,174,96,.35)}
+.ws-item{background:#fff;border:1px solid #e0e0e0;border-radius:11px;overflow:hidden}
+.ws-ih{padding:10px 14px 0;display:flex;align-items:center;gap:7px;font-size:10px;color:#999}
+.ws-tag{padding:2px 9px;border-radius:11px;font-size:9px;font-weight:700;color:#fff;background:#E30613}
+.ws-stat{margin-left:auto;padding:2px 9px;border-radius:11px;font-size:9px;font-weight:700;
+  background:#e8f8ee;color:#27ae60}
+.ws-chat{padding:11px 14px;display:flex;flex-direction:column;gap:10px}
+.ws-r{display:flex;gap:8px;max-width:88%}
+.ws-r.l{align-self:flex-start}
+.ws-r.r{align-self:flex-end;flex-direction:row-reverse}
+.ws-av{width:32px;height:32px;border-radius:50%;background:#eee;flex:none;display:flex;
+  align-items:center;justify-content:center;font-size:15px;border:2px solid #fff;
+  box-shadow:0 1px 5px rgba(0,0,0,.12)}
+.ws-av.g{background:#eafaf0;border-color:#c5ecd4}
+.ws-col{display:flex;flex-direction:column;min-width:0}
+.ws-r.r .ws-col{align-items:flex-end}
+.ws-who{font-size:9px;color:#999;margin-bottom:3px}
+.ws-bb{padding:8px 11px;border-radius:13px;font-size:11px;line-height:1.65;color:#1A1A1A}
+.ws-bb.a{background:#f0f0f0;border-bottom-left-radius:3px}
+.ws-bb.b{background:#eafaf0;border:1px solid #c5ecd4;border-bottom-right-radius:3px}
+.ws-tm{font-size:8px;color:#bbb;margin-top:3px}
+
+/* ---------- 穎利 OTP 桌面程式（480x640 視窗）---------- */
+.otp{position:relative;width:480px;height:640px;background:#1A1A1A;color:#fff;
+  border-radius:10px;overflow:hidden;font-family:Arial,var(--zh),sans-serif;
+  box-shadow:0 22px 50px rgba(0,0,0,.4);border:1px solid #2a2a2a;
+  transform:scale(.78);transform-origin:center center}
+.otp .o-top{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:#111;border-bottom:1px solid #2a2a2a}
+.otp .o-l{display:flex;align-items:center;gap:8px}
+.otp .o-dot{width:18px;height:18px;background:#E30613;border-radius:50%;flex:none}
+.otp .o-ttl{font-size:14px;color:#fff}
+.otp .o-r{display:flex;gap:8px;align-items:center;position:relative}
+.otp .o-bo{background:transparent;border:1px solid #444;color:#ccc;padding:5px 12px;
+  border-radius:6px;font-size:13px}
+.otp .o-br{background:#E30613;color:#fff;padding:5px 14px;border-radius:6px;font-size:13px}
+.otp .o-dd{position:absolute;top:34px;right:0;background:#222;border:1px solid #333;
+  border-radius:8px;overflow:hidden;min-width:150px;z-index:5}
+.otp .o-di{padding:10px 16px;font-size:13px;color:#ccc;display:flex;align-items:center;gap:8px}
+.otp .o-di.hot{background:#2a2a2a;color:#fff}
+.otp .o-search{padding:10px 16px;border-bottom:1px solid #2a2a2a}
+.otp .o-search div{background:#2a2a2a;border:1px solid #3a3a3a;border-radius:6px;
+  color:#555;font-size:13px;padding:7px 12px}
+.otp .o-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+/* 空狀態 */
+.otp .o-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;height:420px;color:#555}
+.otp .o-empty .ic{font-size:46px;color:#333}
+.otp .o-empty .t{font-size:20px;color:#E30613}
+.otp .o-empty .s{font-size:13px;color:#555}
+.otp .o-empty .b{background:#E30613;color:#fff;padding:9px 24px;border-radius:6px;
+  font-size:13px;margin-top:4px}
+/* 卡片 */
+.otp .o-card{background:#222;border:1px solid #2e2e2e;border-radius:8px;padding:14px 16px;
+  display:flex;align-items:center;gap:14px}
+.otp .o-card.hot{border-color:#E30613;background:#2a2020}
+.otp .o-ic{width:38px;height:38px;border-radius:50%;background:#E30613;display:flex;
+  align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex:none}
+.otp .o-info{flex:1;min-width:0}
+.otp .o-nm{font-size:13px;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.otp .o-code{font-size:26px;letter-spacing:4px;color:#fff;font-variant-numeric:tabular-nums}
+.otp .o-ring{position:relative;width:32px;height:32px;flex:none}
+.otp .o-ring svg{transform:rotate(-90deg)}
+.otp .o-sec{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#aaa}
+.otp .o-act{color:#555;font-size:15px}
+/* 吐司 */
+.otp .o-toast{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  background:#E30613;color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;
+  opacity:0;transition:opacity .3s}
+.otp.copied .o-toast{opacity:1}
+/* 框選掃描示意 */
+.otp .o-shot{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;
+  transition:opacity .3s;display:flex;align-items:center;justify-content:center}
+.otp.shot .o-shot{opacity:1}
+.otp .o-sel{position:relative;width:190px;height:190px;border:2px solid #E30613;
+  background:rgba(255,255,255,.08)}
+.otp .o-sel .qr{position:absolute;inset:16px;background:
+  repeating-linear-gradient(0deg,#fff 0 7px,#1A1A1A 7px 14px),
+  repeating-linear-gradient(90deg,#fff 0 7px,transparent 7px 14px);
+  background-blend-mode:multiply;opacity:.85}
+.otp .o-sel .ok{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);
+  background:#E30613;color:#fff;padding:8px 20px;border-radius:6px;font-size:13px;
+  white-space:nowrap}
+.otp .o-hint{position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.8);border:1px solid #E30613;color:#fff;padding:9px 18px;
+  border-radius:8px;font-size:13px;white-space:nowrap}
+
+/* ---------- 金鑰派發開機畫面 ---------- */
+.kr{position:relative;width:640px;height:430px;background:#0a0a0c;overflow:hidden;
+  border-radius:10px;box-shadow:0 22px 50px rgba(0,0,0,.35);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--zh);transform:scale(1.16);transform-origin:center center}
+.kr .kr-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:36px 36px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,#000 25%,transparent 82%);
+          mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,#000 25%,transparent 82%)}
+.kr .kr-glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 42%,rgba(227,6,19,.12),transparent 46%)}
+.kr .kr-gauge{position:relative;width:196px;height:196px;display:flex;
+  align-items:center;justify-content:center;margin-bottom:20px}
+.kr .kr-gauge>svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.kr .kr-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:2}
+.kr .kr-fg{fill:none;stroke:url(#krg);stroke-width:4;stroke-linecap:round;
+  filter:drop-shadow(0 0 6px rgba(227,6,19,.6))}
+.kr .kr-tick{fill:none;stroke:rgba(255,255,255,.11);stroke-width:1}
+.kr .kr-cnrs{position:absolute;inset:-6px;pointer-events:none}
+.kr .kr-cnrs i{position:absolute;width:20px;height:20px;border:2px solid rgba(227,6,19,.65)}
+.kr .kr-cnrs i:nth-child(1){top:0;left:0;border-right:none;border-bottom:none}
+.kr .kr-cnrs i:nth-child(2){top:0;right:0;border-left:none;border-bottom:none}
+.kr .kr-cnrs i:nth-child(3){bottom:0;left:0;border-right:none;border-top:none}
+.kr .kr-cnrs i:nth-child(4){bottom:0;right:0;border-left:none;border-top:none}
+.kr .kr-core{position:relative;z-index:2;text-align:center}
+.kr .kr-logo{width:46px;margin-bottom:7px;filter:drop-shadow(0 0 10px rgba(227,6,19,.5))}
+.kr .kr-pct{font-family:var(--en);font-weight:700;font-size:44px;line-height:1;color:#fff}
+.kr .kr-pct small{font-size:.42em;color:#8a8a92;margin-left:2px;vertical-align:top}
+.kr .kr-cnt{font-family:var(--en);font-size:12px;letter-spacing:3px;color:#ff5560;
+  margin-top:5px;font-weight:600}
+.kr .kr-lab{font-family:var(--en);font-size:10px;letter-spacing:4px;color:#44444c;
+  text-transform:uppercase;margin-bottom:8px}
+.kr .kr-now{font-size:16px;color:#f2f2f4;letter-spacing:1px}
+.kr .kr-now b{color:#3ecf6a;font-weight:700}
+.kr .kr-now .cur{display:inline-block;width:2px;height:1em;background:#E30613;
+  vertical-align:-2px;margin-left:3px}
+.kr .kr-feed{margin-top:12px;font-family:var(--en);font-size:12px;letter-spacing:2px;color:#8a8a92}
+.kr .kr-feed b{color:#3ecf6a;font-weight:700}
+/* iOS 提示條 */
+.kr .kr-ios{position:absolute;left:0;right:0;bottom:0;padding:11px 18px;
+  background:rgba(227,6,19,.14);border-top:1px solid rgba(227,6,19,.4);
+  font-size:13px;color:#ffb0b6;display:flex;align-items:center;gap:8px;
+  opacity:0;transition:opacity .35s}
+.kr.ios .kr-ios{opacity:1}
+.kr .kr-ios i{font-style:normal;font-size:15px}
+
 /* ---------- 系統自己的封面（打卡 / 作業中心 的迎賓畫面）---------- */
 .sys{position:relative;width:640px;height:430px;background:#0a0a0c;overflow:hidden;
   transform-origin:center center;font-family:var(--zh);text-align:center;
@@ -884,7 +1174,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v7",
+    "ver": "2026-07-28 / v10",
     "updated": "2026-07-28",
     "icons": {
       "今日總覽": "img/61_今日總覽.png",
@@ -1041,6 +1331,32 @@ var FALLBACK = {
         }
       ],
       "notes": "這頁一定要講。過去最多人問的就是「為什麼有時候要重登」。講完這頁，客服量會少一半。"
+    },
+    {
+      "type": "demo",
+      "comp": "keyring",
+      "roles": [
+        "*"
+      ],
+      "title": "第一次進來，會先看到這個轉圈圈",
+      "lead": "它在幫你把所有系統的鑰匙一次配好。",
+      "steps": [
+        {
+          "h": "什麼都不用按，等它跑完就好",
+          "p": "公司有二十幾個系統，它一次幫你全部打通。之後點任何一張卡片都直接進去，不用再登入第二次。"
+        },
+        {
+          "h": "用 iPhone 的話，每次進來都會再跑一次",
+          "p": "這是正常的，不是壞掉，也不是你哪裡按錯 —— iPhone 為了保護你，每次都會把上一次的設定清掉，所以我們就每次幫你重配一次。",
+          "ios": true
+        },
+        {
+          "h": "跑完自動就進去了",
+          "p": "真的卡住超過一分鐘，重新整理一次就好。還是不行就跟元家說一聲。",
+          "ios": true
+        }
+      ],
+      "notes": "★這頁是為了讓 iPhone 使用者安心。重點只有一句：「每次都要重配是正常的，那是 iPhone 在保護你」。不要講 localStorage、Cookie、第三方儲存那些詞。安卓跟電腦通常只有第一次會看到。"
     },
     {
       "type": "section",
@@ -1576,6 +1892,33 @@ var FALLBACK = {
           "p": "不用自己抄時間。"
         }
       ]
+    },
+    {
+      "type": "demo",
+      "comp": "board",
+      "roles": [
+        "*"
+      ],
+      "title": "公告看完，記得按一下「收到」",
+      "lead": "這樣發的人就知道大家都看到了，不用再一個一個問。",
+      "steps": [
+        {
+          "h": "上面那排是分類，點一下只看那一種",
+          "p": "🚨 即時是最急的，會跳出來提醒你；規章、獎懲平常不用天天看。",
+          "focus": "chip"
+        },
+        {
+          "h": "看完按紅色那顆「收到」",
+          "p": "按下去就變成「✅ 已收到」，會記下你是幾點看的。不用回訊息，也不用截圖回報。",
+          "focus": "ack"
+        },
+        {
+          "h": "規章改版會留紀錄，舊的查得到",
+          "p": "右下角有「📜 版本紀錄」，可以看這份規章以前長什麼樣、什麼時候換的。",
+          "focus": "ver"
+        }
+      ],
+      "notes": "★重點是第二點：按「收到」不是打卡，是讓發的人知道訊息有到。★旁邊的 👁 數字只有主管看得到。上面「📬 收件匣」那個頁籤是專門看指名給你的東西。"
     },
     {
       "type": "list",
@@ -2156,6 +2499,60 @@ var FALLBACK = {
       "notes": "這三張是「不用申請、隨時看」的類型，跟前面幾頁的單據性質不一樣。"
     },
     {
+      "type": "demo",
+      "comp": "dir",
+      "roles": [
+        "*"
+      ],
+      "title": "要找誰、分機幾號，打字就有",
+      "lead": "不用再翻那張貼在牆上的分機表。",
+      "steps": [
+        {
+          "h": "姓名、部門、分機，打哪個都找得到",
+          "p": "打「業務」會出來整個部門，打「215」會直接找到那個人。",
+          "focus": "find"
+        },
+        {
+          "h": "手機上點分機就直接撥出去",
+          "p": "不用先撥總機再轉，點一下就通了。",
+          "focus": "card"
+        },
+        {
+          "h": "右邊是公共區的電話",
+          "p": "會議室、茶水間、產線這些沒有人的分機，按樓層分好放在右邊。",
+          "focus": "pub"
+        }
+      ],
+      "notes": "★本月壽星是自動抓生日出來的，不用有人維護。★頭貼可以自己換（個人資料維護那頁）。★老闆的卡片長得不一樣，那是故意的。"
+    },
+    {
+      "type": "demo",
+      "comp": "sched",
+      "roles": [
+        "*"
+      ],
+      "title": "這禮拜要做什麼，一張表看完",
+      "lead": "哪個產品、哪一天、做到哪了。",
+      "steps": [
+        {
+          "h": "日、週、月三種看法，上面切",
+          "p": "想看今天就切「日」，想抓整週節奏就切「週」。",
+          "focus": "view"
+        },
+        {
+          "h": "顏色就是進度",
+          "p": "灰的還沒開始、黃的正在做、綠的做完了、紅的要重做。不用問就知道現在卡在哪。",
+          "focus": "week"
+        },
+        {
+          "h": "點下去看細節",
+          "p": "數量、預估工時、幾個人、注意事項都在裡面。",
+          "focus": "week"
+        }
+      ],
+      "notes": "★這頁給的是「看得懂」的程度就好，怎麼開單是產線主管的事。★橘色那欄是今天。"
+    },
+    {
       "type": "cardgrid",
       "roles": [
         "*"
@@ -2183,6 +2580,134 @@ var FALLBACK = {
         }
       ],
       "notes": "暱稱大頭貼那句要停一下，這是最多人不知道可以改的。OTP 那張講「省下跑來跑去」最有感。"
+    },
+    {
+      "type": "demo",
+      "comp": "prof",
+      "roles": [
+        "*"
+      ],
+      "title": "你的資料，哪些可以自己改",
+      "lead": "用顏色分成三種，一眼就知道要找誰。",
+      "steps": [
+        {
+          "h": "綠色的：你自己隨時改",
+          "p": "暱稱、手機、緊急聯絡人、地址這些。搬家換電話，自己更新就好。",
+          "focus": "edit"
+        },
+        {
+          "h": "灰色帶鎖的：要改請找姬姐",
+          "p": "身分證、生日、學歷這些是當初履歷填的。鎖起來不是不信任你，是這幾欄一改，勞健保跟報稅都會跟著跑掉。",
+          "focus": "lock"
+        },
+        {
+          "h": "藍色的：系統自己算的",
+          "p": "任職狀態、直屬主管這種，不用填。你的請假、加班會送給誰簽，就是看這裡。",
+          "focus": "auto"
+        }
+      ],
+      "notes": "★第二點的口氣要放軟，重點是「為什麼鎖」而不是「你不能改」。★緊急聯絡人真的拜託大家填，出事的時候是靠這個。"
+    },
+    {
+      "type": "demo",
+      "comp": "wish",
+      "roles": [
+        "*"
+      ],
+      "title": "哪裡卡住，跟池子裡的人說一聲",
+      "lead": "不用先想清楚是不是 BUG，講出來就好。",
+      "steps": [
+        {
+          "h": "先選一個類別",
+          "p": "抓蟲、許願、想改進、聊聊 —— 選錯也沒關係，我看得懂。",
+          "focus": "ask"
+        },
+        {
+          "h": "打字送出，可以夾圖",
+          "p": "直接把畫面截圖丟進來最快。哪一頁、按了什麼、然後怎樣，寫得越隨意越好。",
+          "focus": "ask"
+        },
+        {
+          "h": "處理好會回你，也會寄信",
+          "p": "你的每一則都看得到回覆，不會丟進去就沒聲音。",
+          "focus": "chat"
+        }
+      ],
+      "notes": "★這頁是全場最想要大家記住的一頁。講的時候鼓勵一下：講出來才會改，忍著用不會有人知道。★不用怕講錯，也不用先自己判斷是不是 BUG。"
+    },
+    {
+      "type": "list",
+      "roles": [
+        "*"
+      ],
+      "title": "二次驗證，不用再跑去拿公務機了",
+      "lead": "有些系統除了密碼，還要再輸入一組會一直變的六位數字。",
+      "items": [
+        {
+          "h": "那組數字不是密碼，是在確認「真的是你」",
+          "p": "每 30 秒換一次。就算密碼被別人知道，沒有這組數字也進不去。"
+        },
+        {
+          "h": "以前那組數字只在公務機上",
+          "p": "要走過去拿手機、開 App、盯著螢幕一個一個打，打到一半還會換掉，只好重來。"
+        },
+        {
+          "h": "現在自己電腦上就有一支「穎利 OTP」",
+          "p": "開起來，點一下就複製，直接貼上去。公務機可以放著不用動，也不用等別人用完。"
+        }
+      ],
+      "notes": "★這頁只講「為什麼」。講的時候補一句實際例子：哪些系統會用到二次驗證。重點是「不用再為了六位數字跑去拿公務機」。程式在 作業中心→工具管理→穎利科技 OTP，點下去開新分頁下載。"
+    },
+    {
+      "type": "demo",
+      "comp": "otpadd",
+      "roles": [
+        "*"
+      ],
+      "title": "第一次設定：把手機上的搬過來",
+      "lead": "只做一次，之後就都在電腦上了。",
+      "steps": [
+        {
+          "h": "按右上角紅色的「＋ 新增」",
+          "p": "會跳出三個選項，挑一個順手的就好。"
+        },
+        {
+          "h": "最快的是「截圖掃描」",
+          "p": "把有 QR Code 的畫面叫出來，按下去程式會自己縮小，用滑鼠框住那個 QR，按「確認掃描」就好。",
+          "shot": true
+        },
+        {
+          "h": "手邊沒有 QR 也沒關係",
+          "p": "選「手動輸入」，把名稱跟那一長串英數字貼進去，一樣可以用。"
+        }
+      ],
+      "notes": "★「截圖掃描」是最不會出錯的，示範時走這條。三個選項的差別：上傳 QR＝已經存成圖片檔；截圖掃描＝QR 現在就在螢幕上；手動輸入＝只拿到一串英數字。設定好的資料存在自己電腦裡，按左上角資料夾圖示可以打開。"
+    },
+    {
+      "type": "demo",
+      "comp": "otplist",
+      "roles": [
+        "*"
+      ],
+      "title": "平常就這樣用：點一下，貼上去",
+      "lead": "開起來就看得到，不用等。",
+      "steps": [
+        {
+          "h": "六位數字每 30 秒換一次",
+          "p": "右邊那個紅圈就是還剩幾秒，圈跑完數字就換一組。"
+        },
+        {
+          "h": "點一下卡片就複製起來了",
+          "p": "下面會跳「已複製！」，然後直接貼到要登入的地方。不用拿公務機，也不用自己一個一個看著打。",
+          "copied": true
+        },
+        {
+          "h": "圈快跑完了，等下一輪再貼",
+          "p": "剩三、四秒才複製的話，貼過去可能剛好過期。等它換新的再點就好，不用緊張。",
+          "copied": true
+        }
+      ],
+      "notes": "★第二點是全場重點：點一下就複製。第三點是最常被問的「為什麼我貼過去說錯誤」—— 通常就是碼過期了，再點一次新的即可。多個帳號可以用上面的搜尋框找。"
     },
     {
       "type": "end",
@@ -2239,6 +2764,235 @@ function setData(j, src){
 }
 
 var PICKED = '';
+/* ---------- 佈告欄 ---------- */
+function _boardHtml(){
+  var chips = [['全部',1],['🚨 即時',0],['公告',0],['活動',0],['獎懲',0],['規章',0]];
+  return '<div class="pf" id="pf">' +
+    '<div class="bd-tabs part fw" data-p="tab"><div class="bd-tab on">📋 佈告欄</div>' +
+      '<div class="bd-tab">📬 收件匣</div></div>' +
+    '<div class="bd-chips part fw" data-p="chip">' +
+      chips.map(function(c){ return '<div class="bd-chip' + (c[1]?' on':'') + '"><span>' +
+        esc(c[0]) + '</span></div>'; }).join('') + '</div>' +
+    '<div class="bd-card part" data-p="ack"><div class="bd-top">' +
+      '<span class="bd-badge">🚨 即時</span><span class="bd-sub">廠務</span></div>' +
+      '<div class="bd-ttl">明天早上 9:00 全廠停電檢修，請提前存檔</div>' +
+      '<div class="bd-meta"><span class="w">咪姐 · 營運管理</span><span>07/27 16:40</span></div>' +
+      '<div class="bd-body">明日 09:00～11:00 台電例行檢修，產線與辦公室都會斷電。請大家今天下班前把電腦資料存好。</div>' +
+      '<div class="bd-foot"><div class="bd-ack">✋ 收 到 ！</div>' +
+        '<span class="bd-cnt">👁 18</span></div></div>' +
+    '<div class="bd-card c2 part" data-p="ver"><div class="bd-top">' +
+      '<span class="bd-badge b2">📋 規章</span><span class="bd-sub">出勤</span>' +
+      '<span class="bd-ver">v3</span></div>' +
+      '<div class="bd-ttl">出勤管理辦法</div>' +
+      '<div class="bd-meta"><span class="w">姬姐 · 人資</span><span>07/20 09:12</span></div>' +
+      '<div class="bd-foot"><div class="bd-acked">✅ 已收到　07/20 09:31</div>' +
+        '<span class="bd-vbtn">📜 版本紀錄</span><span class="bd-cnt">👁 24</span></div></div>' +
+  '</div>';
+}
+
+/* ---------- 員工通訊錄 ---------- */
+function _dirHtml(){
+  function card(ini, name, nick, dept, ext, mail, seat, boss){
+    return '<div class="dr-c' + (boss?' boss':'') + '"><div class="dr-cb">' +
+      '<div class="dr-ava">' + (boss?'<span class="dr-crown">👑</span>':'') + esc(ini) + '</div>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="dr-nm">' + esc(name) + (nick?'<em>（' + esc(nick) + '）</em>':'') + '</div>' +
+        '<div class="dr-dp">' + esc(dept) + '</div><div class="dr-line"></div>' +
+        '<div class="dr-mt">' +
+          '<div class="dr-mr"><span class="dr-mi">☎</span><b>分機 ' + esc(ext) + '</b></div>' +
+          '<div class="dr-mr"><span class="dr-mi k">✉</span>' + esc(mail) + '</div>' +
+          '<div class="dr-mr"><span class="dr-mi">⚑</span>' + esc(seat) + '</div>' +
+        '</div></div></div><div class="dr-bar"></div></div>';
+  }
+  function floor(name, n, tiles){
+    return '<div class="dr-fl"><h5>' + esc(name) + '<i>' + n + '</i></h5><div class="dr-tiles">' +
+      tiles.map(function(t){ return '<div class="dr-tile"><b>' + t[0] + '</b><span>' +
+        esc(t[1]) + '</span></div>'; }).join('') + '</div></div>';
+  }
+  return '<div class="pf" id="pf"><div class="dr-wrap">' +
+    '<div class="dr-stars part" data-p="star"><h4>🎂 本月壽星</h4><div class="dr-chips">' +
+      '<span class="dr-chip">王小明<i>07/12</i></span>' +
+      '<span class="dr-chip">陳大器<i>07/25</i></span>' +
+      '<span class="dr-chip">林佩珊<i>07/30</i></span></div></div>' +
+    '<div class="dr-ctrl part" data-p="find"><div>🔍 搜尋姓名 / 部門 / 分機…</div>' +
+      '<div style="flex:0 0 118px">全部部門　▾</div></div>' +
+    '<div class="dr-row">' +
+      '<div class="dr-people part" data-p="card">' +
+        card('咪','蔡咪咪','咪姐','營運管理 · 總經理','101','michelle.tsai@winz-tech.com','2F 辦公室',true) +
+        card('王','王小明','','生產部 · 作業專員','215','ming@winz-tech.com','1F 產線A',false) +
+      '</div>' +
+      '<div class="dr-pubs part" data-p="pub">' +
+        floor('1F', 3, [['201','產線A'],['202','包裝區'],['203','倉庫']]) +
+        floor('2F', 3, [['101','會議室'],['102','茶水間'],['103','影印區']]) +
+      '</div>' +
+    '</div></div></div>';
+}
+
+/* ---------- 排程系統 ---------- */
+function _schedHtml(){
+  var days = [['日','7/26','sun'],['一','7/27',''],['二','7/28','now'],['三','7/29',''],
+              ['四','7/30',''],['五','7/31',''],['六','8/1','sat']];
+  var rows = [['洗毛精 1000ml｜攪拌', ['','完成','進行中','未開始','','','']],
+              ['潔牙骨 大型犬｜包裝', ['','','完成','完成','進行中','','']],
+              ['寵物濕紙巾｜充填',   ['','','未開始','','重製','','']]];
+  return '<div class="pf" id="pf">' +
+    '<div class="sd-vt part fw" data-p="view"><div>日</div><div class="on">週</div><div>月</div></div>' +
+    '<div class="sd-card part" data-p="week"><div class="sd-nav"><span>◀ 上週</span>' +
+      '<b>7/26 ～ 8/1</b><span>下週 ▶</span></div>' +
+      '<table class="sd-tb"><thead><tr><th style="min-width:26px"></th>' +
+      days.map(function(d){ return '<th class="' + d[2] + '">' + d[0] + '<br>' + d[1] + '</th>'; }).join('') +
+      '</tr></thead><tbody>' +
+      rows.map(function(r){
+        return '<tr><td class="nm">' + esc(r[0]) + '</td>' +
+          r[1].map(function(st, k){
+            return '<td class="' + (days[k][2]==='now'?'now':'') + '">' +
+              (st ? '<div class="sd-cell sd-' + st + '">' + st + '</div>' : '') + '</td>';
+          }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div>' +
+  '</div>';
+}
+
+/* ---------- 個人資料維護 ---------- */
+function _profHtml(){
+  function f(lab, val, ro){
+    return '<div class="pr-f' + (ro?' ro':'') + '"><label>' + esc(lab) + (ro?' 🔒':'') +
+      '</label><div>' + esc(val) + '</div></div>';
+  }
+  return '<div class="pf" id="pf"><div class="pr-wrap">' +
+    '<div class="pr-av part" data-p="me"><div class="pr-pic">王</div><div>' +
+      '<div class="pr-nm">王小明</div><div class="pr-dp">生產部 · 作業專員</div>' +
+      '<span class="pr-st">在職</span></div></div>' +
+    '<div class="pr-c m part" data-p="edit"><div class="pr-t"><i>可維護</i>個人資料</div>' +
+      '<div class="pr-n">以下欄位你可以隨時改</div><div class="pr-g">' +
+      f('暱稱','小明') + f('個人手機','0912-345-678') + f('緊急聯絡人','王大明') +
+      f('緊急聯絡人關係','父') + f('緊急聯絡人電話','0922-111-222') + f('通訊地址','彰化縣…') +
+      '</div></div>' +
+    '<div class="pr-c l part" data-p="lock"><div class="pr-t"><i>鎖定</i>基本身分資料</div>' +
+      '<div class="pr-n">履歷填寫後不可修改，需要改請找姬姐</div><div class="pr-g">' +
+      f('身分證字號','N1234****9','ro') + f('生日','1995-07-12','ro') +
+      f('最高學歷','大學','ro') + f('學校','○○科技大學','ro') +
+      f('兵役','已服畢','ro') + f('戶籍地址','彰化縣…','ro') +
+      '</div></div>' +
+    '<div class="pr-c a part" data-p="auto"><div class="pr-t"><i>自動</i>系統自動判定</div>' +
+      '<div class="pr-n">依資料自動帶出，不用填</div><div class="pr-g">' +
+      f('任職狀態','在職','ro') + f('性別','男','ro') + f('直屬主管','陳大器','ro') +
+      '</div></div>' +
+  '</div></div>';
+}
+
+/* ---------- 除蟲許願池 ---------- */
+function _wishHtml(){
+  var cats = [['🐛 抓蟲',1],['⭐ 許願',0],['🔧 想改進',0],['💬 聊聊',0]];
+  return '<div class="pf" id="pf"><div class="ws-wrap">' +
+    '<div class="ws-hero part" data-p="hero"><div class="ws-fig">🌱</div>' +
+      '<div class="ws-bub"><h5>🌱 生態規劃師 · 元家</h5>' +
+      '<p>よう！系統哪裡卡卡的、想許什麼願、有什麼想改的，都跟我說一聲，我一個一個幫你看。</p></div></div>' +
+    '<div class="ws-ask part" data-p="ask"><div class="ws-hint">先選一個類別，再跟我說說：</div>' +
+      '<div class="ws-cats">' + cats.map(function(c){
+        return '<span class="ws-cat' + (c[1]?' on':'') + '">' + esc(c[0]) + '</span>'; }).join('') + '</div>' +
+      '<div class="ws-ta">請購單送出後，進度追蹤那頁一直轉圈圈，重整才會出來…</div>' +
+      '<div class="ws-foot"><div class="ws-tool">😀</div><div class="ws-tool">📷</div>' +
+        '<span class="ws-tip">可附圖，單張 5MB 以下</span>' +
+        '<div class="ws-send">➤</div></div></div>' +
+    '<div class="ws-item part" data-p="chat"><div class="ws-ih">' +
+      '<span class="ws-tag">除蟲BUG</span><span>· QA-0231</span>' +
+      '<span class="ws-stat">已回覆</span></div>' +
+      '<div class="ws-chat">' +
+        '<div class="ws-r l"><div class="ws-av">🐛</div><div class="ws-col">' +
+          '<div class="ws-who">小明</div>' +
+          '<div class="ws-bb a">佈告欄的圖片點開之後關不掉</div>' +
+          '<div class="ws-tm">07/24 10:12</div></div></div>' +
+        '<div class="ws-r r"><div class="ws-av g">🌱</div><div class="ws-col">' +
+          '<div class="ws-who">元家</div>' +
+          '<div class="ws-bb b">修好了！點圖片以外的地方就會關掉，重整一次就是新版 👍</div>' +
+          '<div class="ws-tm">07/24 14:03</div></div></div>' +
+      '</div></div>' +
+  '</div></div>';
+}
+
+/* ---------- 穎利 OTP：第一次設定 ---------- */
+function _otpTop(hotDD){
+  return '<div class="o-top"><div class="o-l"><div class="o-dot"></div>' +
+    '<span class="o-ttl">穎利 OTP</span></div>' +
+    '<div class="o-r"><div class="o-bo">🗂</div><div class="o-br">＋ 新增</div>' +
+    (hotDD ? '<div class="o-dd">' +
+      '<div class="o-di">🔳　上傳 QR Code</div>' +
+      '<div class="o-di hot">🖥　截圖掃描</div>' +
+      '<div class="o-di">⌨　手動輸入</div></div>' : '') +
+    '</div></div>';
+}
+function _otpAddHtml(){
+  return '<div class="otp" id="otp">' + _otpTop(true) +
+    '<div class="o-search"><div>搜尋…</div></div>' +
+    '<div class="o-body"><div class="o-empty">' +
+      '<div class="ic">🛡</div><div class="t">OTP</div>' +
+      '<div class="s">還沒有任何 OTP</div>' +
+      '<div class="s">點擊上方「新增」按鈕開始</div>' +
+      '<div class="b">手動輸入</div>' +
+    '</div></div>' +
+    '<div class="o-shot"><div class="o-hint">拖曳框選 QR Code 區域，按 ESC 取消</div>' +
+      '<div class="o-sel"><div class="qr"></div><div class="ok">確認掃描</div></div></div>' +
+  '</div>';
+}
+
+/* ---------- 穎利 OTP：平常怎麼用 ---------- */
+function _otpListHtml(){
+  function card(ini, name, code, left, hot){
+    var r = 13, circ = 2 * Math.PI * r, dash = circ * (left / 30);
+    return '<div class="o-card' + (hot ? ' hot' : '') + '">' +
+      '<div class="o-ic">' + ini + '</div>' +
+      '<div class="o-info"><div class="o-nm">' + esc(name) + '</div>' +
+        '<div class="o-code">' + code.slice(0,3) + ' ' + code.slice(3) + '</div></div>' +
+      '<div class="o-ring"><svg width="32" height="32" viewBox="0 0 32 32">' +
+        '<circle cx="16" cy="16" r="' + r + '" fill="none" stroke="#333" stroke-width="2.5"/>' +
+        '<circle cx="16" cy="16" r="' + r + '" fill="none" stroke="#E30613" stroke-width="2.5" ' +
+          'stroke-dasharray="' + dash.toFixed(1) + ' ' + circ.toFixed(1) + '" stroke-linecap="round"/>' +
+        '</svg><div class="o-sec">' + left + '</div></div>' +
+      '<div class="o-act">✏</div><div class="o-act">🗑</div></div>';
+  }
+  return '<div class="otp" id="otp">' + _otpTop(false) +
+    '<div class="o-search"><div>搜尋…</div></div>' +
+    '<div class="o-body">' +
+      card('GM', 'Google (winz04@winz-tech.com)', '481920', 22, true) +
+      card('CT', '中國信託 網銀', '735104', 22, false) +
+    '</div>' +
+    '<div class="o-toast">已複製！</div>' +
+  '</div>';
+}
+
+/* ---------- 金鑰派發（第一次登入時那個轉圈圈）---------- */
+function _keyringHtml(){
+  var m = DATA.meta || {};
+  var C = 2 * Math.PI * 80;
+  var pct = 60, off = C * (1 - pct / 100);
+  return '<div class="kr" id="kr">' +
+    '<div class="kr-grid"></div><div class="kr-glow"></div>' +
+    '<div class="kr-gauge">' +
+      '<div class="kr-cnrs"><i></i><i></i><i></i><i></i></div>' +
+      '<svg viewBox="0 0 200 200"><circle class="kr-tick" cx="100" cy="100" r="96" ' +
+        'stroke-dasharray="1.5 10"/></svg>' +
+      '<svg viewBox="0 0 200 200">' +
+        '<defs><linearGradient id="krg" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0" stop-color="#8f0009"/><stop offset="1" stop-color="#ff5560"/>' +
+        '</linearGradient></defs>' +
+        '<circle class="kr-bg" cx="100" cy="100" r="80"/>' +
+        '<circle class="kr-fg" cx="100" cy="100" r="80" stroke-dasharray="' + C.toFixed(1) +
+          '" stroke-dashoffset="' + off.toFixed(1) + '"/>' +
+      '</svg>' +
+      '<div class="kr-core">' +
+        (m.logo ? '<img class="kr-logo" src="' + esc(m.logo) + '" alt="" ' +
+                  'onerror="this.style.display=\'none\'">' : '') +
+        '<div class="kr-pct">' + pct + '<small>%</small></div>' +
+        '<div class="kr-cnt">12 / 20</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="kr-lab">// Dispatching keyring</div>' +
+    '<div class="kr-now">建立安全通道　<b>12 / 20</b> 已就緒<span class="cur"></span></div>' +
+    '<div class="kr-feed"><b>作業中心　✓</b></div>' +
+    '<div class="kr-ios"><i>💡</i>iPhone 每次進來都會重跑一次，這是正常的</div>' +
+  '</div>';
+}
+
 /* ---------- 系統自己的封面（照 PWA 迎賓頁重畫，同事一眼就認得）---------- */
 function _pawSvg(){ return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">' + '<ellipse cx="50" cy="66" rx="24" ry="19"/><ellipse cx="24" cy="42" rx="9" ry="12"/>' + '<ellipse cx="42" cy="30" rx="9" ry="13"/><ellipse cx="60" cy="30" rx="9" ry="13"/>' + '<ellipse cx="77" cy="42" rx="9" ry="12"/></svg>'; }
 function _sysHtml(kind){
@@ -2531,11 +3285,14 @@ function buildDeck(){
              }).join('') + '</div>';
     }
     else if (s.type === 'demo' && ['reqform','reqtrack','reqlist','smpform','smplist','conform',
-                                   'scrapform','scraplist','eoform','eolist'].indexOf(s.comp) > -1){
+                                   'scrapform','scraplist','eoform','eolist',
+                                   'board','dir','sched','prof','wish'].indexOf(s.comp) > -1){
       var mk = { reqform:_reqFormHtml, reqtrack:_reqTrackHtml, reqlist:_reqListHtml,
                  smpform:_smpFormHtml, smplist:_smpListHtml, conform:_conFormHtml,
                  scrapform:_scrapFormHtml, scraplist:_scrapListHtml,
-                 eoform:_eoFormHtml,       eolist:_eoListHtml }[s.comp];
+                 eoform:_eoFormHtml,       eolist:_eoListHtml,
+                 board:_boardHtml, dir:_dirHtml, sched:_schedHtml,
+                 prof:_profHtml,   wish:_wishHtml }[s.comp];
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
              '<div class="rule"></div><div class="demo wide">' + mk() +
@@ -2546,6 +3303,19 @@ function buildDeck(){
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
              '<div class="rule"></div><div class="demo wide">' +
              (s.comp === 'payform' ? _payFormHtml() : _payListHtml()) +
+             '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
+    else if (s.type === 'demo' && (s.comp === 'otpadd' || s.comp === 'otplist')){
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo wide">' +
+             (s.comp === 'otpadd' ? _otpAddHtml() : _otpListHtml()) +
+             '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
+    else if (s.type === 'demo' && s.comp === 'keyring'){
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo wide">' + _keyringHtml() +
              '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
     }
     else if (s.type === 'demo' && s.comp === 'book'){
@@ -2609,7 +3379,7 @@ var MIN_K = 0.9;   // ★ 投影可讀下限；再放不下就是那頁該拆
 /* 畫面元件比版面高 → 整塊等比縮小（不重排、不變形） */
 function fitVisual(sl){
   var demo = sl.querySelector('.demo'); if (!demo) return;
-  var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot'); if (!vis) return;
+  var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot, .kr, .otp'); if (!vis) return;
   vis.style.transform = '';
   // ★ 兩個都要用版面尺標（offsetHeight），不能用 getBoundingClientRect —— 舞台本身有 scale
   var H = demo.clientHeight, hh = vis.offsetHeight;
@@ -3214,6 +3984,17 @@ function setHub(sl){
 function setPhone(){
   var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
   setHub(sl); setShot(sl); setBook(sl);
+  var ot = sl.querySelector('.otp');
+  if (ot){
+    var so = SLIDES[IDX] || {}, co = (so.steps || [])[Math.max(0, STEP-1)] || {};
+    ot.classList.toggle('shot', !!co.shot);
+    ot.classList.toggle('copied', !!co.copied);
+  }
+  var kr = sl.querySelector('.kr');
+  if (kr){
+    var sk = SLIDES[IDX] || {}, ck = (sk.steps || [])[Math.max(0, STEP-1)] || {};
+    kr.classList.toggle('ios', !!ck.ios);
+  }
   var ph = sl.querySelector('.phone'); if (!ph) return;
   var s = SLIDES[IDX] || {}, cf = (s.steps || [])[Math.max(0, STEP-1)] || {};
   var st = cf.state || 'idle';
