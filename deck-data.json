@@ -3,9 +3,10 @@
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v5",
+    "ver": "2026-07-28 / v7",
     "updated": "2026-07-28",
     "icons": {
+      "今日總覽": "img/61_今日總覽.png",
       "生產管理": "img/02_生產管理.png",
       "品質管理": "img/03_品質管理.png",
       "採購管理": "img/04_採購管理.png",
@@ -106,8 +107,7 @@
       "speakerEn": "PAGGIE",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "sys": "punch",
-      "face": "paggie.png"
+      "photo": "paggie.png"
     },
     {
       "type": "cover",
@@ -127,8 +127,7 @@
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "sys": "hub",
-      "face": "mimi.png"
+      "photo": "mimi.png"
     },
     {
       "type": "section",
