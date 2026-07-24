@@ -22,7 +22,7 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   background:var(--paper);overflow:hidden;flex:none}
 
 /* ---------- 共用版面 ---------- */
-.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:56px 90px 60px}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:56px 90px 132px}
 .slide.on{display:flex}
 .slide.dark{background:var(--dark)}
 
@@ -44,14 +44,14 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   font-size:280px;color:rgba(227,6,19,.16);line-height:.8;letter-spacing:-10px}
 
 /* 條列 */
-.items{display:grid;gap:20px;align-content:start;flex:1;min-height:0}
-.items.two{grid-template-columns:1fr 1fr;gap:20px 40px}
+.items{display:grid;gap:calc(20px*var(--k,1));align-content:start;flex:1;min-height:0;overflow:hidden}
+.items.two{grid-template-columns:1fr 1fr;gap:calc(20px*var(--k,1)) 40px}
 .item{display:flex;gap:20px;align-items:flex-start;
-  border-left:6px solid var(--line);padding:10px 0 10px 22px}
+  border-left:6px solid var(--line);padding:calc(10px*var(--k,1)) 0 calc(10px*var(--k,1)) 22px}
 .item .idx{font-family:var(--en);font-weight:700;font-size:20px;color:var(--red);
   padding-top:6px;flex:none;width:34px}
-.item h3{font-size:31px;font-weight:900;color:var(--ink);line-height:1.35}
-.item p{font-size:24px;color:var(--sub);line-height:1.66;margin-top:6px}
+.item h3{font-size:calc(31px*var(--k,1));font-weight:900;color:var(--ink);line-height:1.35}
+.item p{font-size:calc(24px*var(--k,1));color:var(--sub);line-height:1.6;margin-top:6px}
 
 /* 逐步展開 */
 .step{opacity:0;transform:translateY(16px);transition:opacity .32s ease,transform .32s ease}
@@ -66,9 +66,9 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .todo-box .tag span{display:block;transform:skewX(18deg)}
 
 /* 頁尾 */
-.foot{position:absolute;left:90px;right:90px;bottom:26px;display:flex;align-items:center;
+.foot{position:absolute;left:90px;right:90px;bottom:30px;display:flex;align-items:center;
   border-top:1px solid var(--line);padding-top:14px;
-  font-family:var(--en);font-size:16px;letter-spacing:2px;color:var(--sub)}
+  font-family:var(--en);font-size:15px;letter-spacing:2px;color:#9A9AA2}
 .slide.dark .foot{border-color:rgba(255,255,255,.12);color:#5A5A66}
 .foot .r{margin-left:auto;display:flex;gap:22px;align-items:center}
 .foot .pill{background:var(--red);color:#fff;padding:3px 12px;transform:skewX(-18deg)}
@@ -126,10 +126,11 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 #timer{position:absolute;right:26px;top:22px;font-family:var(--en);font-weight:700;font-size:26px;
   color:var(--red);background:rgba(255,255,255,.9);padding:6px 16px;display:none;z-index:30}
 #timer.on{display:block}
-#help{position:fixed;left:14px;bottom:12px;color:#55555f;font-size:13px;
-  font-family:var(--en);letter-spacing:2px;z-index:70}
-#src{position:fixed;right:14px;bottom:12px;font-size:13px;font-family:var(--en);
-  letter-spacing:1px;z-index:70;color:#55555f}
+#help,#src{position:fixed;bottom:10px;z-index:70;font-family:var(--en);font-size:12px;
+  letter-spacing:2px;color:#4A4A55;background:rgba(0,0,0,.55);padding:5px 12px;
+  opacity:0;transition:opacity .3s;pointer-events:none}
+#help{left:12px} #src{right:12px;letter-spacing:1px}
+body.peek #help, body.peek #src{opacity:1}
 </style>
 </head>
 <body>
@@ -405,9 +406,19 @@ function routeName(){
 }
 
 /* ---------- 顯示 / 逐步展開 ---------- */
+function autofit(){
+  var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
+  var box = sl.querySelector('.items'); if (!box) return;
+  var k = 1; box.style.setProperty('--k', 1);
+  while (box.scrollHeight > box.clientHeight + 2 && k > 0.68){
+    k = Math.round((k - 0.04) * 100) / 100;
+    box.style.setProperty('--k', k);
+  }
+}
 function show(){
   var all = $('deck').querySelectorAll('.slide');
   for (var i=0;i<all.length;i++) all[i].classList.toggle('on', i === IDX);
+  autofit();
   applySteps();
   renderNotes();
   if (ROUTE === '_dev') expandAll();
@@ -484,7 +495,7 @@ function fit(){
   var s = Math.min(innerWidth/1600, innerHeight/900);
   $('stage').style.transform = 'scale(' + s + ')';
 }
-addEventListener('resize', fit);
+addEventListener('resize', function(){ fit(); autofit(); });
 
 /* ---------- 操作 ---------- */
 addEventListener('keydown', function(e){
@@ -511,6 +522,14 @@ $('viewport').addEventListener('click', function(e){
   next();
 });
 $('viewport').addEventListener('contextmenu', function(e){ e.preventDefault(); prev(); });
+
+/* 滑鼠動才顯示角落提示，投影時乾淨 */
+var _pk = null;
+addEventListener('mousemove', function(){
+  document.body.classList.add('peek');
+  clearTimeout(_pk);
+  _pk = setTimeout(function(){ document.body.classList.remove('peek'); }, 2500);
+});
 
 /* 網址帶路線：?route=qc 直接開 */
 fit();
