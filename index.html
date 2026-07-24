@@ -407,11 +407,11 @@ var FALLBACK = {
         },
         {
           "h": "👥 公司共用電腦",
-          "p": "現場那台、會議室那台。刻意不記得你 —— 下一個人來，不會用到你的帳號。"
+          "p": "現場那台、會議室那台。系統刻意不記得你 —— 這樣下一個人來，才不會不小心用到你的帳號。"
         },
         {
-          "h": "所以「共用電腦每次都要登入」不是壞掉",
-          "p": "是故意的。那台電腦大家輪流用。"
+          "h": "共用電腦每次都要登入，是正常的",
+          "p": "那是在保護大家的帳號，不是系統壞掉。選錯了也沒關係，重登一次就好。"
         }
       ],
       "notes": "這頁一定要講。過去最多人問的就是「為什麼有時候要重登」。講完這頁，客服量會少一半。"
@@ -445,8 +445,8 @@ var FALLBACK = {
           "focus": "cards"
         },
         {
-          "h": "看不到的，代表你用不到",
-          "p": "每個人看到的卡不一樣。不是被藏起來，是那個功能跟你的工作無關。",
+          "h": "每個人看到的都不一樣",
+          "p": "畫面上只放跟你工作有關的，你就不用在一堆用不到的東西裡面找。之後需要用到什麼，跟我們說一聲就好。",
           "focus": "cards"
         }
       ],
@@ -510,8 +510,8 @@ var FALLBACK = {
           "pinned": true
         },
         {
-          "h": "懶得釘也沒關係",
-          "p": "系統會記住你常點哪幾個，自動排進「最常使用」。",
+          "h": "沒空整理也沒關係",
+          "p": "系統會記住你常點哪幾個，自動幫你排進「最常使用」。",
           "focus": "fav",
           "pinned": true
         },
@@ -662,19 +662,19 @@ var FALLBACK = {
           "state": "idle"
         },
         {
-          "h": "打完，紅色那顆就關起來了",
-          "p": "時間直接顯示在上面，不會有「到底打了沒」的疑慮。",
+          "h": "打完，紅色那顆就先休息了",
+          "p": "時間會直接顯示在上面，不用擔心「到底打了沒」。",
           "state": "in"
         },
         {
           "h": "下班按藍色那顆",
-          "p": "還沒到下班時間會先問你一次，避免手滑。",
+          "p": "還沒到下班時間，系統會先問你一次，免得手滑。",
           "state": "in",
           "hint": "🔒 尚未到下班時間，會再確認一次"
         },
         {
-          "h": "兩顆都灰了，今天結束",
-          "p": "打過就不能改。真的打錯，走「忘打卡」申請。",
+          "h": "兩顆都變灰，今天就結束了",
+          "p": "打過就不用再按了。真的按錯也不要緊，用「忘打卡」補一張就好。",
           "state": "out"
         }
       ],
@@ -702,8 +702,8 @@ var FALLBACK = {
           "p": "重要的公告不只貼在牆上，還會主動送到你手上。"
         },
         {
-          "h": "看過的會記錄下來",
-          "p": "發布的人知道誰還沒看到，就不用一個一個問。"
+          "h": "看過的會自動記錄",
+          "p": "這樣就不用再一個一個問「你看到了嗎」，也不會有人漏掉。"
         },
         {
           "h": "活動會自動跑到行事曆",
@@ -777,8 +777,8 @@ var FALLBACK = {
       "roles": [
         "*"
       ],
-      "title": "用不順，直接說",
-      "sub": "系統是為了讓大家少做一點事。<br>哪裡卡住、哪裡難用，講出來就會改。"
+      "title": "哪裡卡住，都可以跟我們說",
+      "sub": "系統是為了讓大家少做一點事。<br>哪裡難用、哪裡多餘，講出來我們就改。"
     }
   ]
 };
@@ -937,19 +937,26 @@ function autofit(){
       k = Math.round((k - 0.03) * 100) / 100;
       box.style.setProperty('--k', k);
     }
-    // 字已到下限還是放不下 → 改縮圖，把空間讓給字
-    if (vis && box.scrollHeight > box.clientHeight + 2){
-      var w = vis.getBoundingClientRect().width, min = w * 0.6, cur = w;
-      while (box.scrollHeight > box.clientHeight + 2 && cur > min){
-        cur -= 26; vis.style.maxWidth = cur + 'px';
+    // 字已到下限還是放不下 → 才縮圖（最多縮到 75%），把空間讓給字
+    if (vis && box.scrollHeight > box.clientHeight + 6){
+      var w = vis.getBoundingClientRect().width, min = w * 0.75, cur = w;
+      while (box.scrollHeight > box.clientHeight + 6 && cur > min){
+        cur -= 24; vis.style.maxWidth = cur + 'px';
       }
     }
   });
 }
+function refit(){ requestAnimationFrame(function(){ requestAnimationFrame(autofit); }); }
 function show(){
   var all = $('deck').querySelectorAll('.slide');
   for (var i=0;i<all.length;i++) all[i].classList.toggle('on', i === IDX);
-  autofit();
+  autofit(); refit();
+  // ★ 這頁的圖載完要再量一次，否則量到的是「圖還沒出現」的高度
+  var on = $('deck').querySelector('.slide.on');
+  if (on) on.querySelectorAll('img').forEach(function(im){
+    if (!im.complete) { im.addEventListener('load', refit, {once:true});
+                        im.addEventListener('error', refit, {once:true}); }
+  });
   applySteps();
   renderNotes();
   if (ROUTE === '_dev') expandAll();
@@ -1177,6 +1184,8 @@ addEventListener('mousemove', function(){
 /* 網址帶路線：?route=qc 直接開 */
 fit();
 boot();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+addEventListener('load', refit);
 setTimeout(function(){
   var m = location.search.match(/[?&]route=([^&]+)/);
   if (m && DATA) pick(decodeURIComponent(m[1]));
