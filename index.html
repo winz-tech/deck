@@ -121,6 +121,151 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .wl-r.empty{color:#5A5A66;border-color:rgba(255,255,255,.09)}
 .wl-r.empty.on{color:#cfcfcf}
 .wl-note{margin-top:18px;font-size:16px;color:#5A5A66;letter-spacing:1px}
+/* ================= 考勤薪資家族（暗色，姬姐場）================= */
+.wz{width:376px;background:#0a0a0c;border:1px solid rgba(255,255,255,.10);border-radius:12px;
+  overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.4);font-family:var(--zh);color:#fff;
+  transform-origin:center center}
+.wz.w2{width:700px}
+.wz-fn{display:flex;align-items:center;gap:9px;padding:7px 11px;
+  background:linear-gradient(90deg,#141418,#1c1c22);border-bottom:1px solid rgba(227,6,19,.4)}
+.wz-hb{width:26px;height:23px;border:1px solid rgba(255,255,255,.25);border-radius:5px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px}
+.wz-hb i{display:block;width:13px;height:2px;background:#fff}
+.wz-hb i:nth-child(2){background:#E30613}
+.wz-pg{font-family:var(--en);font-weight:700;font-size:9px;letter-spacing:3px;color:#E30613}
+.wz-clk{margin-left:auto;font-family:var(--en);font-weight:600;font-size:11px;letter-spacing:2px}
+.wz-bd{padding:11px}
+.wz-tabs{display:flex;gap:5px;margin-bottom:10px}
+.wz-tab{flex:1;padding:8px 0;text-align:center;font-size:11px;font-weight:700;color:#8a8a92;
+  background:#15151a;border:1px solid rgba(255,255,255,.08);border-radius:7px}
+.wz-tab.on{background:linear-gradient(135deg,#E30613,#8f0009);color:#fff;border-color:transparent;
+  box-shadow:0 0 12px rgba(227,6,19,.4)}
+.wz-tab em{font-style:normal;background:#fff;color:#E30613;border-radius:9px;font-size:9px;
+  padding:0 5px;margin-left:3px;font-family:var(--en)}
+.wz-card{position:relative;background:#15151a;border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;padding:12px;margin-bottom:10px}
+.wz-card::before,.wz-card::after{content:'';position:absolute;width:10px;height:10px;
+  border:2px solid #E30613}
+.wz-card::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
+.wz-card::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
+.wz-lb{display:block;font-family:var(--en);font-size:9px;letter-spacing:1px;color:#8a8a92;
+  margin:8px 0 3px}
+.wz-in{padding:8px 9px;font-size:12px;color:#fff;background:#0e0e12;
+  border:1px solid rgba(255,255,255,.18);border-radius:7px}
+.wz-in.sel::after{content:'▾';float:right;color:#8a8a92}
+.wz-in.ph{color:#55555e}
+.wz-row{display:flex;gap:7px}.wz-row>*{flex:1}
+.wz-btn{position:relative;margin:11px auto 2px;width:96%;transform:skewX(-18deg);border-radius:5px;
+  background:linear-gradient(135deg,#E30613,#8f0009);
+  box-shadow:0 0 14px rgba(227,6,19,.4),0 3px 0 rgba(0,0,0,.5)}
+.wz-btn.gray{background:linear-gradient(135deg,#34343c,#17171b);
+  border:1px solid rgba(255,255,255,.15);box-shadow:0 3px 0 rgba(0,0,0,.5)}
+.wz-btn b{display:block;transform:skewX(18deg);color:#fff;font-size:13px;font-weight:700;
+  letter-spacing:5px;padding:9px 0;text-align:center}
+.wz-prev{text-align:center;font-size:11px;color:#8a8a92;margin:10px 0;padding:8px;
+  background:#0e0e12;border:1px dashed rgba(227,6,19,.4);border-radius:7px}
+.wz-prev b{color:#E30613;font-size:18px;font-family:var(--en)}
+.wz-warn{font-size:10px;color:#8a8a92;background:#0e0e12;border:1px dashed rgba(227,6,19,.4);
+  border-radius:7px;padding:8px 9px;margin-top:9px;line-height:1.7}
+.wz-warn b{color:#E30613}
+.wz-num{display:flex;justify-content:space-between;align-items:baseline}
+.wz-num .n{font-family:var(--en);font-weight:700;font-size:23px;color:#E30613;
+  text-shadow:0 0 12px rgba(227,6,19,.5)}
+.wz-num .n.w{color:#fff;text-shadow:none}
+.wz-num .l{font-size:10px;color:#8a8a92}
+.wz-note{font-size:10px;color:#8a8a92;margin-top:5px}
+
+/* 我的出勤 */
+.at-m{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.at-m .b{width:30px;height:30px;background:#15151a;border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.at-m .t{flex:1;text-align:center;font-family:var(--en);font-size:17px;font-weight:700;letter-spacing:2px}
+.at-st{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}
+.at-st div{background:#15151a;border:1px solid rgba(255,255,255,.08);border-radius:9px;
+  padding:9px 4px;text-align:center}
+.at-st .n{font-family:var(--en);font-size:19px;font-weight:800;line-height:1}
+.at-st .l{font-size:9px;color:#8a8a92;margin-top:4px}
+.at-st .bad .n{color:#E30613}
+.at-d{background:#15151a;border:1px solid rgba(255,255,255,.08);border-left:3px solid #4a4a52;
+  border-radius:9px;padding:9px 11px;margin-bottom:6px}
+.at-d.ok{border-left-color:#3fd06a}.at-d.warn{border-left-color:#ffb340}
+.at-d.bad{border-left-color:#E30613}.at-d.leave{border-left-color:#3b82f6}
+.at-d.rest{opacity:.45}
+.at-top{display:flex;align-items:center;gap:8px}
+.at-dt{font-family:var(--en);font-size:13px;font-weight:700}
+.at-dw{font-size:10px;color:#8a8a92}
+.at-tag{font-size:9px;padding:1px 7px;border-radius:4px;background:#2a2a32;color:#8a8a92}
+.at-tm{margin-left:auto;font-family:var(--en);font-size:12px;font-weight:600}
+.at-tm i{font-style:normal;color:#E30613}
+.at-bg{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.at-b{font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px}
+.at-b.w{background:rgba(255,179,64,.15);color:#ffb340}
+.at-b.r{background:rgba(227,6,19,.15);color:#ff6168}
+.at-b.l{background:rgba(59,130,246,.15);color:#60a5fa}
+.at-b.o{background:rgba(139,92,246,.15);color:#a78bfa}
+.at-fix{margin-top:8px;width:100%;padding:7px;background:#E30613;color:#fff;border-radius:7px;
+  font-size:11px;font-weight:700;text-align:center}
+
+/* 忘打卡 */
+.px-ty{display:flex;gap:7px;margin-top:3px}
+.px-ty div{flex:1;padding:9px 0;text-align:center;font-size:12px;font-weight:700;color:#8a8a92;
+  background:#0e0e12;border:1px solid rgba(255,255,255,.18);border-radius:7px}
+.px-ty div.on{background:linear-gradient(135deg,#E30613,#8f0009);color:#fff;border-color:transparent;
+  box-shadow:0 0 10px rgba(227,6,19,.4)}
+
+/* 補休 */
+.ct-c{background:#15151a;border:1px solid rgba(255,255,255,.08);border-left:3px solid #3a3a42;
+  border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.ct-c.ok{border-left-color:#2e9e44}.ct-c.soon{border-left-color:#ffb340}
+.ct-t{display:flex;align-items:center;gap:7px}
+.ct-no{font-family:var(--en);font-size:10px;color:#8a8a92;letter-spacing:1px}
+.ct-tp{font-size:9px;padding:1px 6px;border-radius:4px;background:#26262c;color:#8a8a92}
+.ct-lf{margin-left:auto;font-family:var(--en);font-size:17px;font-weight:700;color:#4fd06a}
+.ct-b{font-size:11px;color:#8a8a92;margin-top:5px;line-height:1.7}
+.ct-b b{color:#fff;font-family:var(--en)}
+.ct-e{font-size:10px;margin-top:5px;font-family:var(--en);letter-spacing:1px;color:#8a8a92}
+.ct-e.soon{color:#ffb340;font-weight:700}
+
+/* 加班 */
+.ot-bar{height:10px;background:#0e0e12;border:1px solid rgba(255,255,255,.08);border-radius:5px;
+  overflow:hidden;margin:9px 0 5px;position:relative}
+.ot-bar .f{height:100%;background:linear-gradient(90deg,#8f0009,#E30613);
+  box-shadow:0 0 8px rgba(227,6,19,.6)}
+.ot-bar .w40{position:absolute;top:0;bottom:0;left:86.9%;width:2px;background:rgba(255,255,255,.45)}
+.ot-cap{font-family:var(--en);font-size:11px;color:#8a8a92}
+
+/* 我的薪資單 */
+.ps-lock{border-color:rgba(255,179,0,.5)!important}
+.ps-lock .t{font-size:12px;font-weight:700;color:#ffb300;margin-bottom:5px}
+.ps-lock .s{font-size:11px;color:#8a8a92;line-height:1.8}
+.ps-lock .s b{color:#fff}
+.ps-h{display:flex;justify-content:space-between;align-items:baseline}
+.ps-ym{font-family:var(--en);font-weight:700;font-size:16px;letter-spacing:2px}
+.ps-net{font-family:var(--en);font-weight:700;font-size:19px;color:#E30613;
+  text-shadow:0 0 10px rgba(227,6,19,.5)}
+.ps-net small{font-size:10px;color:#8a8a92;font-weight:400}
+.ps-d{margin-top:10px;border-top:1px dashed rgba(255,255,255,.08);padding-top:9px}
+.ps-btn{width:100%;padding:8px;margin-bottom:8px;background:linear-gradient(135deg,#34343c,#17171b);
+  border:1px solid rgba(227,6,19,.5);border-radius:7px;color:#fff;font-size:11px;font-weight:700;
+  text-align:center}
+.ps-btn.g{border-color:rgba(63,208,106,.5)}
+.ps-r{display:flex;justify-content:space-between;font-size:11px;padding:3px 0}
+.ps-r .k{color:#8a8a92}
+.ps-r .v{color:#fff;font-family:var(--en)}
+.ps-r.add .v{color:#4fd06a}
+.ps-r.sub .v{color:#E30613}
+.ps-r.fx{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);
+  margin:5px 0;padding:6px 0;background:rgba(255,255,255,.03)}
+.ps-r.fx .k{color:#fff;font-weight:700}
+.ps-r.fx .v{color:#4fd06a;font-weight:700;font-size:13px}
+.ps-r.tot{border-top:1px solid rgba(255,255,255,.08);margin-top:5px;padding-top:7px}
+.ps-r.tot .k{color:#fff;font-weight:700}
+.ps-r.tot .v{font-size:15px;font-weight:700;color:#E30613}
+.ps-pen{margin-top:9px;padding:9px 10px;background:rgba(63,208,106,.1);
+  border:1px solid rgba(63,208,106,.4);border-radius:7px;font-size:11px;color:#4fd06a;line-height:1.6}
+.ps-pen b{font-family:var(--en)}
+.ps-pen span{color:#8a8a92;font-size:10px}
+
 /* ---------- 佈告欄 ---------- */
 .bd-tabs{display:flex;background:#fff;border-bottom:1px solid #e8e4e4}
 .bd-tab{flex:1;padding:11px 0;text-align:center;font-size:13px;font-weight:700;color:#a5a0a0;position:relative}
@@ -514,7 +659,7 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
   transition:filter .22s,transform .3s cubic-bezier(.2,.8,.3,1)}
 .cs-p:hover .cs-ph .sys,.cs-p.on .cs-ph .sys{filter:none;
   transform:translate(-50%,-50%) scale(1.05)}
-.cs-face{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center 10%;
+.cs-face{width:34px;height:34px;border-radius:50%;object-fit:cover;
   border:2px solid rgba(227,6,19,.75);margin-right:2px}
 .cs-ds{position:relative;z-index:2}
 .cs-ph::after{content:'';position:absolute;inset:0;
@@ -823,6 +968,12 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 /* ★ 滿版區塊（pf-nav / rl-search / rl-badges）左右沒有留白，
    紅框畫在 -7px 會被 .pf 的 overflow:hidden 切成兩條橫線 → 改成往內畫 */
 .pf.focusing .part.hit.fw::after{inset:-3px 9px}
+/* 考勤家族聚焦（沿用同一套 part/hit）*/
+.wz .part{transition:opacity .35s,filter .35s}
+.wz.focusing .part{opacity:.24;filter:saturate(.25)}
+.wz.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
+.wz.focusing .part.hit::after{content:'';position:absolute;inset:-6px;border:2px solid var(--red);
+  border-radius:8px;box-shadow:0 0 18px rgba(227,6,19,.5);pointer-events:none}
 .bk .part{transition:opacity .35s,filter .35s}
 .bk.focusing .part{opacity:.26;filter:saturate(.3)}
 .bk.focusing .part.hit{opacity:1;filter:none;position:relative;z-index:2}
@@ -1181,7 +1332,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v11",
+    "ver": "2026-07-28 / v12",
     "updated": "2026-07-28",
     "icons": {
       "今日總覽": "img/61_今日總覽.png",
@@ -1868,6 +2019,186 @@ var FALLBACK = {
         }
       ],
       "notes": "最後一步按鈕會變成「今天辛苦了 · 回家路上請小心」，這句可以帶一下。"
+    },
+    {
+      "type": "section",
+      "roles": [
+        "punch"
+      ],
+      "no": "02",
+      "title": "打完卡之後，去哪裡看",
+      "sub": "這個月出勤幾天、有沒有漏打，自己查得到。"
+    },
+    {
+      "type": "demo",
+      "comp": "att",
+      "roles": [
+        "punch"
+      ],
+      "title": "這個月我出勤幾天？自己看",
+      "lead": "不用問人資，打開就有。",
+      "steps": [
+        {
+          "h": "上面四格是這個月的總結",
+          "p": "出勤幾天、加班幾小時、請假幾小時，最右邊那個紅字是「有問題的天數」。",
+          "focus": "stat"
+        },
+        {
+          "h": "每天一列，左邊那條顏色就是狀態",
+          "p": "綠色正常、橘色遲到早退、藍色請假、灰色放假。時間直接寫在右邊。",
+          "focus": "list"
+        },
+        {
+          "h": "有缺卡的，按下面那顆直接去補",
+          "p": "日期會自動帶過去，不用自己重打。",
+          "focus": "fix"
+        }
+      ],
+      "notes": "★這頁的重點是「自己查得到」。以前要問人資、要等月底，現在隨時打開就有。左上角 ‹ › 可以翻上個月。"
+    },
+    {
+      "type": "demo",
+      "comp": "punchfix",
+      "roles": [
+        "punch"
+      ],
+      "title": "忘記打卡了，補一張就好",
+      "lead": "不用跑一趟人資，手機上就能送。",
+      "steps": [
+        {
+          "h": "日期通常已經幫你帶好了",
+          "p": "從出勤那頁按過來的話，日期直接帶進來，你只要選實際是幾點。",
+          "focus": "when"
+        },
+        {
+          "h": "選是上班卡還是下班卡",
+          "p": "漏哪一張就選哪一張。兩張都漏就送兩次。",
+          "focus": "type"
+        },
+        {
+          "h": "寫原因，送出給主管簽",
+          "p": "核准之後才會寫進出勤，而且會標「補登」跟正常打卡分開，之後查得到。據實寫就好。",
+          "focus": "why"
+        }
+      ],
+      "notes": "★「標補登」不是在罰你，是稽核要求要能分辨。★偶爾忘記很正常，重點是有補。"
+    },
+    {
+      "type": "section",
+      "roles": [
+        "punch"
+      ],
+      "no": "03",
+      "title": "請假、加班、還有薪水",
+      "sub": "這幾件事以前都要跑紙本，現在手機上就能送。"
+    },
+    {
+      "type": "demo",
+      "comp": "leave",
+      "roles": [
+        "punch"
+      ],
+      "title": "要請假，打開填一填就好",
+      "lead": "還剩幾小時、什麼時候會加，上面直接告訴你。",
+      "steps": [
+        {
+          "h": "最上面先看你還剩多少",
+          "p": "可用幾小時、審核中幾小時都寫出來。特休還會告訴你「再幾天會多幾天」。",
+          "focus": "quota"
+        },
+        {
+          "h": "選假別，選開始跟結束",
+          "p": "有些假別依法只能整天請，選到的時候時間會自動鎖住，你不用自己算。",
+          "focus": "when"
+        },
+        {
+          "h": "按「試算時數」，確認沒錯再送出",
+          "p": "午休跟假日系統會自己扣掉。送出之後給你的主管簽，在「我的紀錄」看得到簽到哪。",
+          "focus": "go"
+        }
+      ],
+      "notes": "★假別有 22 種，需要證明文件的會跳提醒。★生理假超過 3 天會併病假，系統送出前會問你一次。★時數是系統算的，不用自己扣午休。"
+    },
+    {
+      "type": "demo",
+      "comp": "comp",
+      "roles": [
+        "punch"
+      ],
+      "title": "加班換來的補休，記得休掉",
+      "lead": "有期限，過期就沒了。",
+      "steps": [
+        {
+          "h": "每一筆加班換的補休，分開記",
+          "p": "哪天加班、換到幾小時、用掉多少、還剩多少，一筆一筆列給你看。",
+          "focus": "list"
+        },
+        {
+          "h": "從加班那天算起，3 個月內要休完",
+          "p": "快到期的會變成橘色，上面也會提醒你還有幾小時要用掉。",
+          "focus": "total"
+        },
+        {
+          "h": "真的沒休完也不會不見",
+          "p": "過期的部分公司會折成加班費，發在薪水裡。但能休還是休掉比較好。",
+          "focus": "total"
+        }
+      ],
+      "notes": "★這頁最容易被忽略。講的時候強調「橘色＝快過期」。★第三點是安撫用的，但要補一句「休假比較好，錢不會補到你的時間」。"
+    },
+    {
+      "type": "demo",
+      "comp": "ot",
+      "roles": [
+        "punch"
+      ],
+      "title": "要加班，先送一張",
+      "lead": "上面那條會告訴你這個月還剩多少。",
+      "steps": [
+        {
+          "h": "最上面那條是本月已經用掉的",
+          "p": "白色那條線是 40 小時的預警線，最右邊是法定上限 46 小時。快滿了會很明顯。",
+          "focus": "meter"
+        },
+        {
+          "h": "選要領加班費，還是換補休",
+          "p": "換補休是 1:1，從加班那天算起 3 個月內要休完。想清楚再選。",
+          "focus": "pay"
+        },
+        {
+          "h": "寫事由，送出給主管簽",
+          "p": "時數系統自己算。核准之後才算數，薪資單上的加班費也是照這個算。",
+          "focus": "go"
+        }
+      ],
+      "notes": "★46h 是法定上限，40h 白線是提早提醒。★費別選錯要找姬姐改，講的時候提醒一下。"
+    },
+    {
+      "type": "demo",
+      "comp": "payslip",
+      "roles": [
+        "punch"
+      ],
+      "title": "薪水怎麼來的，一條一條看得到",
+      "lead": "不用再拿紙本，也不用問人。",
+      "steps": [
+        {
+          "h": "點一下月份，明細就展開",
+          "p": "加了什麼、扣了什麼，一項一項列出來。薪資單固定在<b>次月 5 號早上 9 點</b>開放。",
+          "focus": "card"
+        },
+        {
+          "h": "綠色那筆勞退，是公司額外幫你出的",
+          "p": "不是從你薪水扣的，直接進你的勞退專戶。很多人以為是被扣掉，其實不是。",
+          "focus": "pension"
+        },
+        {
+          "h": "看不懂就按「這個數字怎麼算的」",
+          "p": "加班費、請假扣款會一條一條算給你看：時薪多少、幾小時、乘多少倍。旁邊還能存成 PDF。",
+          "focus": "btn"
+        }
+      ],
+      "notes": "★第二點是全場最重要的一句：勞退是公司額外出的，不是從你薪水扣。★「常駐薪資」那條綠框是算加班費跟投保級距的基準。★會計填寫、離職結算那幾個頁籤員工看不到，不用講。"
     },
     {
       "type": "section",
@@ -2771,6 +3102,187 @@ function setData(j, src){
 }
 
 var PICKED = '';
+/* ================= 考勤薪資家族（姬姐場）================= */
+function _wzFn(name, clock){
+  return '<div class="wz-fn"><div class="wz-hb"><i></i><i></i><i></i></div>' +
+    '<div class="wz-pg">// ' + name + '</div>' +
+    (clock ? '<div class="wz-clk">08:12:03</div>' : '') + '</div>';
+}
+function _wzTabs(list){
+  return '<div class="wz-tabs">' + list.map(function(t){
+    return '<div class="wz-tab' + (t[1] ? ' on' : '') + '">' + esc(t[0]) +
+           (t[2] ? '<em>' + t[2] + '</em>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+
+/* ---------- 我的出勤 ---------- */
+function _attHtml(){
+  function day(d, dow, tm, cls, tag, badges, fix){
+    return '<div class="at-d ' + cls + '"><div class="at-top">' +
+      '<span class="at-dt">' + d + '</span><span class="at-dw">(' + dow + ')</span>' +
+      (tag ? '<span class="at-tag">' + tag + '</span>' : '') +
+      '<span class="at-tm">' + tm + '</span></div>' +
+      (badges ? '<div class="at-bg">' + badges + '</div>' : '') +
+      (fix ? '<div class="at-fix">📝 前往申請忘打卡</div>' : '') + '</div>';
+  }
+  var b = function(c, t){ return '<span class="at-b ' + c + '">' + t + '</span>'; };
+  return '<div class="wz w2">' + _wzFn('My Attendance') + '<div class="wz-bd">' +
+    '<div class="at-m part" data-p="month"><div class="b">‹</div>' +
+      '<div class="t">2026 / 07</div><div class="b">›</div></div>' +
+    '<div class="at-st part" data-p="stat">' +
+      '<div><div class="n">18</div><div class="l">出勤</div></div>' +
+      '<div><div class="n">6</div><div class="l">加班 h</div></div>' +
+      '<div><div class="n">8</div><div class="l">請假 h</div></div>' +
+      '<div class="bad"><div class="n">1</div><div class="l">異常</div></div>' +
+    '</div>' +
+    '<div class="part" data-p="list">' +
+      day('07/24','四','08:12 → 18:04','ok','','') +
+      day('07/23','三','08:35 → 18:02','warn','', b('w','遲到 35 分')) +
+      day('07/21','一','請假','leave','', b('l','特休 8h')) +
+      day('07/20','日','—','rest','例假','') +
+    '</div>' +
+    '<div class="part" data-p="fix">' +
+      day('07/22','二','08:10 → <i>缺</i>','bad','', b('r','沒有下班卡'), true) +
+    '</div>' +
+  '</div></div>';
+}
+
+/* ---------- 忘打卡補登 ---------- */
+function _punchfixHtml(){
+  return '<div class="wz">' + _wzFn('Punch Fix', true) + '<div class="wz-bd">' +
+    _wzTabs([['忘打卡申請',1],['我的紀錄',0],['待我簽核',0]]) +
+    '<div class="wz-card">' +
+      '<div class="part" data-p="when">' +
+        '<div class="wz-lb">// DATE 忘打卡日期</div><div class="wz-in">2026-07-22</div>' +
+        '<div class="wz-lb">// TIME 實際上/下班時間</div><div class="wz-in">🕐　18:05</div>' +
+      '</div>' +
+      '<div class="part" data-p="type">' +
+        '<div class="wz-lb">// TYPE 類別</div>' +
+        '<div class="px-ty"><div>☀ 上班卡</div><div class="on">🌙 下班卡</div></div>' +
+      '</div>' +
+      '<div class="part" data-p="why">' +
+        '<div class="wz-lb">// REASON 忘打卡原因</div>' +
+        '<div class="wz-in ph">趕著進廠房，忘記打下班卡</div>' +
+        '<div class="wz-warn"><b>⚠ 補登說明</b><br>' +
+          '補登紀錄核准後才會寫入出勤，並標記「<b>補登</b>」與正常 GPS 打卡區分，供稽核調閱。請據實填寫。</div>' +
+        '<div class="wz-btn"><b>送出申請</b></div>' +
+      '</div>' +
+    '</div>' +
+  '</div></div>';
+}
+
+/* ---------- 請假 ---------- */
+function _leaveHtml(){
+  return '<div class="wz">' + _wzFn('Leave Request', true) + '<div class="wz-bd">' +
+    _wzTabs([['我要請假',1],['我的紀錄',0],['我的補休',0],['待我簽核',0,'2']]) +
+    '<div class="wz-card part" data-p="quota"><div class="wz-num">' +
+      '<div><div class="n">56</div><div class="l">特休 可用（小時）</div></div>' +
+      '<div style="text-align:right"><div class="n w">96</div><div class="l">年度額度（小時）</div></div>' +
+    '</div><div class="wz-note">週期：2026/03/01 ～ 2027/02/28｜已用 32h｜審核中 8h</div>' +
+    '<div class="wz-note" style="color:#E30613">⏳ 再 218 天（2027/03/01）滿 4 年，可獲得 14 天特休（112h）</div></div>' +
+    '<div class="wz-card">' +
+      '<div class="part" data-p="type"><div class="wz-lb">// TYPE 假別</div>' +
+        '<div class="wz-in sel">特休</div></div>' +
+      '<div class="part" data-p="when">' +
+        '<div class="wz-lb">// FROM 開始</div>' +
+        '<div class="wz-row"><div class="wz-in">2026-07-30</div><div class="wz-in">🕐　09:00</div></div>' +
+        '<div class="wz-lb">// TO 結束</div>' +
+        '<div class="wz-row"><div class="wz-in">2026-07-30</div><div class="wz-in">🕐　18:00</div></div>' +
+      '</div>' +
+      '<div class="part" data-p="go">' +
+        '<div class="wz-lb">// REASON 事由</div><div class="wz-in ph">家裡有事</div>' +
+        '<div class="wz-prev">共 <b>8</b> 小時（1 個工作日，已扣午休/假日）</div>' +
+        '<div class="wz-btn gray"><b>試算時數</b></div>' +
+        '<div class="wz-btn"><b>送出申請</b></div>' +
+      '</div>' +
+    '</div>' +
+  '</div></div>';
+}
+
+/* ---------- 我的補休 ---------- */
+function _compHtml(){
+  function ct(no, dayType, left, date, total, used, exp, cls, expTxt){
+    return '<div class="ct-c ' + cls + '"><div class="ct-t">' +
+      '<span class="ct-no">' + no + '</span><span class="ct-tp">' + dayType + '</span>' +
+      '<span class="ct-lf">' + left + 'h</span></div>' +
+      '<div class="ct-b">加班日 <b>' + date + '</b>　取得 <b>' + total + 'h</b><br>' +
+      '已用 <b>' + used + 'h</b>　剩餘 <b>' + left + 'h</b></div>' +
+      '<div class="ct-e ' + (cls === 'soon' ? 'soon' : '') + '">' + expTxt + '</div></div>';
+  }
+  return '<div class="wz">' + _wzFn('Comp Time', true) + '<div class="wz-bd">' +
+    _wzTabs([['我要請假',0],['我的紀錄',0],['我的補休',1],['待我簽核',0]]) +
+    '<div class="wz-card part" data-p="total"><div class="wz-num">' +
+      '<div><div class="n">16</div><div class="l">可用（小時）</div></div>' +
+      '<div style="text-align:right"><div class="n w">8</div><div class="l">已用（小時）</div></div>' +
+    '</div><div class="wz-note">累計取得 24h｜已用 8h｜剩餘 16h（2.0 天）</div>' +
+    '<div class="wz-note" style="color:#ffb340">⚠ 有 8h 將在 30 天內到期，記得排休</div></div>' +
+    '<div class="part" data-p="list">' +
+      ct('OT26050312','平日',8,'2026/05/03',8,0,'','soon','⏳ 剩 12 天到期（2026/08/03）') +
+      ct('OT26061805','假日',8,'2026/06/18',16,8,'','ok','📅 到期日 2026/09/18（剩 58 天）') +
+    '</div>' +
+  '</div></div>';
+}
+
+/* ---------- 加班 ---------- */
+function _otHtml(){
+  return '<div class="wz">' + _wzFn('Overtime', true) + '<div class="wz-bd">' +
+    _wzTabs([['加班申請',1],['我的紀錄',0],['待我簽核',0]]) +
+    '<div class="wz-card part" data-p="meter"><div class="wz-num">' +
+      '<div><div class="n">24</div><div class="l">本月可加班（小時）</div></div>' +
+      '<div class="ot-cap">22 / 46h</div></div>' +
+      '<div class="ot-bar"><div class="f" style="width:47.8%"></div><div class="w40"></div></div>' +
+      '<div class="wz-note">2026/07｜已核准 <b style="color:#E30613">18h</b>｜審核中 ' +
+      '<b style="color:#E30613">4h</b>（白線=40h預警，上限46h）</div></div>' +
+    '<div class="wz-card">' +
+      '<div class="part" data-p="when">' +
+        '<div class="wz-lb">// DATE 加班日期</div><div class="wz-in">2026-07-28</div>' +
+        '<div class="wz-lb">// TIME 加班時段</div>' +
+        '<div class="wz-row"><div class="wz-in">🕐　18:00</div><div class="wz-in">🕐　20:00</div></div>' +
+      '</div>' +
+      '<div class="part" data-p="pay">' +
+        '<div class="wz-lb">// PAY 費別選擇</div>' +
+        '<div class="wz-in sel">🌴 換補休（1:1，加班日起 3 個月內休畢）</div>' +
+      '</div>' +
+      '<div class="part" data-p="go">' +
+        '<div class="wz-lb">// REASON 加班事由</div><div class="wz-in ph">出貨旺季趕工</div>' +
+        '<div class="wz-prev">本次加班 <b>2</b> 小時</div>' +
+        '<div class="wz-btn"><b>送出申請</b></div>' +
+      '</div>' +
+    '</div>' +
+  '</div></div>';
+}
+
+/* ---------- 我的薪資單 ---------- */
+function _payslipHtml(){
+  function r(k, v, cls){
+    return '<div class="ps-r ' + (cls || '') + '"><span class="k">' + esc(k) + '</span>' +
+      '<span class="v">' + v + '</span></div>';
+  }
+  return '<div class="wz w2">' + _wzFn('Payslip', true) + '<div class="wz-bd">' +
+    _wzTabs([['我的薪資單',1]]) +
+    '<div class="wz-card ps-lock part" data-p="open2">' +
+      '<div class="t">🔒 2026/07 薪資單準備中</div>' +
+      '<div class="s">將於 <b>2026/08/05 09:00</b> 開放查看。<br>' +
+      '（薪資單固定於<b>次月 5 號上午 9 點</b>開放）</div></div>' +
+    '<div class="wz-card part" data-p="card">' +
+      '<div class="ps-h"><span class="ps-ym">2026 / 06</span>' +
+        '<span class="ps-net"><small>實發 NT$ </small>45,230</span></div>' +
+      '<div class="ps-d">' +
+        '<div class="part" data-p="btn"><div class="ps-btn">🔍 這個數字怎麼算的？</div>' +
+          '<div class="ps-btn g">📄 下載 PDF</div></div>' +
+        r('本薪','+ 36,000','add') + r('伙食津貼','+ 2,400','add') +
+        r('職務津貼','+ 2,000','add') +
+        '<div class="part" data-p="fixed">' + r('常駐薪資','40,400','fx') + '</div>' +
+        r('加班費','+ 3,215','add') + r('請假扣款','− 0','sub') +
+        r('勞保自付','− 1,038','sub') + r('健保自付','− 629','sub') +
+        r('實發金額','NT$ 45,230','tot') +
+        '<div class="part" data-p="pension"><div class="ps-pen">' +
+          '💚 公司另為你提繳勞退 <b>NT$ 2,424</b><br>' +
+          '<span>這筆錢由公司額外負擔，不從你的薪水扣，直接存入你的勞退專戶</span></div></div>' +
+      '</div></div>' +
+  '</div></div>';
+}
+
 /* ---------- 佈告欄 ---------- */
 function _boardHtml(){
   var chips = [['全部',1],['🚨 即時',0],['公告',0],['活動',0],['獎懲',0],['規章',0]];
@@ -3340,6 +3852,15 @@ function buildDeck(){
              (s.comp === 'otpadd' ? _otpAddHtml() : _otpListHtml()) +
              '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
     }
+    else if (s.type === 'demo' && ['att','punchfix','leave','comp','ot','payslip'].indexOf(s.comp) > -1){
+      var mkw = { att:_attHtml, punchfix:_punchfixHtml, leave:_leaveHtml,
+                  comp:_compHtml, ot:_otHtml, payslip:_payslipHtml }[s.comp];
+      var narrow = ['punchfix','leave','comp','ot'].indexOf(s.comp) > -1;
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="demo ' + (narrow ? 'd-phone' : 'wide') + '">' +
+             mkw() + '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
+    }
     else if (s.type === 'demo' && s.comp === 'keyring'){
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
@@ -3407,7 +3928,7 @@ var MIN_K = 0.9;   // ★ 投影可讀下限；再放不下就是那頁該拆
 /* 畫面元件比版面高 → 整塊等比縮小（不重排、不變形） */
 function fitVisual(sl){
   var demo = sl.querySelector('.demo'); if (!demo) return;
-  var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot, .kr, .otp'); if (!vis) return;
+  var vis = demo.querySelector('.pf, .bk, .hub, .phone, .shot, .kr, .otp, .wz'); if (!vis) return;
   vis.style.transform = '';
   // ★ 兩個都要用版面尺標（offsetHeight），不能用 getBoundingClientRect —— 舞台本身有 scale
   var H = demo.clientHeight, hh = vis.offsetHeight;
@@ -4012,6 +4533,15 @@ function setHub(sl){
 function setPhone(){
   var sl = $('deck').querySelector('.slide.on'); if (!sl) return;
   setHub(sl); setShot(sl); setBook(sl);
+  var wz = sl.querySelector('.wz');
+  if (wz){
+    var sw = SLIDES[IDX] || {}, cw = (sw.steps || [])[Math.max(0, STEP-1)] || {};
+    var fw = (STEP > 0) ? (cw.focus || '') : '';
+    wz.classList.toggle('focusing', !!fw);
+    wz.querySelectorAll('.part').forEach(function(x){
+      x.classList.toggle('hit', !!fw && x.getAttribute('data-p') === fw);
+    });
+  }
   var ot = sl.querySelector('.otp');
   if (ot){
     var so = SLIDES[IDX] || {}, co = (so.steps || [])[Math.max(0, STEP-1)] || {};
