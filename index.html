@@ -624,50 +624,6 @@ function prev(){
 function goto(i){ IDX = i; STEP = 0; show(); closeGrid(); }
 
 
-/* ---------- 活介面示範頁 ---------- */
-.demo{display:flex;gap:56px;flex:1;min-height:0;align-items:center}
-.demo .caps{flex:1;display:grid;gap:16px;align-content:center}
-.cap{display:flex;gap:18px;align-items:flex-start;border-left:6px solid var(--line);padding:8px 0 8px 20px}
-.cap .idx{font-family:var(--en);font-weight:700;font-size:19px;color:var(--red);width:32px;flex:none;padding-top:5px}
-.cap h3{font-size:29px;font-weight:900;color:var(--ink);line-height:1.35}
-.cap p{font-size:22px;color:var(--sub);line-height:1.6;margin-top:4px}
-.cap.shown{border-left-color:var(--red)}
-
-.phone{width:352px;flex:none;background:#0a0a0c;border:9px solid #26262c;border-radius:34px;
-  padding:12px 12px 20px;box-shadow:0 22px 50px rgba(0,0,0,.3);position:relative;overflow:hidden}
-.phone::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
-  width:96px;height:6px;background:#26262c;border-radius:4px}
-.pu-bar{display:flex;align-items:center;gap:8px;padding:16px 8px 8px;border-bottom:1px solid rgba(227,6,19,.35)}
-.pu-bar .pg{font-family:var(--en);font-weight:700;font-size:10px;letter-spacing:3px;color:var(--red)}
-.pu-bar .ck{margin-left:auto;font-family:var(--en);font-weight:600;font-size:12px;color:#fff;letter-spacing:1px}
-.pu-card{background:#15151a;border:1px solid rgba(255,255,255,.08);border-radius:9px;
-  padding:14px;margin:14px 4px;position:relative}
-.pu-card::before,.pu-card::after{content:'';position:absolute;width:12px;height:12px;border:2px solid var(--red)}
-.pu-card::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
-.pu-card::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
-.pu-date{font-family:var(--en);font-size:11px;letter-spacing:2px;color:#8a8a92}
-.pu-name{font-size:18px;font-weight:700;color:#fff;margin:2px 0 11px}
-.pu-row{display:flex;gap:9px}
-.pu-cell{flex:1;background:#0e0e12;border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:10px 4px;text-align:center}
-.pu-lab{font-family:var(--en);font-size:9px;letter-spacing:1.5px;color:#8a8a92;margin-bottom:3px}
-.pu-time{font-family:var(--en);font-weight:700;font-size:19px;color:#3a3a42;letter-spacing:1px}
-.pu-cell.done{border-color:rgba(227,6,19,.5)}
-.pu-cell.done .pu-time{color:var(--red);text-shadow:0 0 10px rgba(227,6,19,.55)}
-.pu-btn{display:block;width:92%;margin:0 auto 13px;height:74px;border:none;border-radius:7px;
-  transform:skewX(-18deg);position:relative;transition:.35s}
-.pu-btn::before{content:'';position:absolute;inset:4px;border:1px solid rgba(255,255,255,.28);border-radius:4px}
-.pu-btn .in2{transform:skewX(18deg);display:flex;flex-direction:column;align-items:center;
-  justify-content:center;height:100%;gap:2px}
-.pu-btn .zh{color:#fff;font-size:19px;font-weight:700;letter-spacing:5px;margin-right:-5px}
-.pu-btn .en2{font-family:var(--en);font-weight:600;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.6)}
-.pu-btn.i{background:linear-gradient(135deg,#E30613,#8f0009);box-shadow:0 0 18px rgba(227,6,19,.4),0 5px 0 rgba(0,0,0,.5)}
-.pu-btn.o{background:linear-gradient(135deg,#2b4d6f,#16293c);border:1px solid rgba(120,190,255,.32);
-  box-shadow:0 0 14px rgba(60,130,200,.3),0 5px 0 rgba(0,0,0,.5)}
-.pu-btn.off{opacity:.3;filter:grayscale(1);box-shadow:none}
-.pu-btn.off .zh{letter-spacing:2px;margin-right:-2px;font-size:17px}
-.pu-btn.off .en2{letter-spacing:1px;font-size:11px;text-transform:none}
-.pu-hint{text-align:center;font-size:11px;color:#ffb340;margin:-4px 0 8px;min-height:15px}
-
 /* ---------- 總覽 ---------- */
 function toggleGrid(){
   var g = $('grid');
