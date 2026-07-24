@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>穎利科技　教育訓練簡報引擎</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Chakra+Petch:wght@600;700&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --red:#E30613; --ink:#16161A; --paper:#F7F6F4; --dark:#101014;
+  --sub:#6B6B75; --line:#DEDCD8;
+  --done:#1F7A4D; --doing:#C8811A;
+  --zh:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  --en:'Chakra Petch','Microsoft JhengHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
+
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1600px;height:900px;position:relative;transform-origin:center center;
+  background:var(--paper);overflow:hidden;flex:none}
+
+/* ---------- 共用版面 ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:56px 90px 60px}
+.slide.on{display:flex}
+.slide.dark{background:var(--dark)}
+
+.eyebrow{font-family:var(--en);font-weight:700;font-size:20px;letter-spacing:6px;
+  color:var(--red);text-transform:uppercase;margin-bottom:10px}
+.h1{font-size:64px;font-weight:900;color:var(--ink);line-height:1.18;letter-spacing:-1px}
+.lead{font-size:26px;color:var(--sub);margin-top:16px;line-height:1.6}
+.rule{width:120px;height:8px;background:var(--red);transform:skewX(-18deg);margin:26px 0 34px}
+
+/* 封面 / 分段（深色） */
+.dark .h1{color:#fff}
+.dark .lead{color:#9A9AA6}
+.cover-wrap{margin:auto 0;max-width:1200px}
+.cover-title{font-size:88px;font-weight:900;color:#fff;line-height:1.16;letter-spacing:-2px}
+.cover-sub{font-size:29px;color:#B9B9C4;margin-top:28px;line-height:1.6}
+.cover-foot{position:absolute;left:90px;bottom:56px;font-family:var(--en);
+  font-size:17px;letter-spacing:4px;color:#5A5A66}
+.bigno{position:absolute;right:80px;bottom:30px;font-family:var(--en);font-weight:700;
+  font-size:280px;color:rgba(227,6,19,.16);line-height:.8;letter-spacing:-10px}
+
+/* 條列 */
+.items{display:grid;gap:20px;align-content:start;flex:1;min-height:0}
+.items.two{grid-template-columns:1fr 1fr;gap:20px 40px}
+.item{display:flex;gap:20px;align-items:flex-start;
+  border-left:6px solid var(--line);padding:10px 0 10px 22px}
+.item .idx{font-family:var(--en);font-weight:700;font-size:20px;color:var(--red);
+  padding-top:6px;flex:none;width:34px}
+.item h3{font-size:31px;font-weight:900;color:var(--ink);line-height:1.35}
+.item p{font-size:24px;color:var(--sub);line-height:1.66;margin-top:6px}
+
+/* 逐步展開 */
+.step{opacity:0;transform:translateY(16px);transition:opacity .32s ease,transform .32s ease}
+.step.shown{opacity:1;transform:none}
+.item.shown{border-left-color:var(--red)}
+
+/* 待補頁 */
+.todo-box{margin:auto;text-align:center}
+.todo-box .tag{display:inline-block;font-family:var(--en);font-weight:700;font-size:18px;
+  letter-spacing:4px;color:#fff;background:var(--doing);padding:8px 20px;
+  transform:skewX(-18deg);margin-bottom:26px}
+.todo-box .tag span{display:block;transform:skewX(18deg)}
+
+/* 頁尾 */
+.foot{position:absolute;left:90px;right:90px;bottom:26px;display:flex;align-items:center;
+  border-top:1px solid var(--line);padding-top:14px;
+  font-family:var(--en);font-size:16px;letter-spacing:2px;color:var(--sub)}
+.slide.dark .foot{border-color:rgba(255,255,255,.12);color:#5A5A66}
+.foot .r{margin-left:auto;display:flex;gap:22px;align-items:center}
+.foot .pill{background:var(--red);color:#fff;padding:3px 12px;transform:skewX(-18deg)}
+.foot .pill span{display:block;transform:skewX(18deg)}
+
+/* ---------- 路線選單 ---------- */
+#routes{position:absolute;inset:0;background:var(--dark);padding:70px 90px;display:none;flex-direction:column}
+#routes.on{display:flex}
+#routes .h1{color:#fff;font-size:56px}
+.rt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.rt{background:#191920;border:1px solid rgba(255,255,255,.1);padding:30px 28px;cursor:pointer;
+  text-align:left;color:#fff;font-family:var(--zh);transition:.15s;position:relative}
+.rt:hover{background:#22222c;border-color:var(--red);transform:translateY(-3px)}
+.rt .mk{width:44px;height:7px;background:var(--red);transform:skewX(-18deg);margin-bottom:18px}
+.rt b{display:block;font-size:33px;font-weight:900;letter-spacing:1px}
+.rt small{display:block;font-size:19px;color:#9A9AA6;margin-top:10px;line-height:1.5}
+.rt.hot{border-color:var(--red);background:#241016}
+.rt.dev .mk{background:#4A4A55}
+.rt.dev b{color:#9A9AA6}
+
+/* ---------- 總覽 ---------- */
+#grid{position:absolute;inset:0;background:rgba(10,10,14,.97);display:none;
+  padding:50px 60px;overflow:auto;z-index:40}
+#grid.on{display:block}
+.gwrap{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:26px}
+.gcell{background:#1b1b22;border:1px solid rgba(255,255,255,.1);padding:16px;cursor:pointer;
+  color:#fff;min-height:104px;text-align:left;font-family:var(--zh)}
+.gcell:hover{border-color:var(--red);background:#26262f}
+.gcell .n{font-family:var(--en);font-size:14px;color:var(--red);letter-spacing:2px}
+.gcell .t{font-size:19px;font-weight:700;margin-top:8px;line-height:1.4}
+.gcell.now{border-color:var(--red);background:#2d151a}
+
+/* ---------- 講稿 / 編輯器 ---------- */
+#notes{position:absolute;left:0;right:0;bottom:0;background:rgba(16,16,20,.97);color:#E8E8EF;
+  padding:26px 90px;font-size:21px;line-height:1.7;display:none;z-index:35;
+  border-top:3px solid var(--red);max-height:38%;overflow:auto}
+#notes.on{display:block}
+#notes b{color:var(--red);font-family:var(--en);letter-spacing:3px;font-size:15px;display:block;margin-bottom:8px}
+
+#editor{position:absolute;inset:0;background:rgba(10,10,14,.98);z-index:60;display:none;
+  padding:40px 60px;flex-direction:column;color:#fff}
+#editor.on{display:flex}
+#editor h2{font-size:30px;font-weight:900}
+#editor p{color:#9A9AA6;font-size:19px;margin:10px 0 18px;line-height:1.6}
+#editor textarea{flex:1;background:#15151b;color:#C8E6C9;border:1px solid #33333d;
+  padding:18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;line-height:1.6;resize:none}
+#editor .row{display:flex;gap:14px;margin-top:18px;align-items:center}
+.btn{background:var(--red);color:#fff;border:none;padding:14px 30px;font-size:19px;font-weight:900;
+  cursor:pointer;font-family:var(--zh);transform:skewX(-18deg)}
+.btn span{display:block;transform:skewX(18deg)}
+.btn.ghost{background:#2a2a33}
+#edmsg{color:#C8811A;font-size:18px}
+
+/* ---------- 計時器 / 提示 ---------- */
+#timer{position:absolute;right:26px;top:22px;font-family:var(--en);font-weight:700;font-size:26px;
+  color:var(--red);background:rgba(255,255,255,.9);padding:6px 16px;display:none;z-index:30}
+#timer.on{display:block}
+#help{position:fixed;left:14px;bottom:12px;color:#55555f;font-size:13px;
+  font-family:var(--en);letter-spacing:2px;z-index:70}
+#src{position:fixed;right:14px;bottom:12px;font-size:13px;font-family:var(--en);
+  letter-spacing:1px;z-index:70;color:#55555f}
+</style>
+</head>
+<body>
+
+<div id="viewport"><div id="stage">
+  <div id="routes"></div>
+  <div id="deck"></div>
+  <div id="grid"></div>
+  <div id="notes"></div>
+  <div id="timer">00:00</div>
+  <div id="editor">
+    <h2>簡報內容（貼上新的 JSON 就換一份簡報）</h2>
+    <p>這個檔案本身不存內容。內容全在下面這份資料裡 —— 改它，簡報就更新，版型和互動不用重做。<br>
+       正式上線時這份資料會放成外部的 <b>deck-data.json</b>，改那一個檔就好。</p>
+    <textarea id="edtext" spellcheck="false"></textarea>
+    <div class="row">
+      <button class="btn" onclick="applyEdit()"><span>套用，重新產生簡報</span></button>
+      <button class="btn ghost" onclick="toggleEditor(false)"><span>取消</span></button>
+      <span id="edmsg"></span>
+    </div>
+  </div>
+</div></div>
+
+<div id="help">← → 翻頁 ｜ ↓ 全展開 ｜ O 總覽 ｜ N 講稿 ｜ T 計時 ｜ R 換路線 ｜ E 改內容 ｜ F 全螢幕</div>
+<div id="src">—</div>
+
+<script>
+/* ============================================================
+   引擎：只認資料，不認內容
+   資料來源優先序 ① 外部 deck-data.json ② 內建快照（投影保命用）
+   ============================================================ */
+var FALLBACK = {
+  "meta": {
+    "title": "穎利科技　內部系統教育訓練",
+    "subtitle": "大家每天都會用到的功能",
+    "org": "WINZ TECHNOLOGY",
+    "ver": "2026-07-25 / v1",
+    "updated": "2026-07-25"
+  },
+
+  "routes": [
+    { "id": "all",      "name": "全公司場",   "desc": "7/28 全員場・只講共用功能", "hot": true },
+    { "id": "foreman",  "name": "廠務",       "desc": "共用功能 ＋ 廠務專屬" },
+    { "id": "r_and_d",  "name": "研發襄理",   "desc": "共用功能 ＋ 研發專屬" },
+    { "id": "qc",       "name": "品管組長",   "desc": "共用功能 ＋ 進貨檢驗" },
+    { "id": "operator", "name": "作業專員",   "desc": "共用功能 ＋ 現場單據" },
+    { "id": "_dev",     "name": "備課模式",   "desc": "全部頁面一次展開（自己看）", "dev": true }
+  ],
+
+  "slides": [
+    {
+      "type": "cover",
+      "roles": ["*"],
+      "title": "公司的系統，<br>其實比你想的好用",
+      "sub": "十分鐘，帶你把每天會用到的都走過一遍"
+    },
+
+    {
+      "type": "section",
+      "roles": ["*"],
+      "no": "01",
+      "title": "先從「進得去」開始",
+      "sub": "登入這件事，只有第一次麻煩"
+    },
+
+    {
+      "type": "list",
+      "roles": ["*"],
+      "title": "登入時，那兩顆按鈕差在哪？",
+      "lead": "選錯不會壞掉，只是下次要重登一次而已。",
+      "items": [
+        { "h": "🔒 我的個人裝置", "p": "自己的手機、自己的電腦。系統會記得你，下次打開直接進去。" },
+        { "h": "👥 公司共用電腦", "p": "現場那台、會議室那台。刻意不記得你 —— 下一個人來，不會用到你的帳號。" },
+        { "h": "所以「共用電腦每次都要登入」不是壞掉", "p": "是故意的。那台電腦大家輪流用。" }
+      ],
+      "notes": "這頁一定要講。過去最多人問的就是「為什麼有時候要重登」。講完這頁，客服量會少一半。"
+    },
+
+    {
+      "type": "section",
+      "roles": ["*"],
+      "no": "02",
+      "title": "上下班打卡",
+      "sub": "手機拿出來，兩秒的事"
+    },
+
+    {
+      "type": "list",
+      "roles": ["*"],
+      "title": "打卡：紅色上班，藍色下班",
+      "lead": "打完卡，按鈕會變灰，代表今天這一趟已經記錄好了。",
+      "items": [
+        { "h": "要在公司附近才打得到", "p": "系統會抓你的位置，離公司太遠會擋下來。記得開定位權限。" },
+        { "h": "第一次打不到？先別緊張", "p": "新手機第一次抓 GPS 會不準，抓過幾次就穩了。到窗邊再試一次。" },
+        { "h": "忘記打上班卡", "p": "系統會擋住下班卡，並帶你去申請「忘打卡」。送出後就能正常打下班卡。" },
+        { "h": "假日來上班", "p": "會先問你一次「今天是假日，確定要打嗎」。記得另外補加班單，不然不算加班費。" },
+        { "h": "太早到、太晚走", "p": "系統會問一句是公事還是私事。公事就去申請加班，私事寫一行原因就好。" }
+      ],
+      "notes": "重點放在「擋下來不是刁難，是保護你的出勤紀錄」。"
+    },
+
+    {
+      "type": "section",
+      "roles": ["*"],
+      "no": "03",
+      "title": "公司在發生什麼事",
+      "sub": "佈告欄與行事曆"
+    },
+
+    {
+      "type": "list",
+      "roles": ["*"],
+      "title": "佈告欄：重要的事不會只在群組裡飄過去",
+      "lead": "公告、活動、獎懲、規章、即時訊息，都在同一個地方。",
+      "items": [
+        { "h": "會寄到你的信箱", "p": "重要的公告不只貼在牆上，還會主動送到你手上。" },
+        { "h": "看過的會記錄下來", "p": "發布的人知道誰還沒看到，就不用一個一個問。" },
+        { "h": "活動會自動跑到行事曆", "p": "不用自己抄時間。" }
+      ]
+    },
+
+    {
+      "type": "list",
+      "roles": ["*"],
+      "title": "1F 會議室現在有人嗎？",
+      "lead": "打開行事曆就知道，不用跑去看。",
+      "items": [
+        { "h": "會議室不會被兩組人訂走", "p": "同一個時段只會有一組人訂得到。" },
+        { "h": "同事請假，行事曆上看得到", "p": "但只會顯示「不在公司」—— 不會寫是什麼假。" },
+        { "h": "為什麼不寫假別？", "p": "請假的理由是私事。系統只讓大家知道「今天找不找得到人」。" },
+        { "h": "唯一的例外", "p": "公出、出差會寫出來 —— 那是代表公司出去辦事，本來就是公事。" }
+      ],
+      "notes": "隱私這段要慢慢講。這是全公司對系統建立信任的關鍵一頁。"
+    },
+
+    {
+      "type": "todo",
+      "roles": ["*"],
+      "title": "請款申請單",
+      "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
+    },
+
+    {
+      "type": "todo",
+      "roles": ["*"],
+      "title": "樣品／耗材領用單",
+      "sub": "這頁還沒寫 —— 需要家兒提供畫面或說明"
+    },
+
+    {
+      "type": "list",
+      "roles": ["qc"],
+      "title": "進貨檢驗，不用再翻紙本",
+      "lead": "貨到了、還沒驗的，系統會自己列出來。",
+      "items": [
+        { "h": "待驗清單自動出現", "p": "不用去問採購今天到了什麼。" },
+        { "h": "驗完直接填結果", "p": "填完就進系統，後面的人馬上看得到。" }
+      ]
+    },
+
+    {
+      "type": "end",
+      "roles": ["*"],
+      "title": "用不順，直接說",
+      "sub": "系統是為了讓大家少做一點事。<br>哪裡卡住、哪裡難用，講出來就會改。"
+    }
+  ]
+};
+
+var DATA = null, ROUTE = null, IDX = 0, STEP = 0, SLIDES = [];
+var $ = function(id){ return document.getElementById(id); };
+var esc = function(s){ return String(s == null ? '' : s); };
+
+/* ---------- 載入 ---------- */
+function boot(){
+  fetch('deck-data.json', {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(j){ setData(j, '外部 deck-data.json'); })
+    .catch(function(){ setData(FALLBACK, '內建快照（抓不到外部檔）'); });
+}
+function setData(j, src){
+  DATA = j;
+  $('src').textContent = '資料來源：' + src + ' ｜ ' + esc(j.meta && j.meta.ver);
+  renderRoutes();
+}
+
+/* ---------- 路線選單 ---------- */
+function renderRoutes(){
+  var m = DATA.meta || {}, rs = DATA.routes || [];
+  var h = '<div class="eyebrow">// Select Route</div>' +
+          '<div class="h1">' + esc(m.title) + '</div>' +
+          '<div class="lead">今天要帶誰走？點一個開始。</div><div class="rt-grid">';
+  rs.forEach(function(r, i){
+    h += '<button class="rt' + (r.hot?' hot':'') + (r.dev?' dev':'') + '" onclick="pick(\'' + r.id + '\')">' +
+         '<div class="mk"></div><b>' + esc(r.name) + '</b><small>' + esc(r.desc) + '</small></button>';
+  });
+  h += '</div>';
+  $('routes').innerHTML = h;
+  $('routes').classList.add('on');
+  $('deck').innerHTML = '';
+}
+
+function pick(id){
+  ROUTE = id;
+  SLIDES = (DATA.slides || []).filter(function(s){
+    if (id === '_dev') return true;
+    var r = s.roles || ['*'];
+    return r.indexOf('*') > -1 || r.indexOf(id) > -1;
+  });
+  IDX = 0; STEP = 0;
+  $('routes').classList.remove('on');
+  buildDeck();
+  show();
+}
+
+/* ---------- 產生投影片 ---------- */
+function buildDeck(){
+  var m = DATA.meta || {};
+  var html = SLIDES.map(function(s, i){
+    var dark = (s.type === 'cover' || s.type === 'section' || s.type === 'end');
+    var body = '';
+
+    if (s.type === 'cover'){
+      body = '<div class="cover-wrap"><div class="eyebrow">// ' + esc(m.org) + '</div>' +
+             '<div class="cover-title">' + esc(s.title) + '</div>' +
+             '<div class="rule"></div>' +
+             '<div class="cover-sub">' + esc(s.sub) + '</div></div>' +
+             '<div class="cover-foot">' + esc(m.ver) + '</div>';
+    }
+    else if (s.type === 'section'){
+      body = '<div class="cover-wrap"><div class="eyebrow">// Chapter ' + esc(s.no) + '</div>' +
+             '<div class="cover-title">' + esc(s.title) + '</div>' +
+             '<div class="rule"></div>' +
+             '<div class="cover-sub">' + esc(s.sub) + '</div></div>' +
+             '<div class="bigno">' + esc(s.no) + '</div>';
+    }
+    else if (s.type === 'end'){
+      body = '<div class="cover-wrap" style="text-align:center;margin:auto">' +
+             '<div class="cover-title">' + esc(s.title) + '</div>' +
+             '<div class="rule" style="margin:30px auto 34px"></div>' +
+             '<div class="cover-sub">' + esc(s.sub) + '</div></div>';
+    }
+    else if (s.type === 'todo'){
+      body = '<div class="todo-box"><div class="tag"><span>尚未完成</span></div>' +
+             '<div class="h1">' + esc(s.title) + '</div>' +
+             '<div class="lead">' + esc(s.sub) + '</div></div>';
+    }
+    else { /* list */
+      var its = s.items || [];
+      var two = its.length > 6 ? ' two' : '';
+      body = '<div class="h1">' + esc(s.title) + '</div>' +
+             (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
+             '<div class="rule"></div><div class="items' + two + '">' +
+             its.map(function(it, k){
+               var n = (k+1) < 10 ? '0' + (k+1) : (k+1);
+               return '<div class="item step"><div class="idx">' + n + '</div><div>' +
+                      '<h3>' + esc(it.h) + '</h3>' +
+                      (it.p ? '<p>' + esc(it.p) + '</p>' : '') + '</div></div>';
+             }).join('') + '</div>';
+    }
+
+    var foot = '<div class="foot"><div>' + esc(m.title) + '</div><div class="r">' +
+               '<div>' + esc(routeName()) + '</div>' +
+               '<div class="pill"><span>' + (i+1) + ' / ' + SLIDES.length + '</span></div></div></div>';
+
+    return '<div class="slide' + (dark?' dark':'') + '" data-i="' + i + '">' + body + foot + '</div>';
+  }).join('');
+  $('deck').innerHTML = html;
+}
+function routeName(){
+  var r = (DATA.routes || []).filter(function(x){ return x.id === ROUTE; })[0];
+  return r ? r.name : '';
+}
+
+/* ---------- 顯示 / 逐步展開 ---------- */
+function show(){
+  var all = $('deck').querySelectorAll('.slide');
+  for (var i=0;i<all.length;i++) all[i].classList.toggle('on', i === IDX);
+  applySteps();
+  renderNotes();
+  if (ROUTE === '_dev') expandAll();
+}
+function steps(){ return $('deck').querySelectorAll('.slide.on .step'); }
+function applySteps(){
+  var st = steps();
+  for (var i=0;i<st.length;i++) st[i].classList.toggle('shown', i < STEP);
+}
+function expandAll(){ STEP = steps().length; applySteps(); }
+
+function next(){
+  if (STEP < steps().length){ STEP++; applySteps(); return; }
+  if (IDX < SLIDES.length - 1){ IDX++; STEP = 0; show(); }
+}
+function prev(){
+  if (STEP > 0){ STEP--; applySteps(); return; }
+  if (IDX > 0){ IDX--; show(); expandAll(); }   // 退回上一頁自動全展開
+}
+function goto(i){ IDX = i; STEP = 0; show(); closeGrid(); }
+
+/* ---------- 總覽 ---------- */
+function toggleGrid(){
+  var g = $('grid');
+  if (g.classList.contains('on')) return closeGrid();
+  var h = '<div class="eyebrow">// Overview</div><div class="h1" style="color:#fff">' +
+          routeName() + '　共 ' + SLIDES.length + ' 頁</div><div class="gwrap">';
+  SLIDES.forEach(function(s,i){
+    h += '<button class="gcell' + (i===IDX?' now':'') + '" onclick="goto(' + i + ')">' +
+         '<div class="n">' + (i+1) + '</div><div class="t">' + esc(s.title || s.sub || '—') + '</div></button>';
+  });
+  g.innerHTML = h + '</div>';
+  g.classList.add('on');
+}
+function closeGrid(){ $('grid').classList.remove('on'); }
+
+/* ---------- 講稿 ---------- */
+var NOTE_ON = false;
+function renderNotes(){
+  var s = SLIDES[IDX] || {};
+  $('notes').innerHTML = '<b>// 講稿</b>' + (s.notes || '（這頁沒有講稿）');
+  $('notes').classList.toggle('on', NOTE_ON);
+}
+function toggleNotes(){ NOTE_ON = !NOTE_ON; renderNotes(); }
+
+/* ---------- 計時器 ---------- */
+var T0 = null, TI = null;
+function toggleTimer(){
+  if (TI){ clearInterval(TI); TI = null; $('timer').classList.remove('on'); return; }
+  T0 = Date.now(); $('timer').classList.add('on');
+  TI = setInterval(function(){
+    var s = Math.floor((Date.now()-T0)/1000), p = function(n){ return (n<10?'0':'')+n; };
+    $('timer').textContent = p(Math.floor(s/60)) + ':' + p(s%60);
+  }, 500);
+}
+
+/* ---------- 內容編輯器（展示「可更新」用） ---------- */
+function toggleEditor(on){
+  if (on){ $('edtext').value = JSON.stringify(DATA, null, 2); $('edmsg').textContent = ''; }
+  $('editor').classList.toggle('on', !!on);
+}
+function applyEdit(){
+  try{
+    var j = JSON.parse($('edtext').value);
+    setData(j, '手動貼上');
+    toggleEditor(false);
+  }catch(e){
+    $('edmsg').textContent = 'JSON 格式有誤：' + e.message;
+  }
+}
+
+/* ---------- 縮放：固定 1600×900 舞台 ---------- */
+function fit(){
+  var s = Math.min(innerWidth/1600, innerHeight/900);
+  $('stage').style.transform = 'scale(' + s + ')';
+}
+addEventListener('resize', fit);
+
+/* ---------- 操作 ---------- */
+addEventListener('keydown', function(e){
+  var k = e.key;
+  if ($('editor').classList.contains('on')){ if (k === 'Escape') toggleEditor(false); return; }
+  if (!ROUTE){ return; }
+  if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ e.preventDefault(); next(); }
+  else if (k === 'ArrowLeft' || k === 'PageUp'){ e.preventDefault(); prev(); }
+  else if (k === 'ArrowDown'){ e.preventDefault(); expandAll(); }
+  else if (k === 'o' || k === 'O'){ toggleGrid(); }
+  else if (k === 'n' || k === 'N'){ toggleNotes(); }
+  else if (k === 't' || k === 'T'){ toggleTimer(); }
+  else if (k === 'e' || k === 'E'){ toggleEditor(true); }
+  else if (k === 'r' || k === 'R'){ ROUTE = null; closeGrid(); renderRoutes(); }
+  else if (k === 'f' || k === 'F'){
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen();
+  }
+  else if (k === 'Escape'){ closeGrid(); }
+});
+$('viewport').addEventListener('click', function(e){
+  if (!ROUTE) return;
+  if (e.target.closest('#editor,#grid,#routes,.btn')) return;
+  next();
+});
+$('viewport').addEventListener('contextmenu', function(e){ e.preventDefault(); prev(); });
+
+/* 網址帶路線：?route=qc 直接開 */
+fit();
+boot();
+setTimeout(function(){
+  var m = location.search.match(/[?&]route=([^&]+)/);
+  if (m && DATA) pick(decodeURIComponent(m[1]));
+}, 400);
+</script>
+</body>
+</html>
