@@ -24,7 +24,8 @@
       "廠商代號助手": "img/39_廠商代號助手.png",
       "外箱計算器": "img/40_外箱計算器.png",
       "打卡系統": "https://winz-tech.github.io/WINZ-ClockIn/icon-512.png"
-    }
+    },
+    "defaultRoute": "all"
   },
   "routes": [
     {
