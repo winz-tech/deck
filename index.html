@@ -1294,8 +1294,11 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 #help,#src{position:fixed;bottom:10px;z-index:70;font-family:var(--en);font-size:12px;
   letter-spacing:2px;color:#4A4A55;background:rgba(0,0,0,.55);padding:5px 12px;
   opacity:0;transition:opacity .3s;pointer-events:none}
-#help{left:12px} #src{right:12px;letter-spacing:1px}
-body.peek #help, body.peek #src{opacity:1}
+#help{left:12px} #help b{color:var(--red);font-weight:700}
+/* ★ 資料來源標籤：投影時不該出現，只有備課模式看得到 */
+#src{right:12px;letter-spacing:1px;display:none}
+body.devroute #src{display:block}
+body.peek #help, body.devroute.peek #src{opacity:1}
 </style>
 </head>
 <body>
@@ -1306,20 +1309,9 @@ body.peek #help, body.peek #src{opacity:1}
   <div id="grid"></div>
   <div id="notes"></div>
   <div id="timer">00:00</div>
-  <div id="editor">
-    <h2>簡報內容（貼上新的 JSON 就換一份簡報）</h2>
-    <p>這個檔案本身不存內容。內容全在下面這份資料裡 —— 改它，簡報就更新，版型和互動不用重做。<br>
-       正式上線時這份資料會放成外部的 <b>deck-data.json</b>，改那一個檔就好。</p>
-    <textarea id="edtext" spellcheck="false"></textarea>
-    <div class="row">
-      <button class="btn" onclick="applyEdit()"><span>套用，重新產生簡報</span></button>
-      <button class="btn ghost" onclick="toggleEditor(false)"><span>取消</span></button>
-      <span id="edmsg"></span>
-    </div>
-  </div>
 </div></div>
 
-<div id="help">← → 翻頁 ｜ ↓ 全展開 ｜ O 總覽 ｜ N 講稿 ｜ T 計時 ｜ R 換路線 ｜ E 改內容 ｜ F 全螢幕</div>
+<div id="help">← → 翻頁 ｜ ↓ 全展開 ｜ <b>P 簡報者視窗</b> ｜ O 總覽 ｜ T 計時 ｜ R 換場次 ｜ F 全螢幕</div>
 <div id="src">—</div>
 
 <script>
@@ -1332,7 +1324,7 @@ var FALLBACK = {
     "title": "穎利科技　內部系統教育訓練",
     "subtitle": "大家每天都會用到的功能",
     "org": "WINZ TECHNOLOGY",
-    "ver": "2026-07-28 / v12",
+    "ver": "2026-07-28 / v13",
     "updated": "2026-07-28",
     "icons": {
       "今日總覽": "img/61_今日總覽.png",
@@ -3727,6 +3719,7 @@ function startDeck(){ csGo(PICKED); }
 
 function pick(id){
   ROUTE = id;
+  document.body.classList.toggle('devroute', id === '_dev');
   SLIDES = (DATA.slides || []).filter(function(s){
     if (id === '_dev') return true;
     if (s.always) return true;                 // 封面／結尾：每一場都要
@@ -4612,6 +4605,162 @@ function closeGrid(){ $('grid').classList.remove('on'); }
 
 /* ---------- 講稿 ---------- */
 var NOTE_ON = false;
+/* ================= 簡報者視窗 =================
+   投影機播主視窗，講稿留在筆電這一台。
+   子視窗直接讀 window.opener 的狀態（同源），不用 BroadcastChannel，
+   斷線也不會卡住；反過來也能按上下頁控制主視窗。
+   ================================================ */
+var PRESWIN = null;
+
+function openPresenter(){
+  if (PRESWIN && !PRESWIN.closed){ PRESWIN.focus(); return; }
+  PRESWIN = window.open('', 'wzPresenter', 'width=1060,height=760');
+  if (!PRESWIN){
+    alert('瀏覽器擋掉了新視窗。\n請在網址列右邊允許「彈出式視窗」，再按一次 P。');
+    return;
+  }
+  PRESWIN.document.open();
+  PRESWIN.document.write(_presenterDoc());
+  PRESWIN.document.close();
+}
+
+/* 給子視窗抓的：這一頁的全部資料 */
+function presenterState(){
+  var s = SLIDES[IDX] || {}, nx = SLIDES[IDX+1] || null;
+  return {
+    idx: IDX, total: SLIDES.length, step: STEP,
+    route: routeName(), ver: (DATA.meta && DATA.meta.ver) || '',
+    title: String(s.title || '').replace(/<br>/g, ' '),
+    lead: s.lead || '',
+    steps: (s.steps || s.items || []).map(function(c){ return { h: c.h || '', p: c.p || '' }; }),
+    notes: s.notes || '',
+    next: nx ? String(nx.title || '').replace(/<br>/g, ' ') : '（最後一頁）'
+  };
+}
+/* 全部講稿，給列印用 */
+function presenterAll(){
+  return SLIDES.map(function(s, i){
+    return { no: i + 1, title: String(s.title || '').replace(/<br>/g, ' '),
+             steps: (s.steps || s.items || []).map(function(c){ return { h: c.h || '', p: c.p || '' }; }),
+             notes: s.notes || '' };
+  });
+}
+
+function _presenterDoc(){
+  var css =
+  "*{box-sizing:border-box;margin:0;padding:0}" +
+  "body{background:#0d0d11;color:#E8E8EF;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;" +
+    "height:100vh;display:flex;flex-direction:column;overflow:hidden}" +
+  ".hd{display:flex;align-items:center;gap:14px;padding:11px 18px;background:#15151b;" +
+    "border-bottom:2px solid #E30613}" +
+  ".hd .r{font-family:'Chakra Petch',monospace;font-weight:700;font-size:13px;letter-spacing:3px;color:#E30613}" +
+  ".hd .pg{font-family:'Chakra Petch',monospace;font-size:14px;color:#8a8a92}" +
+  ".hd .tm{margin-left:auto;font-family:'Chakra Petch',monospace;font-size:26px;font-weight:700;letter-spacing:2px}" +
+  ".hd button{background:#26262e;border:1px solid #3a3a44;color:#cfcfd6;border-radius:6px;" +
+    "padding:7px 13px;font-size:13px;cursor:pointer;font-family:inherit}" +
+  ".hd button:hover{border-color:#E30613;color:#fff}" +
+  ".bd{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:0}" +
+  ".col{padding:18px 22px;overflow-y:auto;min-height:0}" +
+  ".col+.col{border-left:1px solid #26262e;background:#101015}" +
+  ".lb{font-family:'Chakra Petch',monospace;font-size:11px;letter-spacing:4px;color:#55555e;" +
+    "text-transform:uppercase;margin-bottom:9px}" +
+  "h1{font-size:31px;font-weight:900;line-height:1.25;color:#fff;margin-bottom:6px}" +
+  ".lead{font-size:16px;color:#9a9aa6;margin-bottom:16px;line-height:1.6}" +
+  ".st{border-left:4px solid #33333d;padding:8px 0 8px 13px;margin-bottom:11px;opacity:.42}" +
+  ".st.on{opacity:1;border-left-color:#E30613;background:rgba(227,6,19,.07)}" +
+  ".st .n{font-family:'Chakra Petch',monospace;font-size:12px;color:#E30613;font-weight:700}" +
+  ".st h3{font-size:19px;font-weight:900;color:#fff;margin:2px 0 3px;line-height:1.35}" +
+  ".st p{font-size:15px;color:#a8a8b4;line-height:1.65}" +
+  ".notes{font-size:19px;line-height:1.95;color:#F0F0F6;white-space:pre-wrap;" +
+    "background:#17171d;border:1px solid #2a2a33;border-left:4px solid #E30613;" +
+    "border-radius:8px;padding:15px 17px}" +
+  ".notes.none{color:#55555e;font-size:15px;border-left-color:#33333d}" +
+  ".nx{margin-top:18px;padding-top:14px;border-top:1px solid #26262e;font-size:15px;color:#8a8a92}" +
+  ".nx b{color:#cfcfd6;display:block;font-size:17px;margin-top:4px}" +
+  ".ft{display:flex;gap:10px;padding:11px 18px;background:#15151b;border-top:1px solid #26262e}" +
+  ".ft button{flex:1;padding:14px 0;font-size:17px;font-weight:700;border:none;border-radius:8px;" +
+    "cursor:pointer;font-family:inherit;background:#26262e;color:#fff}" +
+  ".ft button.go{background:linear-gradient(135deg,#E30613,#8f0009)}" +
+  ".ft button:active{transform:translateY(2px)}" +
+  ".dead{padding:40px;text-align:center;color:#8a8a92;font-size:16px;line-height:2}";
+
+  var js =
+  "var W=window.opener;" +
+  "var T0=null,TT=null;" +
+  "function pad(n){return (n<10?'0':'')+n}" +
+  "function tick(){if(!T0){document.getElementById('tm').textContent='00:00';return}" +
+    "var s=Math.floor((Date.now()-T0)/1000);" +
+    "document.getElementById('tm').textContent=pad(Math.floor(s/60))+':'+pad(s%60)}" +
+  "function toggleT(){if(T0){T0=null}else{T0=Date.now()}tick()}" +
+  "function resetT(){T0=Date.now();tick()}" +
+  "function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}" +
+  "var last='';" +
+  "function draw(){" +
+    "if(!W||W.closed){document.getElementById('bd').innerHTML=" +
+      "'<div class=\"dead\">主視窗已經關掉了。<br>回到簡報視窗重新按一次 <b>P</b>。</div>';return}" +
+    "var d;try{d=W.presenterState()}catch(e){return}" +
+    "var key=d.idx+'/'+d.step;if(key===last)return;last=key;" +
+    "document.getElementById('rt').textContent='// '+d.route;" +
+    "document.getElementById('pg').textContent=(d.idx+1)+' / '+d.total;" +
+    "document.getElementById('vr').textContent=d.ver;" +
+    "var h='<div class=\"lb\">現在這一頁</div><h1>'+esc(d.title)+'</h1>';" +
+    "if(d.lead)h+='<div class=\"lead\">'+esc(d.lead)+'</div>';" +
+    "d.steps.forEach(function(c,i){" +
+      "h+='<div class=\"st'+(i<d.step?' on':'')+'\"><div class=\"n\">'+(i+1<10?'0':'')+(i+1)+" +
+      "'</div><h3>'+esc(c.h)+'</h3>'+(c.p?'<p>'+esc(c.p)+'</p>':'')+'</div>'});" +
+    "if(!d.steps.length)h+='<div class=\"lead\">這頁沒有分段，直接講。</div>';" +
+    "document.getElementById('L').innerHTML=h;" +
+    "var n='<div class=\"lb\">講稿（只有你看得到）</div>'+" +
+      "(d.notes?'<div class=\"notes\">'+esc(d.notes)+'</div>':" +
+      "'<div class=\"notes none\">這頁沒有寫講稿。</div>')+" +
+      "'<div class=\"nx\">下一頁<b>'+esc(d.next)+'</b></div>';" +
+    "document.getElementById('R').innerHTML=n}" +
+  "function go(f){try{W[f]();}catch(e){}last='';draw()}" +
+  "function printAll(){" +
+    "var a;try{a=W.presenterAll()}catch(e){return}" +
+    "var h='<meta charset=\"UTF-8\"><title>講稿</title><style>" +
+      "@page{size:A4;margin:16mm}*{box-sizing:border-box;margin:0;padding:0}" +
+      "body{font-family:\"Microsoft JhengHei\",sans-serif;color:#1a1a1a;font-size:12px}" +
+      "h2{font-size:15px;border-bottom:2px solid #E30613;padding-bottom:4px;margin:0 0 7px}" +
+      ".pg{page-break-inside:avoid;margin-bottom:16px}" +
+      ".no{color:#E30613;font-family:monospace}" +
+      ".s{margin:4px 0 4px 12px}.s b{font-size:12.5px}.s span{color:#555;display:block;font-size:11.5px}" +
+      ".nt{background:#f5f5f5;border-left:3px solid #E30613;padding:7px 9px;margin-top:6px;" +
+      "font-size:11.5px;line-height:1.7;white-space:pre-wrap}" +
+      ".pb{position:fixed;top:0;left:0;right:0;background:#1A1A1A;color:#fff;padding:9px 16px}" +
+      ".pb button{padding:7px 18px;border:none;border-radius:5px;background:#E30613;color:#fff;" +
+      "font-size:14px;font-weight:700;cursor:pointer}@media print{.pb,.sp{display:none}}" +
+      "</style><div class=\"pb\"><button onclick=\"window.print()\">🖨 列印 / 存成 PDF</button></div>" +
+      "<div class=\"sp\" style=\"height:44px\"></div>';" +
+    "a.forEach(function(s){" +
+      "h+='<div class=\"pg\"><h2><span class=\"no\">'+(s.no<10?'0':'')+s.no+'</span>　'+s.title+'</h2>';" +
+      "s.steps.forEach(function(c,i){h+='<div class=\"s\"><b>'+(i+1)+'. '+c.h+'</b>'+" +
+      "(c.p?'<span>'+c.p+'</span>':'')+'</div>'});" +
+      "if(s.notes)h+='<div class=\"nt\">'+s.notes+'</div>';h+='</div>'});" +
+    "var w=window.open('','_blank');w.document.open();w.document.write(h);w.document.close()}" +
+  "document.addEventListener('keydown',function(e){" +
+    "if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go('next')}" +
+    "else if(e.key==='ArrowLeft'){e.preventDefault();go('prev')}});" +
+  "setInterval(draw,180);setInterval(tick,1000);draw();tick();";
+
+  return '<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">' +
+    '<title>簡報者視窗 — 穎利科技</title>' +
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap">' +
+    '<style>' + css + '</style></head><body>' +
+    '<div class="hd"><span class="r" id="rt">//</span><span class="pg" id="pg">— / —</span>' +
+      '<button onclick="printAll()">🖨 印出全部講稿</button>' +
+      '<button onclick="resetT()">計時歸零</button>' +
+      '<button onclick="toggleT()">開始 / 暫停</button>' +
+      '<span class="tm" id="tm">00:00</span></div>' +
+    '<div class="bd" id="bd"><div class="col" id="L"></div><div class="col" id="R"></div></div>' +
+    '<div class="ft"><button onclick="go(\'prev\')">‹ 上一步</button>' +
+      '<button class="go" onclick="go(\'next\')">下一步 ›</button></div>' +
+    '<div style="padding:6px 18px;background:#15151b;font-size:11px;color:#44444c;' +
+      'font-family:monospace;letter-spacing:1px">資料版本 <span id="vr"></span>　·　' +
+      '這個視窗留在筆電，投影機只會播簡報那一個視窗</div>' +
+    '<script>' + js + '<\/script></body></html>';
+}
+
 function renderNotes(){
   var s = SLIDES[IDX] || {};
   $('notes').innerHTML = '<b>// 講稿</b>' + (s.notes || '（這頁沒有講稿）');
@@ -4631,21 +4780,6 @@ function toggleTimer(){
 }
 
 /* ---------- 內容編輯器（展示「可更新」用） ---------- */
-function toggleEditor(on){
-  if (on){ $('edtext').value = JSON.stringify(DATA, null, 2); $('edmsg').textContent = ''; }
-  $('editor').classList.toggle('on', !!on);
-}
-function applyEdit(){
-  try{
-    var j = JSON.parse($('edtext').value);
-    setData(j, '手動貼上');
-    toggleEditor(false);
-  }catch(e){
-    $('edmsg').textContent = 'JSON 格式有誤：' + e.message;
-  }
-}
-
-/* ---------- 縮放：固定 1600×900 舞台 ---------- */
 function fit(){
   var s = Math.min(innerWidth/1600, innerHeight/900);
   $('stage').style.transform = 'scale(' + s + ')';
@@ -4655,7 +4789,6 @@ addEventListener('resize', function(){ fit(); autofit(); });
 /* ---------- 操作 ---------- */
 addEventListener('keydown', function(e){
   var k = e.key;
-  if ($('editor').classList.contains('on')){ if (k === 'Escape') toggleEditor(false); return; }
   if (!ROUTE){
     if (k === 'ArrowLeft'){ e.preventDefault(); csMove(-1); }
     else if (k === 'ArrowRight'){ e.preventDefault(); csMove(1); }
@@ -4665,10 +4798,10 @@ addEventListener('keydown', function(e){
   if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ e.preventDefault(); next(); }
   else if (k === 'ArrowLeft' || k === 'PageUp'){ e.preventDefault(); prev(); }
   else if (k === 'ArrowDown'){ e.preventDefault(); expandAll(); }
+  else if (k === 'p' || k === 'P'){ openPresenter(); }
   else if (k === 'o' || k === 'O'){ toggleGrid(); }
   else if (k === 'n' || k === 'N'){ toggleNotes(); }
   else if (k === 't' || k === 'T'){ toggleTimer(); }
-  else if (k === 'e' || k === 'E'){ toggleEditor(true); }
   else if (k === 'r' || k === 'R'){ ROUTE = null; closeGrid(); renderRoutes(); }
   else if (k === 'f' || k === 'F'){
     if (document.fullscreenElement) document.exitFullscreen();
@@ -4678,7 +4811,7 @@ addEventListener('keydown', function(e){
 });
 $('viewport').addEventListener('click', function(e){
   if (!ROUTE) return;
-  if (e.target.closest('#editor,#grid,#routes,.btn')) return;
+  if (e.target.closest('#grid,#routes,.btn')) return;
   next();
 });
 $('viewport').addEventListener('contextmenu', function(e){ e.preventDefault(); prev(); });
