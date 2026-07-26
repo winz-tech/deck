@@ -128,7 +128,14 @@
       "speakerEn": "VLADJIA",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "vladjia.png"
+      "photo": "vladjia.png",
+      "moto": {
+        "debug": true,
+        "hx": 34, "hy": 62, "hs": 1,
+        "tx": 74, "ty": 54, "ts": 1,
+        "ba": -12, "bw": 62, "bd": -1,
+        "px": 50, "pb": 4, "pw": 56
+      }
     },
     {
       "_note": "咪姐版封面：保留備用，roles 改成 _keep 就不會出現在正式場次，備課模式仍看得到",
