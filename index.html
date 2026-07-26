@@ -1155,6 +1155,48 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 @keyframes vpFly{0%,100%{transform:translate(0,0) rotate(-5deg)}
   50%{transform:translate(-16px,-24px) rotate(6deg)}}
 
+/* ---------- 機車燈效（疊在人物圖上，座標可調）---------- */
+.vp-moto{position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:screen}
+.vp-moto>*{position:absolute}
+/* 大燈光暈 */
+.mo-head{left:var(--hx);top:var(--hy);
+  width:calc(150px*var(--hs));height:calc(150px*var(--hs));
+  margin:calc(-75px*var(--hs)) 0 0 calc(-75px*var(--hs));
+  background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,238,195,.55) 20%,
+             rgba(255,170,60,.22) 46%,transparent 72%);
+  animation:moPulse 2.6s ease-in-out infinite}
+/* 燈心（白熱點）*/
+.mo-core{left:var(--hx);top:var(--hy);
+  width:calc(26px*var(--hs));height:calc(26px*var(--hs));
+  margin:calc(-13px*var(--hs)) 0 0 calc(-13px*var(--hs));
+  border-radius:50%;background:#fff;filter:blur(3px);
+  animation:moFlick 4.6s ease-in-out infinite}
+/* 光束（三角錐）*/
+.mo-beam{left:var(--hx);top:var(--hy);width:var(--bw);height:26%;
+  transform-origin:0 50%;
+  transform:translateY(-50%) rotate(var(--ba)) scaleX(var(--bd));
+  background:linear-gradient(90deg,rgba(255,242,215,.55),rgba(255,222,165,.16) 42%,transparent 78%);
+  clip-path:polygon(0 45%,100% 0,100% 100%,0 55%);
+  filter:blur(7px);animation:moBeam 5s ease-in-out infinite}
+/* 尾燈 */
+.mo-tail{left:var(--tx);top:var(--ty);
+  width:calc(84px*var(--ts));height:calc(84px*var(--ts));
+  margin:calc(-42px*var(--ts)) 0 0 calc(-42px*var(--ts));
+  background:radial-gradient(circle,rgba(255,72,84,.9),rgba(227,6,19,.34) 32%,transparent 70%);
+  animation:moTail 2.6s ease-in-out infinite}
+/* 地面反光 */
+.mo-pool{left:var(--px);bottom:var(--pb);width:var(--pw);height:11%;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(255,192,112,.30),transparent 70%);
+  filter:blur(10px);animation:moPulse 2.6s ease-in-out infinite}
+@keyframes moPulse{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes moFlick{0%,40%,47%,100%{opacity:1}43%{opacity:.4}45%{opacity:.95}74%{opacity:.75}}
+@keyframes moBeam{0%,100%{opacity:.5}50%{opacity:.85}}
+@keyframes moTail{0%,100%{opacity:.55}50%{opacity:1}}
+/* 校正模式：看得到光暈的框，對完位置再關掉 */
+.vp-moto.dbg .mo-head,.vp-moto.dbg .mo-tail{outline:1px dashed rgba(0,255,130,.9)}
+.vp-moto.dbg .mo-beam{outline:1px dashed rgba(0,180,255,.9)}
+
 /* ---------- 自己的圖（截圖／照片）+ 聚光燈 ---------- */
 .shot{width:100%;position:relative;border-radius:10px;overflow:hidden;
   box-shadow:0 18px 44px rgba(0,0,0,.28);background:#000;max-height:100%}
