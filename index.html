@@ -1099,6 +1099,62 @@ html,body{height:100%;background:#000;overflow:hidden;font-family:var(--zh)}
 .lc-meta{margin-left:auto;text-align:right;font-family:var(--en);font-size:16px;
   letter-spacing:3px;color:var(--sub);line-height:1.9}
 
+/* ---------- 吸血鬼封面（黑紅版・家兒場）---------- */
+.slide.light.vamp{background:#08080b}
+.vamp .lc-mark{background:linear-gradient(135deg,rgba(227,6,19,.30),rgba(227,6,19,0))}
+.vamp .lc-bar{background:linear-gradient(180deg,#ff2a38,#8f0009);
+  box-shadow:0 0 26px rgba(227,6,19,.85)}
+.vamp .lc-eyebrow{color:#ff2a38;text-shadow:0 0 16px rgba(227,6,19,.7)}
+.vamp .lc-title{color:#fff;text-shadow:0 0 36px rgba(227,6,19,.45),0 3px 0 rgba(0,0,0,.6)}
+.vamp .lc-rule{background:linear-gradient(90deg,#ff2a38,#8f0009);
+  box-shadow:0 0 20px rgba(227,6,19,.75)}
+.vamp .lc-sub{color:#A9A9B6}
+.vamp .lc-logo{filter:drop-shadow(0 0 18px rgba(227,6,19,.55))}
+.vamp .lc-foot{border-top-color:rgba(227,6,19,.35)}
+.vamp .lc-sp .tag{color:#7A7A86;border-right-color:#ff2a38}
+.vamp .lc-sp .who b{color:#fff}
+.vamp .lc-sp .who i{color:#ff2a38}
+.vamp .lc-meta{color:#7A7A86}
+.vamp .lc-cue{color:#5A5A66}
+.vamp .lc-photo .plate{background:linear-gradient(140deg,#E30613,#3a0004);opacity:.30}
+.vamp .lc-photo .edge{background:linear-gradient(180deg,#ff2a38,#8f0009);
+  box-shadow:0 0 22px rgba(227,6,19,.8)}
+.vamp .lc-photo img{filter:drop-shadow(0 22px 44px rgba(0,0,0,.65))
+  drop-shadow(0 0 32px rgba(227,6,19,.35))}
+/* 背景三層：格線 + 血光 + 底霧 */
+.vamp .vp-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:58px 58px;
+  -webkit-mask-image:radial-gradient(ellipse 74% 66% at 42% 46%,#000 18%,transparent 82%);
+          mask-image:radial-gradient(ellipse 74% 66% at 42% 46%,#000 18%,transparent 82%)}
+.vamp .vp-glow{position:absolute;right:-8%;top:-16%;width:1040px;height:1040px;pointer-events:none;
+  background:radial-gradient(circle,rgba(227,6,19,.30),rgba(227,6,19,.06) 42%,transparent 68%)}
+.vamp .vp-fog{position:absolute;left:0;right:0;bottom:0;height:330px;pointer-events:none;
+  background:linear-gradient(0deg,rgba(227,6,19,.15),transparent)}
+/* 上緣血滴 */
+.vamp .vp-drip{position:absolute;top:0;width:5px;pointer-events:none;opacity:.9;
+  background:linear-gradient(180deg,#E30613,#5c0006);border-radius:0 0 4px 4px}
+.vamp .vp-drip::after{content:'';position:absolute;left:50%;bottom:-9px;width:11px;height:13px;
+  transform:translateX(-50%);background:#E30613;
+  border-radius:50% 50% 50% 50%/62% 62% 38% 38%;
+  box-shadow:0 0 12px rgba(227,6,19,.9);animation:vpDrop 3.6s ease-in infinite}
+@keyframes vpDrop{0%,58%{transform:translate(-50%,0) scale(1);opacity:1}
+  86%{transform:translate(-50%,92px) scale(.65);opacity:.2}
+  87%,100%{transform:translate(-50%,0) scale(.35);opacity:0}}
+.vamp .vp-drip.d1{left:7.5%;height:76px}
+.vamp .vp-drip.d2{left:19%;height:44px}
+.vamp .vp-drip.d2::after{animation-delay:1.2s}
+.vamp .vp-drip.d3{left:30%;height:26px}
+.vamp .vp-drip.d3::after{animation-delay:2.4s}
+/* 蝙蝠 */
+.vamp .vp-bat{position:absolute;pointer-events:none;opacity:.55;z-index:1;
+  filter:drop-shadow(0 0 9px rgba(227,6,19,.6));animation:vpFly 7s ease-in-out infinite}
+.vamp .vp-bat svg{display:block;width:100%;height:auto;fill:#141419;
+  stroke:rgba(227,6,19,.7);stroke-width:1.6}
+@keyframes vpFly{0%,100%{transform:translate(0,0) rotate(-5deg)}
+  50%{transform:translate(-16px,-24px) rotate(6deg)}}
+
 /* ---------- 自己的圖（截圖／照片）+ 聚光燈 ---------- */
 .shot{width:100%;position:relative;border-radius:10px;overflow:hidden;
   box-shadow:0 18px 44px rgba(0,0,0,.28);background:#000;max-height:100%}
@@ -3570,6 +3626,24 @@ function _sysHtml(kind){
     '</div></div>';
 }
 
+/* ---------- 吸血鬼封面裝飾 ---------- */
+function _batSvg(){
+  return '<svg viewBox="0 0 100 34" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M50 6c2.6 0 4.4 2.4 5 5.6 5.2-7.4 13-11.6 22.6-11.6-3.4 4-4.6 8.4-3.6 12.4 ' +
+    '4.8-2.6 10.4-3.4 16-1.4-7.6 2.8-11.4 8.4-12.4 15.4-5.8-3-11.4-2-16 1.8-2.4-4.6-6.6-6.8-11.6-6.8' +
+    's-9.2 2.2-11.6 6.8c-4.6-3.8-10.2-4.8-16-1.8-1-7-4.8-12.6-12.4-15.4 5.6-2 11.2-1.2 16 1.4 ' +
+    '1-4-.2-8.4-3.6-12.4 9.6 0 17.4 4.2 22.6 11.6C45.6 8.4 47.4 6 50 6z"/></svg>';
+}
+function _vampDeco(){
+  var bats = [[46,7,46,'0s'],[57,16,30,'1.6s'],[38,12,20,'2.9s']];
+  return '<div class="vp-grid"></div><div class="vp-glow"></div><div class="vp-fog"></div>' +
+    '<div class="vp-drip d1"></div><div class="vp-drip d2"></div><div class="vp-drip d3"></div>' +
+    bats.map(function(b){
+      return '<div class="vp-bat" style="left:' + b[0] + '%;top:' + b[1] + '%;width:' + b[2] +
+             'px;animation-delay:' + b[3] + '">' + _batSvg() + '</div>';
+    }).join('');
+}
+
 /* ---------- 選角音效（Web Audio，不用外部檔）---------- */
 var _CSAC = null;
 function _csAC(){
@@ -3764,7 +3838,7 @@ function buildDeck(){
     var body = '';
 
     if (s.type === 'cover' && s.light){
-      body = '<div class="lc-bar"></div><div class="lc-mark"></div>' +
+      body = '<div class="lc-bar"></div><div class="lc-mark"></div>' + (s.vamp ? _vampDeco() : '') +
         '<div class="lc-grid"><div class="lc-wrap">' +
           (s.logo ? '<img class="lc-logo anim a1" src="' + esc(s.logo) + '" alt="" onerror="this.style.display=\'none\'">' : '') +
           '<div class="lc-eyebrow anim a2">// ' + esc(s.org || (m.org||'')) + '</div>' +
@@ -3928,7 +4002,8 @@ function buildDeck(){
                '<div>' + esc(routeName()) + '</div>' +
                '<div class="pill"><span>' + (i+1) + ' / ' + SLIDES.length + '</span></div></div></div>';
 
-    return '<div class="slide' + (dark?' dark':'') + (light?' light':'') + '" data-i="' + i + '">' +
+   return '<div class="slide' + (dark?' dark':'') + (light?' light':'') +
+           (s.vamp?' vamp':'') + '" data-i="' + i + '">' +
            body + (light ? '' : foot) + '</div>';
   }).join('');
   $('deck').innerHTML = html;
