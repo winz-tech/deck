@@ -1545,7 +1545,14 @@ var FALLBACK = {
       "speakerEn": "PAGGIE",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "paggie.png"
+      "photo": "vladjia.png",
+      "moto": {
+        "debug": true,
+        "hx": 34, "hy": 62, "hs": 1,
+        "tx": 74, "ty": 54, "ts": 1,
+        "ba": -12, "bw": 62, "bd": -1,
+        "px": 50, "pb": 4, "pw": 56
+      }
     },
     {
       "type": "cover",
@@ -1565,7 +1572,14 @@ var FALLBACK = {
       "speakerEn": "MIMI TSAI",
       "when": "2026 / 07 / 28",
       "where": "內部系統教育訓練",
-      "photo": "mimi.png"
+      "photo": "vladjia.png",
+      "moto": {
+        "debug": true,
+        "hx": 34, "hy": 62, "hs": 1,
+        "tx": 74, "ty": 54, "ts": 1,
+        "ba": -12, "bw": 62, "bd": -1,
+        "px": 50, "pb": 4, "pw": 56
+      }
     },
     {
       "type": "section",
@@ -3676,6 +3690,19 @@ function _batSvg(){
     's-9.2 2.2-11.6 6.8c-4.6-3.8-10.2-4.8-16-1.8-1-7-4.8-12.6-12.4-15.4 5.6-2 11.2-1.2 16 1.4 ' +
     '1-4-.2-8.4-3.6-12.4 9.6 0 17.4 4.2 22.6 11.6C45.6 8.4 47.4 6 50 6z"/></svg>';
 }
+/* 機車燈效層：座標全部走 CSS 變數，改 JSON 就能對位 */
+function _motoFx(m){
+  m = (m && typeof m === 'object') ? m : {};
+  var v = function(k, d){ return (m[k] == null ? d : m[k]); };
+  var st = '--hx:' + v('hx', 34) + '%;--hy:' + v('hy', 62) + '%;--hs:' + v('hs', 1) + ';' +
+           '--tx:' + v('tx', 74) + '%;--ty:' + v('ty', 54) + '%;--ts:' + v('ts', 1) + ';' +
+           '--ba:' + v('ba', -12) + 'deg;--bw:' + v('bw', 62) + '%;--bd:' + v('bd', -1) + ';' +
+           '--px:' + v('px', 50) + '%;--pb:' + v('pb', 4) + '%;--pw:' + v('pw', 56) + '%';
+  return '<div class="vp-moto' + (m.debug ? ' dbg' : '') + '" style="' + st + '">' +
+    '<div class="mo-beam"></div><div class="mo-pool"></div>' +
+    '<div class="mo-head"></div><div class="mo-core"></div><div class="mo-tail"></div></div>';
+}
+
 function _vampDeco(){
   var bats = [[46,7,46,'0s'],[57,16,30,'1.6s'],[38,12,20,'2.9s']];
   return '<div class="vp-grid"></div><div class="vp-glow"></div><div class="vp-fog"></div>' +
@@ -3891,7 +3918,8 @@ function buildDeck(){
         (s.sys ? '<div class="lc-photo lc-sys step"><div class="plate"></div><div class="edge"></div>' +
             _sysHtml(s.sys) + '</div>'
           : s.photo ? '<div class="lc-photo step"><div class="plate"></div><div class="edge"></div>' +
-            '<img src="' + esc(s.photo) + '" alt="" onerror="this.parentNode.style.display=\'none\'"></div>' : '') +
+            '<img src="' + esc(s.photo) + '" alt="" onerror="this.parentNode.style.display=\'none\'">' +
+            (s.moto ? _motoFx(s.moto) : '') + '</div>' : '') +
         '</div>' +
         '<div class="lc-foot"><div class="lc-sp"><div class="tag">Speaker</div>' +
           '<div class="who"><b>' + esc(s.speaker || '') + '</b><i>' + esc(s.speakerEn || '') + '</i></div></div>' +
