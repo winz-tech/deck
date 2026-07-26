@@ -4022,10 +4022,10 @@ function buildDeck(){
              (s.comp === 'otpadd' ? _otpAddHtml() : _otpListHtml()) +
              '<div class="caps">' + _capsHtml(s.steps) + '</div></div>';
     }
-    else if (s.type === 'demo' && ['att','punchfix','leave','comp','ot','payslip'].indexOf(s.comp) > -1){
+    else if (s.type === 'demo' && ['att','punchfix','leave','comp','ot','payslip','pick'].indexOf(s.comp) > -1){
       var mkw = { att:_attHtml, punchfix:_punchfixHtml, leave:_leaveHtml,
-                  comp:_compHtml, ot:_otHtml, payslip:_payslipHtml }[s.comp];
-      var narrow = ['punchfix','leave','comp','ot'].indexOf(s.comp) > -1;
+                  comp:_compHtml, ot:_otHtml, payslip:_payslipHtml, pick:_pickHtml }[s.comp];
+      var narrow = ['punchfix','leave','comp','ot','pick'].indexOf(s.comp) > -1;
       body = '<div class="h1">' + esc(s.title) + '</div>' +
              (s.lead ? '<div class="lead">' + esc(s.lead) + '</div>' : '') +
              '<div class="rule"></div><div class="demo ' + (narrow ? 'd-phone' : 'wide') + '">' +
@@ -5052,6 +5052,32 @@ addEventListener('load', refit);
   font:12px/1.7 ui-monospace,monospace;color:#0f0;white-space:pre;
   background:rgba(0,0,0,.85);padding:7px 10px;border-radius:6px}
 .vp-moto.dbg .mo-hud{display:block}
+
+      /* ---------- 裝置選擇（登入回呼頁）---------- */
+.dv-hd{text-align:center;padding:2px 0 13px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:13px}
+.dv-hd .n{color:#fff;font-size:15px;font-weight:700}
+.dv-hd .s{color:#8a8a92;font-size:11px;margin-top:4px}
+.dv-q{color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;text-align:center;margin-bottom:13px}
+.dv-card{display:flex;align-items:center;gap:11px;padding:13px;margin-bottom:9px;
+  background:#15151a;border:1.5px solid rgba(255,255,255,.14);border-radius:11px}
+.dv-card.hot{border-color:#ffb300;background:rgba(255,179,0,.10)}
+.dv-ic{font-size:23px;flex:none}
+.dv-h{color:#fff;font-size:13px;font-weight:700;margin-bottom:3px}
+.dv-s{color:#8a8a92;font-size:10px;line-height:1.6}
+.dv-s b{color:#ffb300}
+.dv-sl{background:#15151a;border:1px solid rgba(255,179,0,.35);border-radius:11px;padding:13px}
+.dv-sl .lab{color:#8a8a92;font-size:10px;margin-bottom:12px}
+.dv-row{display:flex;align-items:center;gap:9px}
+.dv-end{color:#55555e;font-size:9px;flex:none;white-space:nowrap}
+.dv-bar{position:relative;flex:1;height:5px;border-radius:3px;
+  background:linear-gradient(90deg,#ffb300 0 26%,rgba(255,255,255,.14) 26%)}
+.dv-bar i{position:absolute;left:26%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;
+  border-radius:50%;background:#ffb300;border:3px solid #15151a;
+  box-shadow:0 0 12px rgba(255,179,0,.7)}
+.dv-val{color:#fff;font-size:12px;margin-top:12px}
+.dv-val b{font-size:23px;font-weight:700;color:#ffb300;font-family:ui-monospace,monospace}
+.dv-go{margin-top:13px;padding:11px;text-align:center;border-radius:8px;
+  background:linear-gradient(135deg,#E30613,#8f0009);color:#fff;font-size:13px;font-weight:700}
 </style>
 <script>
 /* 重新定義燈效層：加把手 + 新預設座標 */
@@ -5108,6 +5134,28 @@ function _motoWire(){
     if (e.target.closest && e.target.closest('.vp-moto')) e.stopPropagation();
   }, true);
 })();
+
+      /* ---------- 裝置選擇畫面（登入回呼頁的真實樣子）---------- */
+function _pickHtml(){
+  return '<div class="wz"><div class="wz-bd">' +
+    '<div class="dv-hd part" data-p="hi"><div class="n">歡迎，王小明！</div>' +
+      '<div class="s">身分驗證完成</div></div>' +
+    '<div class="dv-q">這台是誰的裝置？</div>' +
+    '<div class="dv-card part" data-p="personal"><div class="dv-ic">🔒</div>' +
+      '<div style="flex:1;min-width:0"><div class="dv-h">我的個人裝置</div>' +
+      '<div class="dv-s">記住我 · <b>不會自動登出</b></div></div></div>' +
+    '<div class="dv-card hot part" data-p="shared"><div class="dv-ic">👥</div>' +
+      '<div style="flex:1;min-width:0"><div class="dv-h">公司共用電腦</div>' +
+      '<div class="dv-s">閒置一段時間<b>自動登出</b>，保護你的資料</div></div></div>' +
+    '<div class="dv-sl part" data-p="idle">' +
+      '<div class="lab">閒置多久自動登出？（有動作就重新計時）</div>' +
+      '<div class="dv-row"><span class="dv-end">3 分</span>' +
+        '<div class="dv-bar"><i></i></div><span class="dv-end">30 分</span></div>' +
+      '<div class="dv-val"><b>10</b> 分鐘</div>' +
+      '<div class="dv-go">確定，進入系統 →</div>' +
+    '</div>' +
+  '</div></div>';
+}
 </script>
 </body>
 </html>
