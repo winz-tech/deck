@@ -5020,5 +5020,94 @@ addEventListener('load', refit);
 [300, 900, 2000].forEach(function(t){ setTimeout(refit, t); });   // 保底：不管什麼原因沒量到，這三槍補上
 
 </script>
+
+<!-- ================= 機車燈效・紅燈版 + 拖曳校正器（覆蓋區，貼在最後就好）================= -->
+<style>
+/* 紅燈：蓋掉上面的橘白色 */
+.vp-moto .mo-head{width:calc(160px*var(--hs));height:calc(160px*var(--hs));
+  margin:calc(-80px*var(--hs)) 0 0 calc(-80px*var(--hs));
+  background:radial-gradient(circle,rgba(255,225,228,.95),rgba(255,60,72,.62) 16%,
+             rgba(227,6,19,.30) 42%,transparent 70%)}
+.vp-moto .mo-core{width:calc(22px*var(--hs));height:calc(22px*var(--hs));
+  margin:calc(-11px*var(--hs)) 0 0 calc(-11px*var(--hs));
+  filter:blur(3px) drop-shadow(0 0 10px #ff2a38) drop-shadow(0 0 22px #E30613)}
+.vp-moto .mo-beam{height:24%;
+  background:linear-gradient(90deg,rgba(255,120,130,.50),rgba(227,6,19,.20) 40%,transparent 76%)}
+.vp-moto .mo-tail{width:calc(96px*var(--ts));height:calc(96px*var(--ts));
+  margin:calc(-48px*var(--ts)) 0 0 calc(-48px*var(--ts));
+  background:radial-gradient(circle,rgba(255,90,100,.95),rgba(227,6,19,.42) 26%,transparent 66%)}
+.vp-moto .mo-pool{height:12%;filter:blur(12px);
+  background:radial-gradient(ellipse at center,rgba(255,60,72,.34),transparent 70%)}
+/* 校正把手 */
+.vp-moto.dbg{pointer-events:auto}
+.mo-hand{position:absolute;width:26px;height:26px;border-radius:50%;display:none;
+  transform:translate(-50%,-50%);cursor:grab;z-index:9;
+  border:2px solid #0f0;background:rgba(0,255,0,.22);box-shadow:0 0 10px rgba(0,255,0,.7)}
+.mo-hand:active{cursor:grabbing}
+.vp-moto.dbg .mo-hand{display:block}
+.mo-hand.h{left:var(--hx);top:var(--hy)}
+.mo-hand.t{left:var(--tx);top:var(--ty);border-color:#f2f;
+  background:rgba(255,0,255,.22);box-shadow:0 0 10px rgba(255,0,255,.7)}
+.mo-hud{position:absolute;left:8px;top:8px;display:none;z-index:10;pointer-events:none;
+  font:12px/1.7 ui-monospace,monospace;color:#0f0;white-space:pre;
+  background:rgba(0,0,0,.85);padding:7px 10px;border-radius:6px}
+.vp-moto.dbg .mo-hud{display:block}
+</style>
+<script>
+/* 重新定義燈效層：加把手 + 新預設座標 */
+_motoFx = function(m){
+  m = (m && typeof m === 'object') ? m : {};
+  var v = function(k, d){ return (m[k] == null ? d : m[k]); };
+  var st = '--hx:' + v('hx', 22) + '%;--hy:' + v('hy', 42) + '%;--hs:' + v('hs', .9) + ';' +
+           '--tx:' + v('tx', 80) + '%;--ty:' + v('ty', 62) + '%;--ts:' + v('ts', .75) + ';' +
+           '--ba:' + v('ba', -8) + 'deg;--bw:' + v('bw', 54) + '%;--bd:' + v('bd', -1) + ';' +
+           '--px:' + v('px', 48) + '%;--pb:' + v('pb', 6) + '%;--pw:' + v('pw', 60) + '%';
+  return '<div class="vp-moto' + (m.debug ? ' dbg' : '') + '" style="' + st + '">' +
+    '<div class="mo-beam"></div><div class="mo-pool"></div>' +
+    '<div class="mo-head"></div><div class="mo-core"></div><div class="mo-tail"></div>' +
+    (m.debug ? '<div class="mo-hand h" data-k="h"></div>' +
+               '<div class="mo-hand t" data-k="t"></div><div class="mo-hud"></div>' : '') +
+    '</div>';
+};
+
+/* 拖曳校正：綠圈＝大燈、紫圈＝尾燈，左上角印出可直接貼回 JSON 的數字 */
+function _motoWire(){
+  document.querySelectorAll('.vp-moto.dbg').forEach(function(mo){
+    if (mo._wired) return; mo._wired = 1;
+    var hud = mo.querySelector('.mo-hud');
+    function g(k){ return parseFloat(mo.style.getPropertyValue('--' + k)) || 0; }
+    function dump(){
+      hud.textContent = '拖綠圈＝大燈　拖紫圈＝尾燈\n' +
+        '"hx": ' + g('hx').toFixed(1) + ', "hy": ' + g('hy').toFixed(1) + ',\n' +
+        '"tx": ' + g('tx').toFixed(1) + ', "ty": ' + g('ty').toFixed(1);
+    }
+    mo.querySelectorAll('.mo-hand').forEach(function(h){
+      h.addEventListener('pointerdown', function(e){
+        e.preventDefault(); e.stopPropagation();
+        var k = h.getAttribute('data-k'), box = mo.getBoundingClientRect();
+        function mv(ev){
+          var x = Math.max(0, Math.min(100, (ev.clientX - box.left) / box.width * 100));
+          var y = Math.max(0, Math.min(100, (ev.clientY - box.top) / box.height * 100));
+          mo.style.setProperty('--' + (k === 'h' ? 'hx' : 'tx'), x.toFixed(1) + '%');
+          mo.style.setProperty('--' + (k === 'h' ? 'hy' : 'ty'), y.toFixed(1) + '%');
+          dump();
+        }
+        function up(){ removeEventListener('pointermove', mv); removeEventListener('pointerup', up); }
+        addEventListener('pointermove', mv); addEventListener('pointerup', up);
+      });
+    });
+    dump();
+  });
+}
+
+/* 每次換頁自動接線；拖把手時不要翻頁 */
+(function(){
+  var _oldShow = show;
+  show = function(){ _oldShow.apply(this, arguments); _motoWire(); };
+  document.getElementById('viewport').addEventListener('click', function(e){
+    if (e.target.closest && e.target.closest('.vp-moto')) e.stopPropagation();
+  }, true);
+})();
+</script>
 </body>
 </html>
