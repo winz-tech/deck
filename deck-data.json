@@ -59,11 +59,11 @@
       "no": "02",
       "name": "作業中心",
       "en": "OPERATIONS HUB",
-      "speaker": "咪姐",
-      "speakerEn": "MIMI TSAI",
+      "speaker": "元家",
+      "speakerEn": "VLADJIA",
       "desc": "每天都會用到的那些功能",
       "sys": "hub",
-      "face": "mimi.png"
+      "face": "vladjia.png"
     },
     {
       "id": "foreman",
@@ -112,12 +112,30 @@
     {
       "type": "cover",
       "light": true,
+      "vamp": true,
       "roles": [
         "hub",
         "foreman",
         "r_and_d",
         "qc",
         "operator"
+      ],
+      "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
+      "org": "WINZ TECHNOLOGY",
+      "title": "公司的系統，<br>讓你快速上手",
+      "sub": "十分鐘，帶你把每天會用到的都走過一遍",
+      "speaker": "元家",
+      "speakerEn": "VLADJIA",
+      "when": "2026 / 07 / 28",
+      "where": "內部系統教育訓練",
+      "photo": "vladjia.png"
+    },
+    {
+      "_note": "咪姐版封面：保留備用，roles 改成 _keep 就不會出現在正式場次，備課模式仍看得到",
+      "type": "cover",
+      "light": true,
+      "roles": [
+        "_keep"
       ],
       "logo": "https://lh3.googleusercontent.com/d/1h84lVm_Rn-_A_eX4dVkVz0010wlngP-d",
       "org": "WINZ TECHNOLOGY",
